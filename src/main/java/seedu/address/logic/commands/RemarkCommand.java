@@ -31,10 +31,17 @@ public class RemarkCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Edited remark for person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "Input for remark field must be provided.";
 
+    private final Index index;
+    private final String remark;
+
     /**
      *
      */
-    public RemarkCommand() { }
+    public RemarkCommand(Index index, String remark) {
+        this.index = index;
+        this.remark = remark;
+        System.out.println("Error message: index - " + index + "; remark - " + remark);
+    }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
@@ -49,5 +56,23 @@ public class RemarkCommand extends Command {
         }
 
         return null;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof RemarkCommand)) {
+            return false;
+        }
+
+        // state check
+        RemarkCommand e = (RemarkCommand) other;
+        return index.equals(e.index)
+                && remark.equals(e.remark);
     }
 }

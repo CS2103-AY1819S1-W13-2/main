@@ -39,10 +39,37 @@ public class RemarkCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
+    private final String testRemark = "test remark";
+
     @Test
     public void execute_failure() {
-        RemarkCommand remarkCommand = new RemarkCommand();
+        RemarkCommand remarkCommand = new RemarkCommand(INDEX_FIRST_PERSON, testRemark);
 
         assertCommandFailure(remarkCommand, model, commandHistory, RemarkCommand.MESSAGE_NOT_EDITED);
+    }
+
+    @Test
+    public void equals() {
+        final RemarkCommand standardCommand = new RemarkCommand(INDEX_FIRST_PERSON, testRemark);
+
+        // same values -> returns true
+        String copyRemark = "test remark";
+        RemarkCommand commandWithSameValues = new RemarkCommand(INDEX_FIRST_PERSON, copyRemark);
+        assertTrue(standardCommand.equals(commandWithSameValues));
+
+        // same object -> returns true
+        assertTrue(standardCommand.equals(standardCommand));
+
+        // null -> returns false
+        assertFalse(standardCommand.equals(null));
+
+        // different types -> returns false
+        assertFalse(standardCommand.equals(new ClearCommand()));
+
+        // different index -> returns false
+        assertFalse(standardCommand.equals(new RemarkCommand(INDEX_SECOND_PERSON, testRemark)));
+
+        // different descriptor -> returns false
+        assertFalse(standardCommand.equals(new RemarkCommand(INDEX_FIRST_PERSON, "different test remark")));
     }
 }
