@@ -84,6 +84,10 @@ public class RemarkCommand extends Command {
         return String.format(message, editedPerson);
     }
 
+    /**
+     * Creates and returns a {@code Person} with the details of {@code personToEdit}
+     * edited with {@code remark}.
+     */
     private static Person createEditedPerson(Person personToEdit, Remark remark) {
         assert personToEdit != null;
 
