@@ -5,18 +5,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's corresponding remark in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidRemark(String)}
+ * Guarantees: immutable
  */
 public class Remark {
-
-    public static final String MESSAGE_REMARK_CONSTRAINTS =
-            "Remarks can take any values, and it should not be blank";
-
-    /*
-     * The first character of the remark must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String REMARK_VALIDATION_REGEX = "[^\\s].*";
 
     public final String value;
 
@@ -27,15 +18,7 @@ public class Remark {
      */
     public Remark(String remark) {
         requireNonNull(remark);
-        checkArgument(isValidRemark(remark), MESSAGE_REMARK_CONSTRAINTS);
         value = remark;
-    }
-
-    /**
-     * Returns true if a given string is a valid remark.
-     */
-    public static boolean isValidRemark(String test) {
-        return test.matches(REMARK_VALIDATION_REGEX);
     }
 
     @Override

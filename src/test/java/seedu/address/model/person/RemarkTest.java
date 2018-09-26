@@ -17,27 +17,6 @@ public class RemarkTest {
     }
 
     @Test
-    public void constructor_invalidAddress_throwsIllegalArgumentException() {
-        String invalidRemark = "";
-        Assert.assertThrows(IllegalArgumentException.class, () -> new Remark(invalidRemark));
-    }
-
-    @Test
-    public void isValidAddress() {
-        // null remark
-        Assert.assertThrows(NullPointerException.class, () -> Remark.isValidRemark(null));
-
-        // invalid remarks
-        assertFalse(Remark.isValidRemark("")); // empty string
-        assertFalse(Remark.isValidRemark(" ")); // spaces only
-
-        // valid addresses
-        assertTrue(Remark.isValidRemark("Likes to drink coffee"));
-        assertTrue(Remark.isValidRemark("-")); // one character
-        assertTrue(Remark.isValidRemark("Likes to eat; enjoys musicals too")); // long address
-    }
-
-    @Test
     public void equals() {
 
         // same object
