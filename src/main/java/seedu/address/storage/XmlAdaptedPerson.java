@@ -68,7 +68,7 @@ public class XmlAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        remark = source.getRemark() != null ? source.getRemark().value : "";
+        remark = source.getRemark().value;
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
