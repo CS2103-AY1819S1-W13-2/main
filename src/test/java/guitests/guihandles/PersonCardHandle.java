@@ -64,7 +64,7 @@ public class PersonCardHandle extends NodeHandle<Node> {
         return phoneLabel.getText();
     }
 
-    public String getEmail() { 
+    public String getEmail() {
         return emailLabel.getText();
     }
 
