@@ -15,14 +15,15 @@ import java.util.stream.Stream;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Remark;
 
 /**
  * Parses input arguments and creates a new RemarkCommand object
  */
 public class RemarkCommandParser implements Parser<RemarkCommand> {
     /**
-     * Parses the given {@code String} of arguments in the context of the EditCommand
-     * and returns an EditCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the RemarkCommand
+     * and returns an RemarkCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public RemarkCommand parse(String args) throws ParseException {
@@ -38,10 +39,10 @@ public class RemarkCommandParser implements Parser<RemarkCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemarkCommand.MESSAGE_USAGE), pe);
         }
 
-        String remark;
+        Remark remark;
 
         try {
-            remark = argMultimap.getValue(PREFIX_REMARK).get();
+            remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get());
         }
         catch (NoSuchElementException e) {
             throw new ParseException(RemarkCommand.MESSAGE_NOT_EDITED);

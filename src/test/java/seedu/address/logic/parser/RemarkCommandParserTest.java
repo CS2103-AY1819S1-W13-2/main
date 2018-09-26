@@ -48,6 +48,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
@@ -92,7 +93,7 @@ public class RemarkCommandParserTest {
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + REMARK_DESC_AMY;
 
-        RemarkCommand expectedCommand = new RemarkCommand(targetIndex, VALID_REMARK_AMY);
+        RemarkCommand expectedCommand = new RemarkCommand(targetIndex, new Remark(VALID_REMARK_AMY));
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -102,7 +103,7 @@ public class RemarkCommandParserTest {
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + REMARK_DESC_AMY + REMARK_DESC_BOB;
 
-        RemarkCommand expectedCommand = new RemarkCommand(targetIndex, VALID_REMARK_BOB);
+        RemarkCommand expectedCommand = new RemarkCommand(targetIndex, new Remark(VALID_REMARK_BOB));
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -112,7 +113,7 @@ public class RemarkCommandParserTest {
         Index targetIndex = INDEX_THIRD_PERSON;
         String userInput = targetIndex.getOneBased() + REMARK_EMPTY;
 
-        RemarkCommand expectedCommand = new RemarkCommand(targetIndex, "");
+        RemarkCommand expectedCommand = new RemarkCommand(targetIndex, new Remark(""));
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }

@@ -11,6 +11,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Remark;
 
 /**
  * Edits the remark for an existing person in the address book.
@@ -30,17 +31,20 @@ public class RemarkCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Edited remark for person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "Input for remark field must be provided.";
+    public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Remark: %2$s";
 
     private final Index index;
-    private final String remark;
+    private final Remark remark;
 
     /**
      *
      */
-    public RemarkCommand(Index index, String remark) {
+    public RemarkCommand(Index index, Remark remark) {
+        requireNonNull(index);
+        requireNonNull(remark);
+
         this.index = index;
         this.remark = remark;
-        System.out.println("Error message: index - " + index + "; remark - " + remark);
     }
 
     @Override
@@ -52,7 +56,7 @@ public class RemarkCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }*/
         if (true) {
-            throw new CommandException(MESSAGE_NOT_EDITED);
+            throw new CommandException(String.format(MESSAGE_ARGUMENTS, index.getOneBased(), remark));
         }
 
         return null;

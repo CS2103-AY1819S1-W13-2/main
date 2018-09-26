@@ -11,6 +11,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.RemarkCommand.MESSAGE_ARGUMENTS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -26,6 +27,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Remark;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 
@@ -39,13 +41,14 @@ public class RemarkCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
-    private final String testRemark = "test remark";
+    private final Remark testRemark = new Remark("test remark");
 
     @Test
     public void execute_failure() {
         RemarkCommand remarkCommand = new RemarkCommand(INDEX_FIRST_PERSON, testRemark);
 
-        assertCommandFailure(remarkCommand, model, commandHistory, RemarkCommand.MESSAGE_NOT_EDITED);
+        assertCommandFailure(remarkCommand, model, commandHistory, String.format(MESSAGE_ARGUMENTS,
+                INDEX_FIRST_PERSON.getOneBased(), testRemark));
     }
 
     @Test
@@ -53,7 +56,7 @@ public class RemarkCommandTest {
         final RemarkCommand standardCommand = new RemarkCommand(INDEX_FIRST_PERSON, testRemark);
 
         // same values -> returns true
-        String copyRemark = "test remark";
+        Remark copyRemark = new Remark("test remark");
         RemarkCommand commandWithSameValues = new RemarkCommand(INDEX_FIRST_PERSON, copyRemark);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
@@ -70,6 +73,6 @@ public class RemarkCommandTest {
         assertFalse(standardCommand.equals(new RemarkCommand(INDEX_SECOND_PERSON, testRemark)));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new RemarkCommand(INDEX_FIRST_PERSON, "different test remark")));
+        assertFalse(standardCommand.equals(new RemarkCommand(INDEX_FIRST_PERSON, new Remark("different test remark"))));
     }
 }
