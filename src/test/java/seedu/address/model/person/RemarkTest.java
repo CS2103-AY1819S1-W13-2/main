@@ -1,6 +1,8 @@
 package seedu.address.model.person;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -33,5 +35,26 @@ public class RemarkTest {
         assertTrue(Remark.isValidRemark("Likes to drink coffee"));
         assertTrue(Remark.isValidRemark("-")); // one character
         assertTrue(Remark.isValidRemark("Likes to eat; enjoys musicals too")); // long address
+    }
+
+    @Test
+    public void equals() {
+
+        // same object
+        Remark remark = new Remark("test remark");
+        Remark sameRemark = remark;
+        assertEquals(remark, sameRemark);
+        assertEquals(remark, remark);
+
+        // different object, same value
+        remark = new Remark("test remark");
+        Remark sameValueRemark = new Remark("test remark");
+        assertEquals(remark, sameValueRemark);
+
+        // different object, different value
+        remark = new Remark("test remark");
+        Remark diffRemark = new Remark("not the same value");
+        assertNotEquals(remark, diffRemark);
+
     }
 }
