@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -23,7 +22,6 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 /**
@@ -73,7 +71,7 @@ public class RemarkCommandTest {
     }
 
     @Test
-    public void execute_addRemarkfilteredList_success() {
+    public void execute_addRemarkFilteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
@@ -90,7 +88,7 @@ public class RemarkCommandTest {
     }
 
     @Test
-    public void execute_deleteRemarkfilteredList_success() {
+    public void execute_deleteRemarkFilteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
@@ -104,11 +102,6 @@ public class RemarkCommandTest {
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(remarkCommand, model, commandHistory, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_failure() {
-        //RemarkCommand remarkCommand = new RemarkCommand(INDEX_FIRST_PERSON, testRemark);
     }
 
     @Test
