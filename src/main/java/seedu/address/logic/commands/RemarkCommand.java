@@ -66,7 +66,12 @@ public class RemarkCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, remark);
+        assert personToEdit != null;
+
+        // create new editedPerson with the updated remark
+        Remark updatedRemark = Optional.ofNullable(remark).orElse(personToEdit.getRemark());
+        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
+                personToEdit.getAddress(), updatedRemark, personToEdit.getTags());
 
         model.updatePerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -82,24 +87,6 @@ public class RemarkCommand extends Command {
     private String generateSuccessMessage(Person editedPerson) {
         String message = !remark.value.isEmpty() ? MESSAGE_ADD_REMARK_SUCCESS : MESSAGE_DELETE_REMARK_SUCCESS;
         return String.format(message, editedPerson);
-    }
-
-    /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code remark}.
-     */
-    private static Person createEditedPerson(Person personToEdit, Remark remark) {
-        assert personToEdit != null;
-
-        // only editable field is remark
-        Name name = personToEdit.getName();
-        Phone phone = personToEdit.getPhone();
-        Email email = personToEdit.getEmail();
-        Address address = personToEdit.getAddress();
-        Remark updatedRemark = Optional.ofNullable(remark).orElse(personToEdit.getRemark());
-        Set<Tag> tags = personToEdit.getTags();
-
-        return new Person(name, phone, email, address, updatedRemark, tags);
     }
 
     @Override
