@@ -94,20 +94,21 @@ public class Person {
             return false;
         }
 
+        // remark is not a criteria for equality between Persons
         Person otherPerson = (Person) other;
         return otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getRemark().equals(getRemark())
                 && otherPerson.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, remark, tags);
+        return Objects.hash(name, phone, email, address, tags);
     }
+    // remark is not a criteria for two Persons to be equal
 
     @Override
     public String toString() {
@@ -119,8 +120,6 @@ public class Person {
                 .append(getEmail())
                 .append(" Address: ")
                 .append(getAddress())
-                .append(" Remarks: ")
-                .append(getRemark())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

@@ -6,7 +6,7 @@
         <phone>94351253</phone>
         <email>alice@example.com</email>
         <address>123, Jurong West Ave 6, #08-111</address>
-        <remark>alice is awesome</remark>
+        <remark></remark>
         <tagged>friends</tagged>
     </persons>
     <persons>
@@ -52,6 +52,6 @@
         <phone>9482442</phone>
         <email>anna@example.com</email>
         <address>4th street</address>
-        <remark></remark>
+        <remark>"george is awesome"</remark>
     </persons>
 </addressbook>
