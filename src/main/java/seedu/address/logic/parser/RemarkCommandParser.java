@@ -38,8 +38,7 @@ public class RemarkCommandParser implements Parser<RemarkCommand> {
 
         try {
             remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get());
-        }
-        catch (NoSuchElementException e) {
+        } catch (NoSuchElementException e) {
             throw new ParseException(RemarkCommand.MESSAGE_NOT_EDITED);
         }
 
