@@ -833,51 +833,190 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
 
-|`* * *` |user |add a new person |
+|`* * *` |user |add a new person |store more contacts in the app
+
+|`*` |university student on multiple platforms (including social media) |import contacts from other sources (Facebook, Linkedin, etc.) |synchronize my contacts with other applications
+
+|`* *` |forgetful user |attach a picture to every contact |remember how the person looks like
+
+|`*` |forgetful user |save some interesting notes about the contact |remember characteristics or traits of the contact
 
 |`* * *` |user |delete a person |remove entries that I no longer need
 
+|`* * *` |user |delete multiple contacts at one go |clean up my address book easily
+
 |`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
 
-|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
+|`* *` |user |hide <<private-contact-detail, private contact details>> by default |minimize chance of someone else seeing them by accident
 
 |`*` |user with many persons in the address book |sort persons by name |locate a person easily
-|=======================================================================
 
-_{More to be added}_
+|`* * *` |user |undo and redo changes |easily correct a wrongly taken action
+
+|`* * *` |user |edit contact information (contact numbers, addresses, tags, faculty, etc.) of existing contacts |be assured my contacts are up-to-date
+
+|`* *` |user |edit the information of multiple contacts at one go |maintain up-to-date records more efficiently
+
+|`* *` |user |add more than one number to a contact |retrieve all the contact numbers of the contact at one go
+
+|`* * *` |user |view contacts by tags |locate contacts in my different social circles easily
+
+|`* * *` |user |receive a toast for every action |be assured of the changes made
+
+|`* *` |user |choose what notifications I would like to receive |minimize distractions from the app
+
+|`* * *` |user |create new groups from already existing contacts |collaborate with existing contacts
+
+|`* * *` |user |create new groups from new contacts |have new group members automatically added in my address book
+
+|`* *` |user |add contacts to an existing group |include later-joining members
+
+|`*` |user |be prompted to add new contacts to a suggested group based on the tags |be reminded to update groups with possible new users
+
+|`* * *` |user |rename groups |change the name of groups over time
+
+|`*` |user |merge groups |organize my groups
+
+|`*` |user |split groups |organize my groups
+
+|`* * *` |user |view team members belonging to a group |view my contacts related to a specific group
+
+|`*` |user |view other contacts in the same group as a specific contact |view group-related contacts using the information of only one member
+
+|`* * *` |user |remove a contact from a group |ensure that the group member list is up-to-date
+
+|`* * *` |user |delete an entire group |remove inactive groups without affecting my contact list
+
+|`* * *` |university student |add events to the app |keep track of my schedule and upcoming events
+
+|`* *` |busy university student |save my timetable in the app |tell easily when any events clash with my timetable
+
+|`* * *` |university student |check if an event clashes with my schedule |better decide if I can set up an appointment at that time slot
+
+|`* * *` |considerate  university student |obtain a meeting time that is convenient for all contacts in a group
+|find a convenient time for meetups
+
+|`* * *` |considerate university student |obtain a meeting location that is convenient for all contacts in a group
+(based on faculty) |find a convenient location for meetups
+
+|`* * *` |university student |view my events for a particular week |gauge my availability for that week
+
+|`*` |user |share multiple contacts with my peers |exchange contacts quickly
+
+|`*` |user |archive inactive groups without deletion |avoid clutter in the list of visible groups without losing the information permanently
+
+|`*` |user |un-archive groups |continue working with groups that have been re-activated if needed
+
+| `* *` |user |detect similar contacts when importing contacts from an external source e.g. .csv file and merge them |avoid having duplicate contacts
+
+|`* * *` |user |I cannot add duplicate contacts (manually) |avoid having duplicate contacts
+|=======================================================================
 
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise).
 
 [discrete]
-=== Use case: Delete person
+=== UC1: Add person
 
 *MSS*
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+.  User requests to add a new contact
+.  AddressBook adds the contact and displays the new contact added
 +
 Use case ends.
 
 *Extensions*
 
-[none]
+* 1a. The input information is invalid.
++
+** 1a1. AddressBook shows an error message.
++
+Use case ends.
+
+[discrete]
+=== UC2: Delete person
+
+*MSS*
+
+.  User requests to list persons
+.  AddressBook shows a list of persons
+.  User requests to delete a specific person in the list
+.  AddressBook deletes the person
++
+Use case ends.
+
+*Extensions*
+
 * 2a. The list is empty.
 +
 Use case ends.
 
 * 3a. The given index is invalid.
 +
-[none]
 ** 3a1. AddressBook shows an error message.
 +
 Use case resumes at step 2.
 
-_{More to be added}_
+[discrete]
+=== UC3: Create new group
+
+*MSS*
+
+. User requests to add new group of persons
+. AddressBook creates a new group with that name and displays the newly created group
++
+Use case ends.
+
+*Extensions*
+
+* 1a. The input information is invalid.
++
+** 1a1. AddressBook shows an error message.
++
+Use case ends.
+
+[discrete]
+=== UC4: View contacts for a group
+
+*MSS*
+
+. User requests to view contacts for a particular group
+. AddressBook displays all contacts in that group
++
+User case ends.
+
+*Extensions*
+
+* 1a. The group name is invalid.
++
+** 1a1. AddressBook shows an error message.
++
+Use case ends.
+
+[discrete]
+=== UC5: Add personal events
+
+*MSS*
+
+. User requests to add event.
+. AddressBook records and displays event.
+. AddressBook [underline]#notifies user (UC18)# one day before the event.
+
+*Extensions*
+
+* 1a. AddressBook detects a clash with the user's schedule.
++
+** 1a1. AddressBook shows a message informing the user of the clash.
+** 1a2. AddressBook asks the user if he or she wants to add the event anyway.
++
+If user does not want to add the event, use case ends. Else, use case resumes from step 2.
++
+* *a. At any time, user chooses to end the command.
+** *a1. AddressBook abandons the event being set up and returns to original screen.
++
+Use case ends.
 
 [appendix]
 == Non Functional Requirements
