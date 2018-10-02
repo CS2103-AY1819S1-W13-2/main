@@ -14,6 +14,13 @@ plugins {
     id 'application'
 }
 
+allprojects{
+    repositories {
+        jcenter()
+        maven { url "https://jitpack.io" }
+    }
+}
+
 if (JavaVersion.current() == JavaVersion.VERSION_1_10
         && System.getProperty('os.name').startsWith('Windows')) {
     logger.warn('''\
@@ -79,6 +86,8 @@ dependencies {
     testRuntimeOnly group: 'org.testfx', name: 'openjfx-monocle', version: 'jdk-9+181'
     testRuntimeOnly group:'org.junit.vintage', name:'junit-vintage-engine', version: jUnitVersion
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: jUnitVersion
+
+    compile 'com.github.PlusHaze:TrayNotification:master
 }
 
 shadowJar {
