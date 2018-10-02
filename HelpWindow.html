@@ -44,7 +44,7 @@
 <li><a href="#add-group-event-code-addgroupevent-code">3.29. Add group event: <code>addGroupEvent</code></a></li>
 <li><a href="#list-group-events-code-listgroupevent-code">3.30. List group events: <code>listGroupEvent</code></a></li>
 <li><a href="#import-contacts-code-importcontacts-code">3.31. Import Contacts: <code>importContacts</code></a></li>
-<li><a href="#notifications-code-notification-code">3.32. Notifications: <code>notification</code></a></li>
+<li><a href="#a-id-notification-a-notifications-code-notification-code">3.32. <a id="notification"></a> Notifications: <code>notification</code></a></li>
 </ul>
 </li>
 <li><a href="#faq">4. FAQ</a></li>
@@ -129,13 +129,16 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <p>Items in square brackets are optional e.g <code>n/NAME [t/TAG]</code> can be used as <code>n/John Doe t/friend</code> or as <code>n/John Doe</code>.</p>
 </li>
 <li>
-<p>Items with <code>…</code>​ after them can be used multiple times including zero times e.g. <code>[t/TAG]&#8230;&#8203;</code> can be used as <code>&#160;</code> (i.e. 0 times), <code>t/friend</code>, <code>t/friend t/family</code> etc.</p>
-</li>
-<li>
-<p>Items with <code>[…]</code>​ after them can be used multiple times, but at least once. e.g. <code>p/PHONE_NUMBER[&#8230;&#8203;]</code> can be used as <code>p/98765432</code>, <code>p/98765432 p/88888888</code> etc.</p>
+<p>Items with <code>…</code>​ after them can be used multiple times including zero times
+e.g. <code>[t/TAG]&#8230;&#8203;</code> can be used as <code>&#160;</code> (i.e. 0 times), <code>t/friend</code>, <code>t/friend t/family</code> etc.
+<code>p/PHONE_NUMBER&#8230;&#8203;</code> can be used as <code>p/98765432</code>, <code>p/98765432 p/88888888</code> etc. (i.e. 1 or many times)</p>
 </li>
 <li>
 <p>Parameters can be in any order e.g. if the command specifies <code>n/NAME p/PHONE_NUMBER</code>, <code>p/PHONE_NUMBER n/NAME</code> is also acceptable.</p>
+</li>
+<li>
+<p>Items in curly brackets are considered to be an entity. The rules outside the curly brackets apply to the entity as a whole.
+e.g. <code>{group/GROUP_NAME i/1 INDEX}&#8230;&#8203;</code> can be used as <code>group/CS2103_Group1 i/1 group/CS2013_Group2 i/3</code></p>
 </li>
 </ul>
 </div>
@@ -151,7 +154,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <h3 id="adding-a-person-code-add-code-code-a-code"><a class="link" href="#adding-a-person-code-add-code-code-a-code">3.2. Adding a person: <code>add</code>, <code>a</code></a></h3>
 <div class="paragraph">
 <p>Adds a person to the address book<br>
-Format: <code>add n/NAME p/PHONE_NUMBER[&#8230;&#8203;] e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;</code></p>
+Format: <code>add n/NAME p/PHONE_NUMBER&#8230;&#8203; e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;</code></p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -500,20 +503,25 @@ Any number of contacts can be added to the group (including 0).</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>If the INDEX field is empty, no contacts will be added to the group.<br></p>
+<p>If the INDEX field is empty, no contacts will be added to the group.<br>
+The group must be an existing group in the AddressBook.<br></p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Format: <code>addToGroup group/GROUP_NAME [i/INDEX]</code></p>
+<p>Format: <code>addToGroup group/GROUP_NAME [i/INDEX]&#8230;&#8203;</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
 </div>
 <div class="ulist">
 <ul>
+<li>
+<p><code>addToGroup group/CS2103Group</code>
+No contacts added to the group.</p>
+</li>
 <li>
 <p><code>list</code><br>
 <code>addToGroup group/CS2103Group i/1</code><br>
@@ -589,7 +597,7 @@ At least one group must be listed. If only one group is listed, no changes will 
 </table>
 </div>
 <div class="paragraph">
-<p>Format: <code>mergeGroup n/NEW_GROUP_NAME group/GROUP_NAME[&#8230;&#8203;]</code></p>
+<p>Format: <code>mergeGroup n/NEW_GROUP_NAME group/GROUP_NAME&#8230;&#8203;</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -598,7 +606,7 @@ At least one group must be listed. If only one group is listed, no changes will 
 <ul>
 <li>
 <p><code>mergeGroup n/CS2103_MERGED group/CS2103_Group1 group/CS2103_Group2 group/CS2103_Group3</code><br>
-A new group called <code>CS2103_MERGED</code> is created containing all contacts from <code>CS2103_Group1</code>, <code>CS2103_Group2</code> and <code>CS2103_Group3</code></p>
+A new group called <code>CS2103_MERGED</code> is created containing all contacts from <code>CS2103_Group1</code>, <code>CS2103_Group2</code> and <code>CS2103_Group3</code>.</p>
 </li>
 </ul>
 </div>
@@ -628,7 +636,7 @@ To create new group, input the new group names and the indexes of the contacts. 
 </table>
 </div>
 <div class="paragraph">
-<p>Format: <code>splitGroup group/GROUP_NAME {n/NEW_GROUP_NAME i/INDEX[&#8230;&#8203;]}[&#8230;&#8203;]</code></p>
+<p>Format: <code>splitGroup group/GROUP_NAME {n/NEW_GROUP_NAME i/INDEX&#8230;&#8203;}&#8230;&#8203;</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -734,7 +742,7 @@ This allows app to prevent any possible clash with events in groups.</p>
 <ul>
 <li>
 <p><code>importCalendar Google</code><br>
-App will redirect to the source to handle majority of the importing process - e.g. logging in, calendar to import, etc.)</p>
+App will redirect to the source (For example, Google) to handle majority of the importing process - e.g. logging in, calendar to import, etc.)</p>
 </li>
 </ul>
 </div>
@@ -742,10 +750,11 @@ App will redirect to the source to handle majority of the importing process - e.
 <div class="sect2">
 <h3 id="share-multiple-contacts-with-my-peers-code-share-code"><a class="link" href="#share-multiple-contacts-with-my-peers-code-share-code">3.23. Share multiple contacts with my peers : <code>share</code></a></h3>
 <div class="paragraph">
-<p>Send selected contacts to friends via email.</p>
+<p>Send selected contacts in the AddressBook to one other contact in the same AddressBook.
+At least one contact to be sent must be indicated, and only one recipient can be specified.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>share i/INDEX[&#8230;&#8203;] t/INDEX</code></p>
+<p>Format: <code>share i/INDEX&#8230;&#8203; t/INDEX</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -755,7 +764,7 @@ App will redirect to the source to handle majority of the importing process - e.
 <li>
 <p><code>list</code><br>
 <code>share i/2 i/3 i/4 t/1</code><br>
-Sends the 2nd, 3rd and 4th person to 1st person in the list.</p>
+Sends the 2nd, 3rd and 4th person to 1st person in the (same) list.</p>
 </li>
 </ul>
 </div>
@@ -782,7 +791,7 @@ Sends the 2nd, 3rd and 4th person to 1st person in the list.</p>
 <div class="sect2">
 <h3 id="unarchive-old-groups-code-unarchive-code"><a class="link" href="#unarchive-old-groups-code-unarchive-code">3.25. Unarchive old groups : <code>unarchive</code></a></h3>
 <div class="paragraph">
-<p>Unarchive group to retrieve archived group information and make group visible again.</p>
+<p>Unarchive group to retrieve previously-archived group information and make group visible again.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>unarchive group/GROUP_NAME</code></p>
@@ -820,7 +829,9 @@ Sends the 2nd, 3rd and 4th person to 1st person in the list.</p>
 <div class="sect2">
 <h3 id="add-personal-event-code-addevent-code"><a class="link" href="#add-personal-event-code-addevent-code">3.27. Add personal event: <code>addEvent</code></a></h3>
 <div class="paragraph">
-<p>Adds an event in the system. Any number of contacts can be included in the event. A notification will be sent to the user only 24 hours before the event.</p>
+<p>Adds an event in the system with the specified information. Any number of contacts (including zero) can be included in the event.
+A notification will be sent to the user only 24 hours before the event.
+(refer to <a href="#Notification">notification</a> feature)</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>addEvent n/EVENT_NAME dsc/EVENT_DESCRIPTION d/DATE(DD-MM-YY) t/TIME(HHMM) a/ADDRESS [i/CONTACT_INDEX]…</code></p>
@@ -866,10 +877,13 @@ Sends the 2nd, 3rd and 4th person to 1st person in the list.</p>
 <div class="sect2">
 <h3 id="add-group-event-code-addgroupevent-code"><a class="link" href="#add-group-event-code-addgroupevent-code">3.29. Add group event: <code>addGroupEvent</code></a></h3>
 <div class="paragraph">
-<p>Adds an event in the system for the specified group. A notification will be sent to the user and the contacts in the group 24 hours before the event.</p>
+<p>Adds an event in the system with the specified information, for the specified group(s).
+At least one group has to be included in the user input.
+A notification will be sent to the user and contacts in the group 24 hours before the event.
+(refer to <a href="#Notification">notification</a> feature)</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>addGroupEvent n/EVENT_NAME dsc/DESCRIPTION d/DATE(DD-MM-YY) t/TIME(HHMM) a/ADDRESS group/GROUP_NAME</code></p>
+<p>Format: <code>addGroupEvent n/EVENT_NAME dsc/DESCRIPTION d/DATE(DD-MM-YY) t/TIME(HHMM) a/ADDRESS group/GROUP_NAME&#8230;&#8203;</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -878,6 +892,9 @@ Sends the 2nd, 3rd and 4th person to 1st person in the list.</p>
 <ul>
 <li>
 <p><code>addGroupEvent n/Project Meeting dsc/First Meeting d/12-09-18 t/1200 a/123, Clementi Rd, 1234665 group/CS2103_Group</code></p>
+</li>
+<li>
+<p><code>addGroupEvent n/Project Meeting dsc/First Meeting d/12-09-18 t/1200 a/123, Clementi Rd, 1234665 group/CS2103_Group group/CS2103_otherGroup</code></p>
 </li>
 </ul>
 </div>
@@ -915,19 +932,19 @@ Sends the 2nd, 3rd and 4th person to 1st person in the list.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>importContacts file/~/Downloads/contacts1.csv</code>
+<p><code>importContacts file/~/Downloads/contacts1.csv</code><br>
 Imports all contacts from root/Downloads/contacts1.csv into application address book</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="notifications-code-notification-code"><a class="link" href="#notifications-code-notification-code">3.32. Notifications: <code>notification</code></a></h3>
+<h3 id="a-id-notification-a-notifications-code-notification-code"><a class="link" href="#a-id-notification-a-notifications-code-notification-code">3.32. <a id="notification"></a> Notifications: <code>notification</code></a></h3>
 <div class="paragraph">
-<p>Allow users to disable notifications for upcoming events based on most recently displayed events list. All events initially have notifications enabled.</p>
+<p>Allow users to disable notifications for upcoming events based on most recently displayed events list. All events initially have notifications enabled by default.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>notification &lt;EVENT INDEX&gt; enable/disable</code></p>
+<p>Format: <code>notification EVENT_INDEX enable/disable</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -935,11 +952,7 @@ Imports all contacts from root/Downloads/contacts1.csv into application address 
 <div class="ulist">
 <ul>
 <li>
-<p><code>notification 2 disable</code>
-V 1.1: Access Windows OS notification
-V 1.2: Access Notification on other common OS
-V 1.3: Allow events to sent notification.
-V 1.4: Allow user to enable/disable notification for each event.</p>
+<p><code>notification 2 disable</code></p>
 </li>
 </ul>
 </div>
@@ -961,7 +974,7 @@ V 1.4: Allow user to enable/disable notification for each event.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Add</strong> : <code>add n/NAME p/PHONE_NUMBER[&#8230;&#8203;] e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;</code><br>
+<p><strong>Add</strong> : <code>add n/NAME p/PHONE_NUMBER&#8230;&#8203; e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;</code><br>
 e.g. <code>add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague</code></p>
 </li>
 <li>
@@ -999,19 +1012,19 @@ e.g.<code>select 2</code></p>
 <p><strong>Redo</strong> : <code>redo</code></p>
 </li>
 <li>
-<p><strong>Add Contacts to Group</strong> : <code>addToGroup group/GROUP_NAME [i/INDEX]</code><br>
+<p><strong>Add Contacts to Group</strong> : <code>addToGroup group/GROUP_NAME [i/INDEX]&#8230;&#8203;</code><br>
 e.g. <code>addToGroup group/CS2103Group i/1 i/2 i/3</code></p>
 </li>
 <li>
-<p><strong>Rename Groups</strong> <code>renameGroup group/ORIGINAL_NAME n/NEW_GROUP_NAME</code><br>
+<p><strong>Rename Group</strong> <code>renameGroup group/ORIGINAL_NAME n/NEW_GROUP_NAME</code><br>
 e.g. <code>renameGroup group/CS2103Group n/HelloWorld</code></p>
 </li>
 <li>
-<p><strong>Merge Group</strong> : <code>mergeGroup n/NEW_GROUP_NAME group/GROUP_NAME[…​]</code><br>
+<p><strong>Merge Group</strong> : <code>mergeGroup n/NEW_GROUP_NAME group/GROUP_NAME…​</code><br>
 e.g. <code>mergeGroup n/CS2103_MERGED group/CS2103_Group1 group/CS2103_Group2 group/CS2103_Group3</code></p>
 </li>
 <li>
-<p><strong>Split Group</strong> : <code>splitGroup group/GROUP_NAME {n/NEW_GROUP_NAME i/INDEX[…​]}[…​]</code><br>
+<p><strong>Split Group</strong> : <code>splitGroup group/GROUP_NAME {n/NEW_GROUP_NAME i/INDEX…​}…​</code><br>
 e.g. <code>splitGroup group/CS2103_MERGE
 n/CS2103_Group1 i/1 i/2 i/3 i/4 i/5</code></p>
 </li>
@@ -1036,7 +1049,7 @@ e.g. <code>deleteGroup group/CS2103Group</code></p>
 e.g. <code>importCalendar Google</code></p>
 </li>
 <li>
-<p><strong>Share Contact</strong> : <code>share i/INDEX[…​] t/INDEX</code><br>
+<p><strong>Share Contact</strong> : <code>share i/INDEX…​ t/INDEX</code><br>
 e.g. <code>share i/2 i/3 i/4 t/1</code></p>
 </li>
 <li>
@@ -1059,7 +1072,7 @@ e.g. <code>addEvent n/Doctor Appointment dsc/Consultation d/15-09-18 t/1030 a/12
 <p><strong>List Events</strong> : <code>listEvent</code></p>
 </li>
 <li>
-<p><strong>Add Group Event</strong> : <code>addGroupEvent n/EVENT_NAME dsc/DESCRIPTION d/DATE(DD-MM-YY) t/TIME(HHMM) a/ADDRESS group/GROUP_NAME</code><br>
+<p><strong>Add Group Event</strong> : <code>addGroupEvent n/EVENT_NAME dsc/DESCRIPTION d/DATE(DD-MM-YY) t/TIME(HHMM) a/ADDRESS group/GROUP_NAME&#8230;&#8203;</code><br>
 e.g. <code>addGroupEvent n/Project Meeting dsc/First Meeting d/12-09-18 t/1200 a/123, Clementi Rd, 1234665 group/CS2103_Group</code></p>
 </li>
 <li>
@@ -1070,10 +1083,10 @@ e.g. <code>addGroupEvent n/Project Meeting dsc/First Meeting d/12-09-18 t/1200 a
 e.g. <code>importContacts file/~/Downloads/contacts1.csv</code></p>
 </li>
 <li>
-<p><strong>Disable and Enable Notification</strong> : <code>notification &lt;EVENT INDEX&gt; enable/disable</code><br>
+<p><strong>Disable and Enable Notification</strong> : <code>notification EVENT_INDEX enable/disable</code><br>
 e.g. <code>notification 2 disable</code></p>
 </li>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-02 06:03:22 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-02 15:27:22 UTC</div></div></div></body></html>
