@@ -27,24 +27,25 @@
 <li><a href="#exiting-the-program-code-exit-code-code-q-code">3.12. Exiting the program : <code>exit</code>, <code>q</code></a></li>
 <li><a href="#saving-the-data">3.13. Saving the data</a></li>
 <li><a href="#add-contacts-to-an-existing-group-code-addtogroup-code">3.14. Add contacts to an existing group : <code>addToGroup</code></a></li>
-<li><a href="#rename-groups-code-renamegroup-code">3.15. Rename groups : <code>renameGroup</code></a></li>
-<li><a href="#merge-groups-code-mergegroup-code">3.16. Merge groups : <code>mergeGroup</code></a></li>
-<li><a href="#split-groups-code-splitgroup-code">3.17. Split groups : <code>splitGroup</code></a></li>
-<li><a href="#view-team-members-who-belong-to-a-group-code-viewgroup-code">3.18. View team members who belong to a group : <code>viewGroup</code></a></li>
-<li><a href="#view-other-contacts-in-the-same-group-as-a-specific-contact-code-commongroupcontacts-code">3.19. View other contacts in the same group as a specific contact : <code>commonGroupContacts</code></a></li>
-<li><a href="#remove-a-contact-from-a-group-code-remove-code">3.20. Remove a contact from a group : <code>remove</code></a></li>
-<li><a href="#delete-an-entire-group-code-deletegroup-code">3.21. Delete an entire group : <code>deleteGroup</code></a></li>
-<li><a href="#import-user-s-timetable-code-importcalendar-code">3.22. Import user&#8217;s timetable : <code>importCalendar</code></a></li>
-<li><a href="#share-multiple-contacts-with-my-peers-code-share-code">3.23. Share multiple contacts with my peers : <code>share</code></a></li>
-<li><a href="#archive-groups-code-archive-code">3.24. Archive groups : <code>archive</code></a></li>
-<li><a href="#unarchive-old-groups-code-unarchive-code">3.25. Unarchive old groups : <code>unarchive</code></a></li>
-<li><a href="#suggested-location-code-generatelocation-code">3.26. Suggested Location : <code>generateLocation</code></a></li>
-<li><a href="#add-personal-event-code-addevent-code">3.27. Add personal event: <code>addEvent</code></a></li>
-<li><a href="#list-personal-events-code-listevent-code">3.28. List personal events: <code>listEvent</code></a></li>
-<li><a href="#add-group-event-code-addgroupevent-code">3.29. Add group event: <code>addGroupEvent</code></a></li>
-<li><a href="#list-group-events-code-listgroupevent-code">3.30. List group events: <code>listGroupEvent</code></a></li>
-<li><a href="#import-contacts-code-importcontacts-code">3.31. Import Contacts: <code>importContacts</code></a></li>
-<li><a href="#a-id-notification-a-notifications-code-notification-code">3.32. <a id="notification"></a> Notifications: <code>notification</code></a></li>
+<li><a href="#create-group-code-creategroup-code">3.15. Create group : <code>createGroup</code></a></li>
+<li><a href="#rename-groups-code-renamegroup-code">3.16. Rename groups : <code>renameGroup</code></a></li>
+<li><a href="#merge-groups-code-mergegroup-code">3.17. Merge groups : <code>mergeGroup</code></a></li>
+<li><a href="#split-groups-code-splitgroup-code">3.18. Split groups : <code>splitGroup</code></a></li>
+<li><a href="#view-team-members-who-belong-to-a-group-code-viewgroup-code">3.19. View team members who belong to a group : <code>viewGroup</code></a></li>
+<li><a href="#view-other-contacts-in-the-same-group-as-a-specific-contact-code-commongroupcontacts-code">3.20. View other contacts in the same group as a specific contact : <code>commonGroupContacts</code></a></li>
+<li><a href="#remove-a-contact-from-a-group-code-remove-code">3.21. Remove a contact from a group : <code>remove</code></a></li>
+<li><a href="#delete-an-entire-group-code-deletegroup-code">3.22. Delete an entire group : <code>deleteGroup</code></a></li>
+<li><a href="#import-user-s-timetable-code-importcalendar-code">3.23. Import user&#8217;s timetable : <code>importCalendar</code></a></li>
+<li><a href="#share-multiple-contacts-with-my-peers-code-share-code">3.24. Share multiple contacts with my peers : <code>share</code></a></li>
+<li><a href="#archive-groups-code-archive-code">3.25. Archive groups : <code>archive</code></a></li>
+<li><a href="#unarchive-old-groups-code-unarchive-code">3.26. Unarchive old groups : <code>unarchive</code></a></li>
+<li><a href="#suggested-location-code-generatelocation-code">3.27. Suggested Location : <code>generateLocation</code></a></li>
+<li><a href="#add-personal-event-code-addevent-code">3.28. Add personal event: <code>addEvent</code></a></li>
+<li><a href="#list-personal-events-code-listevent-code">3.29. List personal events: <code>listEvent</code></a></li>
+<li><a href="#add-group-event-code-addgroupevent-code">3.30. Add group event: <code>addGroupEvent</code></a></li>
+<li><a href="#list-group-events-code-listgroupevent-code">3.31. List group events: <code>listGroupEvent</code></a></li>
+<li><a href="#import-contacts-code-importcontacts-code">3.32. Import Contacts: <code>importContacts</code></a></li>
+<li><a href="#a-id-notification-a-notifications-code-notification-code">3.33. <a id="notification"></a> Notifications: <code>notification</code></a></li>
 </ul>
 </li>
 <li><a href="#faq">4. FAQ</a></li>
@@ -536,7 +537,40 @@ The <code>addToGroup</code> command adds the first(Betsy), second(Tim) and Third
 </div>
 </div>
 <div class="sect2">
-<h3 id="rename-groups-code-renamegroup-code"><a class="link" href="#rename-groups-code-renamegroup-code">3.15. Rename groups : <code>renameGroup</code></a></h3>
+<h3 id="create-group-code-creategroup-code"><a class="link" href="#create-group-code-creategroup-code">3.15. Create group : <code>createGroup</code></a></h3>
+<div class="paragraph">
+<p>Creates a group.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If the group already exists, an error message is displayed accordingly to indicate that this command cannot be parsed.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Format: <code>createGroup group/GROUP_NAME</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>createGroup group/CS2103Group</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="rename-groups-code-renamegroup-code"><a class="link" href="#rename-groups-code-renamegroup-code">3.16. Rename groups : <code>renameGroup</code></a></h3>
 <div class="paragraph">
 <p>Renames a specified group, if it exists.</p>
 </div>
@@ -569,7 +603,7 @@ The <code>addToGroup</code> command adds the first(Betsy), second(Tim) and Third
 </div>
 </div>
 <div class="sect2">
-<h3 id="merge-groups-code-mergegroup-code"><a class="link" href="#merge-groups-code-mergegroup-code">3.16. Merge groups : <code>mergeGroup</code></a></h3>
+<h3 id="merge-groups-code-mergegroup-code"><a class="link" href="#merge-groups-code-mergegroup-code">3.17. Merge groups : <code>mergeGroup</code></a></h3>
 <div class="paragraph">
 <p>Merges a list of groups together. Any number of groups can be merged together.<br>
 When groups are merged, a new group will be created containing all the contacts in the listed groups.<br>
@@ -612,7 +646,7 @@ A new group called <code>CS2103_MERGED</code> is created containing all contacts
 </div>
 </div>
 <div class="sect2">
-<h3 id="split-groups-code-splitgroup-code"><a class="link" href="#split-groups-code-splitgroup-code">3.17. Split groups : <code>splitGroup</code></a></h3>
+<h3 id="split-groups-code-splitgroup-code"><a class="link" href="#split-groups-code-splitgroup-code">3.18. Split groups : <code>splitGroup</code></a></h3>
 <div class="paragraph">
 <p>Splits a group through a series of commands.</p>
 </div>
@@ -651,7 +685,7 @@ To create new group, input the new group names and the indexes of the contacts. 
 </div>
 </div>
 <div class="sect2">
-<h3 id="view-team-members-who-belong-to-a-group-code-viewgroup-code"><a class="link" href="#view-team-members-who-belong-to-a-group-code-viewgroup-code">3.18. View team members who belong to a group : <code>viewGroup</code></a></h3>
+<h3 id="view-team-members-who-belong-to-a-group-code-viewgroup-code"><a class="link" href="#view-team-members-who-belong-to-a-group-code-viewgroup-code">3.19. View team members who belong to a group : <code>viewGroup</code></a></h3>
 <div class="paragraph">
 <p>Shows the information of each team members in a particular group</p>
 </div>
@@ -670,7 +704,7 @@ To create new group, input the new group names and the indexes of the contacts. 
 </div>
 </div>
 <div class="sect2">
-<h3 id="view-other-contacts-in-the-same-group-as-a-specific-contact-code-commongroupcontacts-code"><a class="link" href="#view-other-contacts-in-the-same-group-as-a-specific-contact-code-commongroupcontacts-code">3.19. View other contacts in the same group as a specific contact : <code>commonGroupContacts</code></a></h3>
+<h3 id="view-other-contacts-in-the-same-group-as-a-specific-contact-code-commongroupcontacts-code"><a class="link" href="#view-other-contacts-in-the-same-group-as-a-specific-contact-code-commongroupcontacts-code">3.20. View other contacts in the same group as a specific contact : <code>commonGroupContacts</code></a></h3>
 <div class="paragraph">
 <p>Shows other contacts who may be in the same group with the contact that the user is currently viewing.</p>
 </div>
@@ -689,7 +723,7 @@ To create new group, input the new group names and the indexes of the contacts. 
 </div>
 </div>
 <div class="sect2">
-<h3 id="remove-a-contact-from-a-group-code-remove-code"><a class="link" href="#remove-a-contact-from-a-group-code-remove-code">3.20. Remove a contact from a group : <code>remove</code></a></h3>
+<h3 id="remove-a-contact-from-a-group-code-remove-code"><a class="link" href="#remove-a-contact-from-a-group-code-remove-code">3.21. Remove a contact from a group : <code>remove</code></a></h3>
 <div class="paragraph">
 <p>Removes a specific contact from a group</p>
 </div>
@@ -708,7 +742,7 @@ To create new group, input the new group names and the indexes of the contacts. 
 </div>
 </div>
 <div class="sect2">
-<h3 id="delete-an-entire-group-code-deletegroup-code"><a class="link" href="#delete-an-entire-group-code-deletegroup-code">3.21. Delete an entire group : <code>deleteGroup</code></a></h3>
+<h3 id="delete-an-entire-group-code-deletegroup-code"><a class="link" href="#delete-an-entire-group-code-deletegroup-code">3.22. Delete an entire group : <code>deleteGroup</code></a></h3>
 <div class="paragraph">
 <p>Delete inactive groups or groups who you are not going to work with in the future without affecting contact list.</p>
 </div>
@@ -727,7 +761,7 @@ To create new group, input the new group names and the indexes of the contacts. 
 </div>
 </div>
 <div class="sect2">
-<h3 id="import-user-s-timetable-code-importcalendar-code"><a class="link" href="#import-user-s-timetable-code-importcalendar-code">3.22. Import user&#8217;s timetable : <code>importCalendar</code></a></h3>
+<h3 id="import-user-s-timetable-code-importcalendar-code"><a class="link" href="#import-user-s-timetable-code-importcalendar-code">3.23. Import user&#8217;s timetable : <code>importCalendar</code></a></h3>
 <div class="paragraph">
 <p>Allows the user to import timetable from an external source to load into the app.<br>
 This allows app to prevent any possible clash with events in groups.</p>
@@ -748,7 +782,7 @@ App will redirect to the source (For example, Google) to handle majority of the 
 </div>
 </div>
 <div class="sect2">
-<h3 id="share-multiple-contacts-with-my-peers-code-share-code"><a class="link" href="#share-multiple-contacts-with-my-peers-code-share-code">3.23. Share multiple contacts with my peers : <code>share</code></a></h3>
+<h3 id="share-multiple-contacts-with-my-peers-code-share-code"><a class="link" href="#share-multiple-contacts-with-my-peers-code-share-code">3.24. Share multiple contacts with my peers : <code>share</code></a></h3>
 <div class="paragraph">
 <p>Send selected contacts in the AddressBook to one other contact in the same AddressBook.
 At least one contact to be sent must be indicated, and only one recipient can be specified.</p>
@@ -770,7 +804,7 @@ Sends the 2nd, 3rd and 4th person to 1st person in the (same) list.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="archive-groups-code-archive-code"><a class="link" href="#archive-groups-code-archive-code">3.24. Archive groups : <code>archive</code></a></h3>
+<h3 id="archive-groups-code-archive-code"><a class="link" href="#archive-groups-code-archive-code">3.25. Archive groups : <code>archive</code></a></h3>
 <div class="paragraph">
 <p>Archive groups to unclutter the list of visible group without losing the group&#8217;s information</p>
 </div>
@@ -789,7 +823,7 @@ Sends the 2nd, 3rd and 4th person to 1st person in the (same) list.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="unarchive-old-groups-code-unarchive-code"><a class="link" href="#unarchive-old-groups-code-unarchive-code">3.25. Unarchive old groups : <code>unarchive</code></a></h3>
+<h3 id="unarchive-old-groups-code-unarchive-code"><a class="link" href="#unarchive-old-groups-code-unarchive-code">3.26. Unarchive old groups : <code>unarchive</code></a></h3>
 <div class="paragraph">
 <p>Unarchive group to retrieve previously-archived group information and make group visible again.</p>
 </div>
@@ -808,7 +842,7 @@ Sends the 2nd, 3rd and 4th person to 1st person in the (same) list.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="suggested-location-code-generatelocation-code"><a class="link" href="#suggested-location-code-generatelocation-code">3.26. Suggested Location : <code>generateLocation</code></a></h3>
+<h3 id="suggested-location-code-generatelocation-code"><a class="link" href="#suggested-location-code-generatelocation-code">3.27. Suggested Location : <code>generateLocation</code></a></h3>
 <div class="paragraph">
 <p>Creates a suggested location to meet up based on each team member’s faculty.</p>
 </div>
@@ -827,7 +861,7 @@ Sends the 2nd, 3rd and 4th person to 1st person in the (same) list.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="add-personal-event-code-addevent-code"><a class="link" href="#add-personal-event-code-addevent-code">3.27. Add personal event: <code>addEvent</code></a></h3>
+<h3 id="add-personal-event-code-addevent-code"><a class="link" href="#add-personal-event-code-addevent-code">3.28. Add personal event: <code>addEvent</code></a></h3>
 <div class="paragraph">
 <p>Adds an event in the system with the specified information. Any number of contacts (including zero) can be included in the event.
 A notification will be sent to the user only 24 hours before the event.
@@ -856,7 +890,7 @@ A notification will be sent to the user only 24 hours before the event.
 </div>
 </div>
 <div class="sect2">
-<h3 id="list-personal-events-code-listevent-code"><a class="link" href="#list-personal-events-code-listevent-code">3.28. List personal events: <code>listEvent</code></a></h3>
+<h3 id="list-personal-events-code-listevent-code"><a class="link" href="#list-personal-events-code-listevent-code">3.29. List personal events: <code>listEvent</code></a></h3>
 <div class="paragraph">
 <p>Lists all events in the system.</p>
 </div>
@@ -875,7 +909,7 @@ A notification will be sent to the user only 24 hours before the event.
 </div>
 </div>
 <div class="sect2">
-<h3 id="add-group-event-code-addgroupevent-code"><a class="link" href="#add-group-event-code-addgroupevent-code">3.29. Add group event: <code>addGroupEvent</code></a></h3>
+<h3 id="add-group-event-code-addgroupevent-code"><a class="link" href="#add-group-event-code-addgroupevent-code">3.30. Add group event: <code>addGroupEvent</code></a></h3>
 <div class="paragraph">
 <p>Adds an event in the system with the specified information, for the specified group(s).
 At least one group has to be included in the user input.
@@ -900,7 +934,7 @@ A notification will be sent to the user and contacts in the group 24 hours befor
 </div>
 </div>
 <div class="sect2">
-<h3 id="list-group-events-code-listgroupevent-code"><a class="link" href="#list-group-events-code-listgroupevent-code">3.30. List group events: <code>listGroupEvent</code></a></h3>
+<h3 id="list-group-events-code-listgroupevent-code"><a class="link" href="#list-group-events-code-listgroupevent-code">3.31. List group events: <code>listGroupEvent</code></a></h3>
 <div class="paragraph">
 <p>Lists all group events in the system.</p>
 </div>
@@ -919,7 +953,7 @@ A notification will be sent to the user and contacts in the group 24 hours befor
 </div>
 </div>
 <div class="sect2">
-<h3 id="import-contacts-code-importcontacts-code"><a class="link" href="#import-contacts-code-importcontacts-code">3.31. Import Contacts: <code>importContacts</code></a></h3>
+<h3 id="import-contacts-code-importcontacts-code"><a class="link" href="#import-contacts-code-importcontacts-code">3.32. Import Contacts: <code>importContacts</code></a></h3>
 <div class="paragraph">
 <p>Import contacts from a specified csv file. Duplicate contacts will be merged together.</p>
 </div>
@@ -939,7 +973,7 @@ Imports all contacts from root/Downloads/contacts1.csv into application address 
 </div>
 </div>
 <div class="sect2">
-<h3 id="a-id-notification-a-notifications-code-notification-code"><a class="link" href="#a-id-notification-a-notifications-code-notification-code">3.32. <a id="notification"></a> Notifications: <code>notification</code></a></h3>
+<h3 id="a-id-notification-a-notifications-code-notification-code"><a class="link" href="#a-id-notification-a-notifications-code-notification-code">3.33. <a id="notification"></a> Notifications: <code>notification</code></a></h3>
 <div class="paragraph">
 <p>Allow users to disable notifications for upcoming events based on most recently displayed events list. All events initially have notifications enabled by default.</p>
 </div>
@@ -1089,4 +1123,4 @@ e.g. <code>notification 2 disable</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-02 15:50:30 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-02 15:52:38 UTC</div></div></div></body></html>
