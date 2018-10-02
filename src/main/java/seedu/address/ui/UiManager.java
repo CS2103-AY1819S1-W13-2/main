@@ -9,6 +9,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import seedu.address.MainApp;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.Config;
@@ -17,6 +18,8 @@ import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
+import tray.notification.NotificationType;
+import tray.notification.TrayNotification;
 
 /**
  * The manager of the UI component.
@@ -54,6 +57,8 @@ public class UiManager extends ComponentManager implements Ui {
         try {
             mainWindow = new MainWindow(primaryStage, config, prefs, logic);
             mainWindow.show(); //This should be called before creating other UI parts
+            new TrayNotification("Addressbook Level 4","Welcome to Addressbook Level 4", NotificationType.NOTICE)
+                    .showAndDismiss(Duration.seconds(2));
             mainWindow.fillInnerParts();
 
         } catch (Throwable e) {
