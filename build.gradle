@@ -14,13 +14,6 @@ plugins {
     id 'application'
 }
 
-allprojects{
-    repositories {
-        jcenter()
-        maven { url "https://jitpack.io" }
-    }
-}
-
 if (JavaVersion.current() == JavaVersion.VERSION_1_10
         && System.getProperty('os.name').startsWith('Windows')) {
     logger.warn('''\
@@ -43,6 +36,7 @@ targetCompatibility = JavaVersion.VERSION_1_9
 repositories {
     mavenCentral()
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+    maven { url 'https://jitpack.io' }
 }
 
 checkstyle {
