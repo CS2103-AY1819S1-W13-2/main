@@ -21,6 +21,7 @@ public class PersonTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
+    // cannot modify the immutable list of tags
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Person person = new PersonBuilder().build();
         thrown.expect(UnsupportedOperationException.class);

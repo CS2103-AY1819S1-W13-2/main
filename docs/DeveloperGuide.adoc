@@ -865,27 +865,27 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* *` |user |choose what notifications I would like to receive |minimize distractions from the app
 
-|`* * *` |user |create new groups from already existing contacts |collaborate with existing contacts
+|`* * *` |user |create new <<groups, group>> from already existing contacts |collaborate with existing contacts
 
-|`* * *` |user |create new groups from new contacts |have new group members automatically added in my address book
+|`* * *` |user |create new <<groups, group>> from new contacts |have new group members automatically added in my address book
 
-|`* *` |user |add contacts to an existing group |include later-joining members
+|`* *` |user |add contacts to an existing <<group, group>> |include later-joining members
 
-|`*` |user |be prompted to add new contacts to a suggested group based on the tags |be reminded to update groups with possible new users
+|`*` |user |be prompted to add new contacts to a suggested <<group, group>> based on the tags |be reminded to update groups with possible new users
 
-|`* * *` |user |rename groups |change the name of groups over time
+|`* * *` |user |rename groups |change the name of <<groups, group>> over time
 
-|`*` |user |merge groups |organize my groups
+|`*` |user |merge <<groups, group>> |organize my groups
 
-|`*` |user |split groups |organize my groups
+|`*` |user |split <<groups, group>> |organize my groups
 
-|`* * *` |user |view team members belonging to a group |view my contacts related to a specific group
+|`* * *` |user |view team members belonging to a <<group, group>> |view my contacts related to a specific group
 
-|`*` |user |view other contacts in the same group as a specific contact |view group-related contacts using the information of only one member
+|`*` |user |view other contacts in the same <<group, group>> as a specific contact |view group-related contacts using the information of only one member
 
-|`* * *` |user |remove a contact from a group |ensure that the group member list is up-to-date
+|`* * *` |user |remove a contact from a <<group, group>> |ensure that the group member list is up-to-date
 
-|`* * *` |user |delete an entire group |remove inactive groups without affecting my contact list
+|`* * *` |user |delete an entire <<group, group>> |remove inactive groups without affecting my contact list
 
 |`* * *` |university student |add events to the app |keep track of my schedule and upcoming events
 
@@ -903,9 +903,9 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`*` |user |share multiple contacts with my peers |exchange contacts quickly
 
-|`*` |user |archive inactive groups without deletion |avoid clutter in the list of visible groups without losing the information permanently
+|`*` |user |archive inactive <<group, group>> without deletion |avoid clutter in the list of visible groups without losing the information permanently
 
-|`*` |user |un-archive groups |continue working with groups that have been re-activated if needed
+|`*` |user |un-archive <<group, group>> |continue working with groups that have been re-activated if needed
 
 | `* *` |user |detect similar contacts when importing contacts from an external source e.g. .csv file and merge them |avoid having duplicate contacts
 
@@ -1018,14 +1018,138 @@ If user does not want to add the event, use case ends. Else, use case resumes fr
 +
 Use case ends.
 
+[discrete]
+=== UC6: View events for a particular week
+
+*MSS*
+
+. User requests to view events for a given week.
+. AddressBook displays events for that week.
++
+
+User case ends.
+
+*Extensions*
+
+* 1a. User enters invalid date.
++
+** 1a1. AddressBook displays error message.
++
+Use case ends.
+
+[discrete]
+=== UC7: View contacts by tag
+
+*MSS*
+
+. User requests to view contacts for a given tag.
+. AddressBook displays contacts under that tag.
++
+
+User case ends.
+
+*Extensions*
+
+* 1a. User enters invalid tag.
++
+** 1a1. AddressBook displays invalid tag message and returns to original screen.
++
+Use case ends.
+
+[discrete]
+=== UC8: Message multiple users
+
+*MSS*
+
+. User requests to send emails to a particular project group.
+. System goes to email page and puts all contacts in the email recipient list.
+. User sends email.
+. System returns to original screen.
++
+
+User case ends.
+
+*Extensions*
+
+* 3a. User exits email screen without sending email.
++
+** 3a1. AddressBook returns to original screen.
++
+Use case ends.
+
+[discrete]
+=== UC9: List projects
+
+*MSS*
+
+. User requests to view all projects.
+. System displays the list of projects.
++
+
+User case ends.
+
+[discrete]
+=== UC10: Find projects by keyword
+
+*MSS*
+
+. User requests to get projects with a certain keyword.
+. System displays all the projects containing that keyword.
++
+
+User case ends.
+
+[discrete]
+=== UC11: Import timetable
+
+*MSS*
+
+. User is redirected to IVLE login for app to access IVLE data.
+. Toast indicating successful import.
+. User is redirected to timetable page on the app.
++
+
+User case ends.
+
+*Extensions*
+
+* 2a. Incorrect login procedure is handled by IVLE.
++
+* 2b. AddressBook detects a clash with the user's schedule.
+** 2b1. AddressBook displays error message showing a clash.
+** 2b2. AddressBook asks if user wants to add the event anyway.
+** 2b3. AddressBook adds the event (or not).
+** If user does not want to add the event, use case ends.
+** Else, use case resumes from step 3.
++
+Use case ends.
+
+[discrete]
+=== UC12: Upcoming event notification
+
+*MSS*
+
+. Notification appears 24h before the event.
+. User taps on notification.
+. User is redirected to app homepage.
++
+
+Use case ends.
+
 [appendix]
 == Non Functional Requirements
 
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
 .  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-_{More to be added}_
+.  The system should be able to work on 32-bit and 64-bit environments.
+.  The system should respond to the user’s input command within 5 seconds.
+.  The system is not required to handle conflicts between group members’ schedules which are not stored in any online platform (recorded only in a paper diary, etc.)
+.  UI should be aesthetically pleasing i.e. colour, font, layout, pictorial-wise.
+.  The basic usage of the application should be easy for a new user to pick up so as to ensure that the application continues to be used in the long term.
+.  Privacy of user groups should be ensured - developers should not be able to view the contacts or groups or events of the user.
+.  Each user should be able to have up to 50 <<groups, group>> that the user can be in at any one point in time.
+.  User activities should be logged in a separate file.
 
 [appendix]
 == Glossary
@@ -1036,22 +1160,15 @@ Windows, Linux, Unix, OS-X
 [[private-contact-detail]] Private contact detail::
 A contact detail that is not meant to be shared with others
 
-[appendix]
-== Product Survey
+[[group]] Group::
+A collection of contacts who come together for ad-hoc, short-term events such as projects.
 
-*Product Name*
+[[tag]] Tag::
+The item used to organize contacts based on personal or work relationships in the address book. For example, tags can exist for family, friends, work colleagues, etc.
 
-Author: ...
+[[faculty]] Faculty::
+The faculty of study that the student belongs to.
 
-Pros:
-
-* ...
-* ...
-
-Cons:
-
-* ...
-* ...
 
 [appendix]
 == Instructions for Manual Testing

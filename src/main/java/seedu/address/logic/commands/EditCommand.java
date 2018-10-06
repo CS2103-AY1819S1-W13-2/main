@@ -34,8 +34,10 @@ import seedu.address.model.tag.Tag;
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD_ALIAS = "e";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + "(alias: " + COMMAND_WORD_ALIAS + ")"
+            + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "

@@ -12,7 +12,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 == Project Team
 
 === Jack Chai Jie Feng
-image::jack.jpg[width="150", align="left"]
+image::cjiefeng.png[width="150", align="left"]
 {empty}[https://github.com/cjiefeng[github]]
 
 Role: Team Lead +
@@ -22,7 +22,7 @@ Component: Model
 '''
 
 === Peck Kai Ting
-image::kaiting.jpg[width="150", align="left"]
+image::kaitingpeck.png[width="150", align="left"]
 {empty}[http://github.com/kaitingpeck[github]]
 
 Role: Developer +
@@ -32,7 +32,7 @@ Component: Logic
 '''
 
 === Pratyay Jaidev
-image::pratyay.jpg[width="150", align="left"]
+image::pratyayj.png[width="150", align="left"]
 {empty}[http://github.com/pratyayj[github]]
 
 Role: Developer +
@@ -42,7 +42,7 @@ Component: UI
 '''
 
 === Yap Yu Wei
-image::yuwei.jpg[width="150", align="left"]
+image::yap666y.png[width="150", align="left"]
 {empty}[http://github.com/yap666y[github]]
 
 Role: Developer +
@@ -52,7 +52,7 @@ Component: Storage
 '''
 
 === Ryan Tan Wei Keat
-image::ryan.jpg[width="150", align="left"]
+image::ryantanwk.png[width="150", align="left"]
 {empty}[http://github.com/ryantanwk[github]]
 
 Role: Developer +
