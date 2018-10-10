@@ -36,6 +36,7 @@ targetCompatibility = JavaVersion.VERSION_1_9
 repositories {
     mavenCentral()
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+    maven { url 'https://github.com/PlusHaze/TrayNotification' }
 }
 
 checkstyle {

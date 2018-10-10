@@ -1,5 +1,6 @@
 package guitests;
 
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.BooleanSupplier;
 
@@ -90,6 +91,7 @@ public class GuiRobot extends FxRobot {
      */
     public int getNumberOfWindowsShown(String stageTitle) {
         return (int) listTargetWindows().stream()
+                .filter(window -> ((Stage)window).getTitle() != null)
                 .filter(window -> window instanceof Stage && ((Stage) window).getTitle().equals(stageTitle))
                 .count();
     }
@@ -105,6 +107,7 @@ public class GuiRobot extends FxRobot {
         Optional<Stage> targetStage = listTargetWindows().stream()
                 .filter(Stage.class::isInstance) // checks that the window is of type Stage
                 .map(Stage.class::cast)
+                .filter(stage -> stage.getTitle() != null)
                 .filter(stage -> stage.getTitle().equals(stageTitle))
                 .findFirst();
 
