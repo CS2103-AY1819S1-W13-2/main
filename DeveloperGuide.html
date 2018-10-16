@@ -217,10 +217,10 @@ This will generate all resources required by the application and tests.</p>
 <div class="sect3">
 <h4 id="updating-documentation-to-match-your-fork"><a class="link" href="#updating-documentation-to-match-your-fork">1.4.2. Updating documentation to match your fork</a></h4>
 <div class="paragraph">
-<p>After forking the repo, the documentation will still have the SE-EDU branding and refer to the <code>se-edu/addressbook-level4</code> repo.</p>
+<p>After forking the repo, the documentation will still have the SE-EDU branding and refer to the <code>se-edu/System-level4</code> repo.</p>
 </div>
 <div class="paragraph">
-<p>If you plan to develop this fork as a separate product (i.e. instead of contributing to <code>se-edu/addressbook-level4</code>), you should do the following:</p>
+<p>If you plan to develop this fork as a separate product (i.e. instead of contributing to <code>se-edu/System-level4</code>), you should do the following:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -398,7 +398,7 @@ The <code>.pptx</code> files used to create diagrams in this document can be fou
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Note how the <code>Model</code> simply raises a <code>AddressBookChangedEvent</code> when the Address Book data are changed, instead of asking the <code>Storage</code> to save the updates to the hard disk.
+Note how the <code>Model</code> simply raises a <code>SystemChangedEvent</code> when the Address Book data are changed, instead of asking the <code>Storage</code> to save the updates to the hard disk.
 </td>
 </tr>
 </table>
@@ -477,7 +477,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><code>Logic</code> uses the <code>AddressBookParser</code> class to parse the user command.</p>
+<p><code>Logic</code> uses the <code>SystemParser</code> class to parse the user command.</p>
 </li>
 <li>
 <p>This results in a <code>Command</code> object which is executed by the <code>LogicManager</code>.</p>
@@ -573,7 +573,7 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book<
 <div class="sect2">
 <h3 id="Design-Commons"><a class="link" href="#Design-Commons">2.6. Common classes</a></h3>
 <div class="paragraph">
-<p>Classes used by multiple components are in the <code>seedu.addressbook.commons</code> package.</p>
+<p>Classes used by multiple components are in the <code>seedu.System.commons</code> package.</p>
 </div>
 </div>
 </div>
@@ -589,31 +589,31 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book<
 <div class="sect3">
 <h4 id="current-implementation"><a class="link" href="#current-implementation">3.1.1. Current Implementation</a></h4>
 <div class="paragraph">
-<p>The undo/redo mechanism is facilitated by <code>VersionedAddressBook</code>.
-It extends <code>AddressBook</code> with an undo/redo history, stored internally as an <code>addressBookStateList</code> and <code>currentStatePointer</code>.
+<p>The undo/redo mechanism is facilitated by <code>VersionedSystem</code>.
+It extends <code>System</code> with an undo/redo history, stored internally as an <code>SystemStateList</code> and <code>currentStatePointer</code>.
 Additionally, it implements the following operations:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>VersionedAddressBook#commit()</code>&#8201;&#8212;&#8201;Saves the current address book state in its history.</p>
+<p><code>VersionedSystem#commit()</code>&#8201;&#8212;&#8201;Saves the current address book state in its history.</p>
 </li>
 <li>
-<p><code>VersionedAddressBook#undo()</code>&#8201;&#8212;&#8201;Restores the previous address book state from its history.</p>
+<p><code>VersionedSystem#undo()</code>&#8201;&#8212;&#8201;Restores the previous address book state from its history.</p>
 </li>
 <li>
-<p><code>VersionedAddressBook#redo()</code>&#8201;&#8212;&#8201;Restores a previously undone address book state from its history.</p>
+<p><code>VersionedSystem#redo()</code>&#8201;&#8212;&#8201;Restores a previously undone address book state from its history.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>These operations are exposed in the <code>Model</code> interface as <code>Model#commitAddressBook()</code>, <code>Model#undoAddressBook()</code> and <code>Model#redoAddressBook()</code> respectively.</p>
+<p>These operations are exposed in the <code>Model</code> interface as <code>Model#commitSystem()</code>, <code>Model#undoSystem()</code> and <code>Model#redoSystem()</code> respectively.</p>
 </div>
 <div class="paragraph">
 <p>Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.</p>
 </div>
 <div class="paragraph">
-<p>Step 1. The user launches the application for the first time. The <code>VersionedAddressBook</code> will be initialized with the initial address book state, and the <code>currentStatePointer</code> pointing to that single address book state.</p>
+<p>Step 1. The user launches the application for the first time. The <code>VersionedSystem</code> will be initialized with the initial address book state, and the <code>currentStatePointer</code> pointing to that single address book state.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -621,7 +621,7 @@ Additionally, it implements the following operations:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Step 2. The user executes <code>delete 5</code> command to delete the 5th person in the address book. The <code>delete</code> command calls <code>Model#commitAddressBook()</code>, causing the modified state of the address book after the <code>delete 5</code> command executes to be saved in the <code>addressBookStateList</code>, and the <code>currentStatePointer</code> is shifted to the newly inserted address book state.</p>
+<p>Step 2. The user executes <code>delete 5</code> command to delete the 5th person in the address book. The <code>delete</code> command calls <code>Model#commitSystem()</code>, causing the modified state of the address book after the <code>delete 5</code> command executes to be saved in the <code>SystemStateList</code>, and the <code>currentStatePointer</code> is shifted to the newly inserted address book state.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -629,7 +629,7 @@ Additionally, it implements the following operations:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Step 3. The user executes <code>add n/David &#8230;&#8203;</code> to add a new person. The <code>add</code> command also calls <code>Model#commitAddressBook()</code>, causing another modified address book state to be saved into the <code>addressBookStateList</code>.</p>
+<p>Step 3. The user executes <code>add n/David &#8230;&#8203;</code> to add a new person. The <code>add</code> command also calls <code>Model#commitSystem()</code>, causing another modified address book state to be saved into the <code>SystemStateList</code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -643,13 +643,13 @@ Additionally, it implements the following operations:</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If a command fails its execution, it will not call <code>Model#commitAddressBook()</code>, so the address book state will not be saved into the <code>addressBookStateList</code>.
+If a command fails its execution, it will not call <code>Model#commitSystem()</code>, so the address book state will not be saved into the <code>SystemStateList</code>.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the <code>undo</code> command. The <code>undo</code> command will call <code>Model#undoAddressBook()</code>, which will shift the <code>currentStatePointer</code> once to the left, pointing it to the previous address book state, and restores the address book to that state.</p>
+<p>Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the <code>undo</code> command. The <code>undo</code> command will call <code>Model#undoSystem()</code>, which will shift the <code>currentStatePointer</code> once to the left, pointing it to the previous address book state, and restores the address book to that state.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -663,7 +663,7 @@ If a command fails its execution, it will not call <code>Model#commitAddressBook
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If the <code>currentStatePointer</code> is at index 0, pointing to the initial address book state, then there are no previous address book states to restore. The <code>undo</code> command uses <code>Model#canUndoAddressBook()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
+If the <code>currentStatePointer</code> is at index 0, pointing to the initial address book state, then there are no previous address book states to restore. The <code>undo</code> command uses <code>Model#canUndoSystem()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
 </td>
 </tr>
 </table>
@@ -677,7 +677,7 @@ If the <code>currentStatePointer</code> is at index 0, pointing to the initial a
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>redo</code> command does the opposite&#8201;&#8212;&#8201;it calls <code>Model#redoAddressBook()</code>, which shifts the <code>currentStatePointer</code> once to the right, pointing to the previously undone state, and restores the address book to that state.</p>
+<p>The <code>redo</code> command does the opposite&#8201;&#8212;&#8201;it calls <code>Model#redoSystem()</code>, which shifts the <code>currentStatePointer</code> once to the right, pointing to the previously undone state, and restores the address book to that state.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -686,13 +686,13 @@ If the <code>currentStatePointer</code> is at index 0, pointing to the initial a
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If the <code>currentStatePointer</code> is at index <code>addressBookStateList.size() - 1</code>, pointing to the latest address book state, then there are no undone address book states to restore. The <code>redo</code> command uses <code>Model#canRedoAddressBook()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+If the <code>currentStatePointer</code> is at index <code>SystemStateList.size() - 1</code>, pointing to the latest address book state, then there are no undone address book states to restore. The <code>redo</code> command uses <code>Model#canRedoSystem()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Step 5. The user then decides to execute the command <code>list</code>. Commands that do not modify the address book, such as <code>list</code>, will usually not call <code>Model#commitAddressBook()</code>, <code>Model#undoAddressBook()</code> or <code>Model#redoAddressBook()</code>. Thus, the <code>addressBookStateList</code> remains unchanged.</p>
+<p>Step 5. The user then decides to execute the command <code>list</code>. Commands that do not modify the address book, such as <code>list</code>, will usually not call <code>Model#commitSystem()</code>, <code>Model#undoSystem()</code> or <code>Model#redoSystem()</code>. Thus, the <code>SystemStateList</code> remains unchanged.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -700,7 +700,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="paragraph">
-<p>Step 6. The user executes <code>clear</code>, which calls <code>Model#commitAddressBook()</code>. Since the <code>currentStatePointer</code> is not pointing at the end of the <code>addressBookStateList</code>, all address book states after the <code>currentStatePointer</code> will be purged. We designed it this way because it no longer makes sense to redo the <code>add n/David &#8230;&#8203;</code> command. This is the behavior that most modern desktop applications follow.</p>
+<p>Step 6. The user executes <code>clear</code>, which calls <code>Model#commitSystem()</code>. Since the <code>currentStatePointer</code> is not pointing at the end of the <code>SystemStateList</code>, all address book states after the <code>currentStatePointer</code> will be purged. We designed it this way because it no longer makes sense to redo the <code>add n/David &#8230;&#8203;</code> command. This is the behavior that most modern desktop applications follow.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -763,7 +763,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <p>Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.</p>
 </li>
 <li>
-<p>Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both <code>HistoryManager</code> and <code>VersionedAddressBook</code>.</p>
+<p>Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both <code>HistoryManager</code> and <code>VersionedSystem</code>.</p>
 </li>
 </ul>
 </div>
@@ -1282,7 +1282,7 @@ Do take a look at <a href="#Design-Logic">Section 2.3, &#8220;Logic component&#8
 <p>Just like we store each individual command word constant <code>COMMAND_WORD</code> inside <code>*Command.java</code> (e.g.  <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/main/java/seedu/address/logic/commands/FindCommand.java"><code>FindCommand#COMMAND_WORD</code></a>, <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/main/java/seedu/address/logic/commands/DeleteCommand.java"><code>DeleteCommand#COMMAND_WORD</code></a>), you need a new constant for aliases as well (e.g. <code>FindCommand#COMMAND_ALIAS</code>).</p>
 </li>
 <li>
-<p><a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/main/java/seedu/address/logic/parser/AddressBookParser.java"><code>AddressBookParser</code></a> is responsible for analyzing command words.</p>
+<p><a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/main/java/seedu/address/logic/parser/SystemParser.java"><code>SystemParser</code></a> is responsible for analyzing command words.</p>
 </li>
 </ul>
 </div>
@@ -1292,7 +1292,7 @@ Do take a look at <a href="#Design-Logic">Section 2.3, &#8220;Logic component&#8
 <div class="ulist">
 <ul>
 <li>
-<p>Modify the switch statement in <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/main/java/seedu/address/logic/parser/AddressBookParser.java"><code>AddressBookParser#parseCommand(String)</code></a> such that both the proper command word and alias can be used to execute the same intended command.</p>
+<p>Modify the switch statement in <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/main/java/seedu/address/logic/parser/SystemParser.java"><code>SystemParser#parseCommand(String)</code></a> such that both the proper command word and alias can be used to execute the same intended command.</p>
 </li>
 <li>
 <p>Add new tests for each of the aliases that you have added.</p>
@@ -1301,7 +1301,7 @@ Do take a look at <a href="#Design-Logic">Section 2.3, &#8220;Logic component&#8
 <p>Update the user guide to document the new aliases.</p>
 </li>
 <li>
-<p>See this <a href="https://github.com/se-edu/addressbook-level4/pull/785">PR</a> for the full solution.</p>
+<p>See this <a href="https://github.com/se-edu/System-level4/pull/785">PR</a> for the full solution.</p>
 </li>
 </ul>
 </div>
@@ -1342,13 +1342,13 @@ Do take a look at <a href="#Design-Model">Section 2.4, &#8220;Model component&#8
 <div class="ulist">
 <ul>
 <li>
-<p>The <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/main/java/seedu/address/model/Model.java"><code>Model</code></a> and the <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/main/java/seedu/address/model/AddressBook.java"><code>AddressBook</code></a> API need to be updated.</p>
+<p>The <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/main/java/seedu/address/model/Model.java"><code>Model</code></a> and the <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/main/java/seedu/address/model/System.java"><code>System</code></a> API need to be updated.</p>
 </li>
 <li>
 <p>Think about how you can use SLAP to design the method. Where should we place the main logic of deleting tags?</p>
 </li>
 <li>
-<p>Find out which of the existing API methods in  <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/main/java/seedu/address/model/AddressBook.java"><code>AddressBook</code></a> and <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/main/java/seedu/address/model/person/Person.java"><code>Person</code></a> classes can be used to implement the tag removal logic. <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/main/java/seedu/address/model/AddressBook.java"><code>AddressBook</code></a> allows you to update a person, and <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/main/java/seedu/address/model/person/Person.java"><code>Person</code></a> allows you to update the tags.</p>
+<p>Find out which of the existing API methods in  <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/main/java/seedu/address/model/System.java"><code>System</code></a> and <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/main/java/seedu/address/model/person/Person.java"><code>Person</code></a> classes can be used to implement the tag removal logic. <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/main/java/seedu/address/model/System.java"><code>System</code></a> allows you to update a person, and <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/main/java/seedu/address/model/person/Person.java"><code>Person</code></a> allows you to update the tags.</p>
 </li>
 </ul>
 </div>
@@ -1358,16 +1358,16 @@ Do take a look at <a href="#Design-Model">Section 2.4, &#8220;Model component&#8
 <div class="ulist">
 <ul>
 <li>
-<p>Implement a <code>removeTag(Tag)</code> method in <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/main/java/seedu/address/model/AddressBook.java"><code>AddressBook</code></a>. Loop through each person, and remove the <code>tag</code> from each person.</p>
+<p>Implement a <code>removeTag(Tag)</code> method in <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/main/java/seedu/address/model/System.java"><code>System</code></a>. Loop through each person, and remove the <code>tag</code> from each person.</p>
 </li>
 <li>
-<p>Add a new API method <code>deleteTag(Tag)</code> in <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/main/java/seedu/address/model/ModelManager.java"><code>ModelManager</code></a>. Your <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/main/java/seedu/address/model/ModelManager.java"><code>ModelManager</code></a> should call <code>AddressBook#removeTag(Tag)</code>.</p>
+<p>Add a new API method <code>deleteTag(Tag)</code> in <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/main/java/seedu/address/model/ModelManager.java"><code>ModelManager</code></a>. Your <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/main/java/seedu/address/model/ModelManager.java"><code>ModelManager</code></a> should call <code>System#removeTag(Tag)</code>.</p>
 </li>
 <li>
 <p>Add new tests for each of the new public methods that you have added.</p>
 </li>
 <li>
-<p>See this <a href="https://github.com/se-edu/addressbook-level4/pull/790">PR</a> for the full solution.</p>
+<p>See this <a href="https://github.com/se-edu/System-level4/pull/790">PR</a> for the full solution.</p>
 </li>
 </ul>
 </div>
@@ -1443,7 +1443,7 @@ Do take a look at <a href="#Design-Ui">Section 2.2, &#8220;UI component&#8221;</
 <p>You can modify the existing test methods for <code>PersonCard</code> 's to include testing the tag&#8217;s color as well.</p>
 </li>
 <li>
-<p>See this <a href="https://github.com/se-edu/addressbook-level4/pull/798">PR</a> for the full solution.</p>
+<p>See this <a href="https://github.com/se-edu/System-level4/pull/798">PR</a> for the full solution.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1513,13 +1513,13 @@ Do take a look at <a href="#Design-Ui">Section 2.2, &#8220;UI component&#8221;</
 <p>The unit tests for <code>ResultDisplay</code> can be modified to include verification of the color.</p>
 </li>
 <li>
-<p>The system tests <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/test/java/systemtests/AddressBookSystemTest.java"><code>AddressBookSystemTest#assertCommandBoxShowsDefaultStyle() and AddressBookSystemTest#assertCommandBoxShowsErrorStyle()</code></a> to include verification for <code>ResultDisplay</code> as well.</p>
+<p>The system tests <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/test/java/systemtests/SystemSystemTest.java"><code>SystemSystemTest#assertCommandBoxShowsDefaultStyle() and SystemSystemTest#assertCommandBoxShowsErrorStyle()</code></a> to include verification for <code>ResultDisplay</code> as well.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>See this <a href="https://github.com/se-edu/addressbook-level4/pull/799">PR</a> for the full solution.</p>
+<p>See this <a href="https://github.com/se-edu/System-level4/pull/799">PR</a> for the full solution.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1579,16 +1579,16 @@ Do take a look at <a href="#Design-Ui">Section 2.2, &#8220;UI component&#8221;</
 <p>Modify the constructor of <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/main/java/seedu/address/ui/StatusBarFooter.java"><code>StatusBarFooter</code></a> to take in the number of persons when the application just started.</p>
 </li>
 <li>
-<p>Use <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/main/java/seedu/address/ui/StatusBarFooter.java"><code>StatusBarFooter#handleAddressBookChangedEvent(AddressBookChangedEvent)</code></a> to update the number of persons whenever there are new changes to the addressbook.</p>
+<p>Use <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/main/java/seedu/address/ui/StatusBarFooter.java"><code>StatusBarFooter#handleSystemChangedEvent(SystemChangedEvent)</code></a> to update the number of persons whenever there are new changes to the System.</p>
 </li>
 <li>
 <p>For tests, modify <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/test/java/guitests/guihandles/StatusBarFooterHandle.java"><code>StatusBarFooterHandle</code></a> by adding a state-saving functionality for the total number of people status, just like what we did for save location and sync status.</p>
 </li>
 <li>
-<p>For system tests, modify <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/test/java/systemtests/AddressBookSystemTest.java"><code>AddressBookSystemTest</code></a> to also verify the new total number of persons status bar.</p>
+<p>For system tests, modify <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/test/java/systemtests/SystemSystemTest.java"><code>SystemSystemTest</code></a> to also verify the new total number of persons status bar.</p>
 </li>
 <li>
-<p>See this <a href="https://github.com/se-edu/addressbook-level4/pull/803">PR</a> for the full solution.</p>
+<p>See this <a href="https://github.com/se-edu/System-level4/pull/803">PR</a> for the full solution.</p>
 </li>
 </ul>
 </div>
@@ -1619,7 +1619,7 @@ Do take a look at <a href="#Design-Storage">Section 2.5, &#8220;Storage componen
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Add a new method <code>backupAddressBook(ReadOnlyAddressBook)</code>, so that the address book can be saved in a fixed temporary location.</p>
+<p>Add a new method <code>backupSystem(ReadOnlySystem)</code>, so that the address book can be saved in a fixed temporary location.</p>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
@@ -1629,10 +1629,10 @@ Do take a look at <a href="#Design-Storage">Section 2.5, &#8220;Storage componen
 <div class="ulist">
 <ul>
 <li>
-<p>Add the API method in <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/main/java/seedu/address/storage/AddressBookStorage.java"><code>AddressBookStorage</code></a> interface.</p>
+<p>Add the API method in <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/main/java/seedu/address/storage/SystemStorage.java"><code>SystemStorage</code></a> interface.</p>
 </li>
 <li>
-<p>Implement the logic in <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/main/java/seedu/address/storage/StorageManager.java"><code>StorageManager</code></a> and <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/main/java/seedu/address/storage/XmlAddressBookStorage.java"><code>XmlAddressBookStorage</code></a> class.</p>
+<p>Implement the logic in <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/main/java/seedu/address/storage/StorageManager.java"><code>StorageManager</code></a> and <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/main/java/seedu/address/storage/XmlSystemStorage.java"><code>XmlSystemStorage</code></a> class.</p>
 </li>
 </ul>
 </div>
@@ -1642,7 +1642,7 @@ Do take a look at <a href="#Design-Storage">Section 2.5, &#8220;Storage componen
 <div class="ulist">
 <ul>
 <li>
-<p>See this <a href="https://github.com/se-edu/addressbook-level4/pull/594">PR</a> for the full solution.</p>
+<p>See this <a href="https://github.com/se-edu/System-level4/pull/594">PR</a> for the full solution.</p>
 </li>
 </ul>
 </div>
@@ -1661,7 +1661,7 @@ Do take a look at <a href="#Design-Storage">Section 2.5, &#8220;Storage componen
 <p>By creating this command, you will get a chance to learn how to implement a feature end-to-end, touching all major components of the app.</p>
 </div>
 <div class="paragraph">
-<p><strong>Scenario:</strong> You are a software maintainer for <code>addressbook</code>, as the former developer team has moved on to new projects. The current users of your application have a list of new feature requests that they hope the software will eventually have. The most popular request is to allow adding additional comments/notes about a particular contact, by providing a flexible <code>remark</code> field for each contact, rather than relying on tags alone. After designing the specification for the <code>remark</code> command, you are convinced that this feature is worth implementing. Your job is to implement the <code>remark</code> command.</p>
+<p><strong>Scenario:</strong> You are a software maintainer for <code>System</code>, as the former developer team has moved on to new projects. The current users of your application have a list of new feature requests that they hope the software will eventually have. The most popular request is to allow adding additional comments/notes about a particular contact, by providing a flexible <code>remark</code> field for each contact, rather than relying on tags alone. After designing the specification for the <code>remark</code> command, you are convinced that this feature is worth implementing. Your job is to implement the <code>remark</code> command.</p>
 </div>
 <div class="sect3">
 <h4 id="description"><a class="link" href="#description">A.2.1. Description</a></h4>
@@ -1701,7 +1701,7 @@ Removes the remark for the first person.</p>
 <p>Add a <code>RemarkCommand</code> that extends <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/main/java/seedu/address/logic/commands/Command.java"><code>Command</code></a>. Upon execution, it should just throw an <code>Exception</code>.</p>
 </li>
 <li>
-<p>Modify <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/main/java/seedu/address/logic/parser/AddressBookParser.java"><code>AddressBookParser</code></a> to accept a <code>RemarkCommand</code>.</p>
+<p>Modify <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/main/java/seedu/address/logic/parser/SystemParser.java"><code>SystemParser</code></a> to accept a <code>RemarkCommand</code>.</p>
 </li>
 </ol>
 </div>
@@ -1714,7 +1714,7 @@ Removes the remark for the first person.</p>
 <p>Add <code>RemarkCommandTest</code> that tests that <code>execute()</code> throws an Exception.</p>
 </li>
 <li>
-<p>Add new test method to <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/test/java/seedu/address/logic/parser/AddressBookParserTest.java"><code>AddressBookParserTest</code></a>, which tests that typing "remark" returns an instance of <code>RemarkCommand</code>.</p>
+<p>Add new test method to <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/test/java/seedu/address/logic/parser/SystemParserTest.java"><code>SystemParserTest</code></a>, which tests that typing "remark" returns an instance of <code>RemarkCommand</code>.</p>
 </li>
 </ol>
 </div>
@@ -1736,7 +1736,7 @@ Removes the remark for the first person.</p>
 <p>Add <code>RemarkCommandParser</code> that knows how to parse two arguments, one index and one with prefix 'r/'.</p>
 </li>
 <li>
-<p>Modify <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/main/java/seedu/address/logic/parser/AddressBookParser.java"><code>AddressBookParser</code></a> to use the newly implemented <code>RemarkCommandParser</code>.</p>
+<p>Modify <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/main/java/seedu/address/logic/parser/SystemParser.java"><code>SystemParser</code></a> to use the newly implemented <code>RemarkCommandParser</code>.</p>
 </li>
 </ol>
 </div>
@@ -1753,7 +1753,7 @@ Removes the remark for the first person.</p>
 for <code>RemarkCommandParser</code>.</p>
 </li>
 <li>
-<p>Modify <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/test/java/seedu/address/logic/parser/AddressBookParserTest.java"><code>AddressBookParserTest</code></a> to test that the correct command is generated according to the user input.</p>
+<p>Modify <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/test/java/seedu/address/logic/parser/SystemParserTest.java"><code>SystemParserTest</code></a> to test that the correct command is generated according to the user input.</p>
 </li>
 </ol>
 </div>
@@ -1833,7 +1833,7 @@ for <code>RemarkCommandParser</code>.</p>
 <p>You may assume that the user will not be able to use the <code>add</code> and <code>edit</code> commands to modify the remarks field (i.e. the person will be created without a remark).</p>
 </li>
 <li>
-<p>Modify <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/main/java/seedu/address/model/util/SampleDataUtil.java/"><code>SampleDataUtil</code></a> to add remarks for the sample data (delete your <code>addressBook.xml</code> so that the application will load the sample data when you launch it.)</p>
+<p>Modify <a href="https://github.com/CS2103-AY1819S1-W13-2/main/tree/master/src/main/java/seedu/address/model/util/SampleDataUtil.java/"><code>SampleDataUtil</code></a> to add remarks for the sample data (delete your <code>System.xml</code> so that the application will load the sample data when you launch it.)</p>
 </li>
 </ol>
 </div>
@@ -1859,7 +1859,7 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Fix <code>invalidAndValidPersonAddressBook.xml</code>, <code>typicalPersonsAddressBook.xml</code>, <code>validAddressBook.xml</code> etc., such that the XML tests will not fail due to a missing <code>&lt;remark&gt;</code> element.</p>
+<p>Fix <code>invalidAndValidPersonSystem.xml</code>, <code>typicalPersonsSystem.xml</code>, <code>validSystem.xml</code> etc., such that the XML tests will not fail due to a missing <code>&lt;remark&gt;</code> element.</p>
 </li>
 </ol>
 </div>
@@ -1939,7 +1939,7 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="sect3">
 <h4 id="full-solution"><a class="link" href="#full-solution">A.2.3. Full Solution</a></h4>
 <div class="paragraph">
-<p>See this <a href="https://github.com/se-edu/addressbook-level4/pull/599">PR</a> for the step-by-step solution.</p>
+<p>See this <a href="https://github.com/se-edu/System-level4/pull/599">PR</a> for the step-by-step solution.</p>
 </div>
 </div>
 </div>
@@ -2018,13 +2018,13 @@ for <code>RemarkCommandParser</code>.</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">forgetful user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">attach a picture to every contact</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">remember how the person looks like</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">attach a picture to every contact [Coming in V2.0]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">remember how the person looks like [Coming in V2.0]</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">forgetful user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">save some interesting notes about the contact</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">save some interesting notes about the contact [Coming in V2.0]</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">remember characteristics or traits of the contact</p></td>
 </tr>
 <tr>
@@ -2036,7 +2036,7 @@ for <code>RemarkCommandParser</code>.</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">delete multiple contacts at one go</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">delete multiple contacts at one go [Coming in V2.0]</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">clean up my address book easily</p></td>
 </tr>
 <tr>
@@ -2048,13 +2048,13 @@ for <code>RemarkCommandParser</code>.</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">hide <a href="#private-contact-detail">private contact details</a> by default</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">hide <a href="#private-contact-detail">private contact details</a> by default [Coming in V2.0]</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">minimize chance of someone else seeing them by accident</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user with many persons in the address book</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">sort persons by name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sort persons by name [Coming in V2.0]</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">locate a person easily</p></td>
 </tr>
 <tr>
@@ -2072,19 +2072,19 @@ for <code>RemarkCommandParser</code>.</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">edit the information of multiple contacts at one go</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">edit the information of multiple contacts at one go [Coming in V2.0]</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">maintain up-to-date records more efficiently</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">add more than one number to a contact</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add more than one number to a contact [Coming in V2.0]</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">retrieve all the contact numbers of the contact at one go</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">view contacts by tags</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">view contacts by tags [Coming in V2.0]</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">locate contacts in my different social circles easily</p></td>
 </tr>
 <tr>
@@ -2108,37 +2108,37 @@ for <code>RemarkCommandParser</code>.</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">create new <a href="#groups">group</a> from new contacts</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">create new <a href="#groups">group</a> from new contacts [Coming in V2.0]</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">have new group members automatically added in my address book</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">add contacts to an existing <a href="#group">group</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add contacts to an existing <a href="#group">group</a> [Coming in V2.0]</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">include later-joining members</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">be prompted to add new contacts to a suggested <a href="#group">group</a> based on the tags</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be prompted to add new contacts to a suggested <a href="#group">group</a> based on the tags [Coming in V2.0]</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">be reminded to update groups with possible new users</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">rename groups</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">rename groups [Coming in V2.0]</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">change the name of <a href="#groups">group</a> over time</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">merge <a href="#groups">group</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">merge <a href="#groups">group</a> [Coming in V2.0]</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">organize my groups</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">split <a href="#groups">group</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">split <a href="#groups">group</a> [Coming in V2.0]</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">organize my groups</p></td>
 </tr>
 <tr>
@@ -2150,19 +2150,19 @@ for <code>RemarkCommandParser</code>.</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">view other contacts in the same <a href="#group">group</a> as a specific contact</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">view other contacts in the same <a href="#group">group</a> as a specific contact [Coming in V2.0]</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">view group-related contacts using the information of only one member</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">remove a contact from a <a href="#group">group</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">remove a contact from a <a href="#group">group</a> [Coming in V2.0]</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">ensure that the group member list is up-to-date</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">delete an entire <a href="#group">group</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">delete an entire <a href="#group">group</a> [Coming in V2.0]</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">remove inactive groups without affecting my contact list</p></td>
 </tr>
 <tr>
@@ -2174,7 +2174,7 @@ for <code>RemarkCommandParser</code>.</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">busy university student</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">save my timetable in the app</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">save my timetable in the app [Coming in V2.0]</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">tell easily when any events clash with my timetable</p></td>
 </tr>
 <tr>
@@ -2186,7 +2186,7 @@ for <code>RemarkCommandParser</code>.</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">considerate  university student</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">obtain a meeting time that is convenient for all contacts in a group</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">obtain a meeting time that is convenient for all contacts in a group [Coming in V2.0]</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">find a convenient time for meetups</p></td>
 </tr>
 <tr>
@@ -2199,37 +2199,37 @@ for <code>RemarkCommandParser</code>.</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">university student</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">view my events for a particular week</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">view my events for a particular week [Coming in V2.0]</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">gauge my availability for that week</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">share multiple contacts with my peers</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">share multiple contacts with my peers [Coming in V2.0]</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">exchange contacts quickly</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">archive inactive <a href="#group">group</a> without deletion</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">archive inactive <a href="#group">group</a> without deletion [Coming in V2.0]</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">avoid clutter in the list of visible groups without losing the information permanently</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">un-archive <a href="#group">group</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">un-archive <a href="#group">group</a> [Coming in V2.0]</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">continue working with groups that have been re-activated if needed</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">detect similar contacts when importing contacts from an external source e.g. .csv file and merge them</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">detect similar contacts when importing contacts from an external source e.g. .csv file and merge them [Coming in V2.0]</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">avoid having duplicate contacts</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">I cannot add duplicate contacts (manually)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">I cannot add duplicate contacts (manually) [Coming in V2.0]</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">avoid having duplicate contacts</p></td>
 </tr>
 </tbody>
@@ -2240,7 +2240,7 @@ for <code>RemarkCommandParser</code>.</p>
 <h2 id="use-cases"><a class="link" href="#use-cases">Appendix D: Use Cases</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>(For all use cases below, the <strong>System</strong> is the <code>AddressBook</code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise).</p>
+<p>(For all use cases below, the <strong>System</strong> is <code>EventsPlus+</code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise).</p>
 </div>
 <h3 id="uc1-add-person" class="discrete">UC1: Add person</h3>
 <div class="paragraph">
@@ -2252,7 +2252,7 @@ for <code>RemarkCommandParser</code>.</p>
 <p>User requests to add a new contact</p>
 </li>
 <li>
-<p>AddressBook adds the contact and displays the new contact added</p>
+<p>System adds the contact and displays the new contact added</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -2269,7 +2269,7 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>1a1. AddressBook shows an error message.</p>
+<p>1a1. System shows an error message.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -2289,13 +2289,13 @@ for <code>RemarkCommandParser</code>.</p>
 <p>User requests to list persons</p>
 </li>
 <li>
-<p>AddressBook shows a list of persons</p>
+<p>System shows a list of persons</p>
 </li>
 <li>
 <p>User requests to delete a specific person in the list</p>
 </li>
 <li>
-<p>AddressBook deletes the person</p>
+<p>System deletes the person</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -2318,7 +2318,7 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>3a1. AddressBook shows an error message.</p>
+<p>3a1. System shows an error message.</p>
 <div class="paragraph">
 <p>Use case resumes at step 2.</p>
 </div>
@@ -2338,7 +2338,7 @@ for <code>RemarkCommandParser</code>.</p>
 <p>User requests to add new group of persons</p>
 </li>
 <li>
-<p>AddressBook creates a new group with that name and displays the newly created group</p>
+<p>System creates a new group with that name and displays the newly created group</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -2355,7 +2355,7 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>1a1. AddressBook shows an error message.</p>
+<p>1a1. System shows an error message.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -2375,9 +2375,9 @@ for <code>RemarkCommandParser</code>.</p>
 <p>User requests to view contacts for a particular group</p>
 </li>
 <li>
-<p>AddressBook displays all contacts in that group</p>
+<p>System displays all contacts in that group</p>
 <div class="paragraph">
-<p>User case ends.</p>
+<p>Use case ends.</p>
 </div>
 </li>
 </ol>
@@ -2392,7 +2392,7 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>1a1. AddressBook shows an error message.</p>
+<p>1a1. System shows an error message.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -2412,10 +2412,7 @@ for <code>RemarkCommandParser</code>.</p>
 <p>User requests to add event.</p>
 </li>
 <li>
-<p>AddressBook records and displays event.</p>
-</li>
-<li>
-<p>AddressBook <span class="underline">notifies user (UC18)</span> one day before the event.</p>
+<p>System records and displays event.</p>
 </li>
 </ol>
 </div>
@@ -2425,243 +2422,21 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>1a. AddressBook detects a clash with the user&#8217;s schedule.</p>
+<p>1a. System detects a clash with the user&#8217;s schedule.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>1a1. AddressBook shows a message informing the user of the clash.</p>
-</li>
-<li>
-<p>1a2. AddressBook asks the user if he or she wants to add the event anyway.</p>
-<div class="paragraph">
-<p>If user does not want to add the event, use case ends. Else, use case resumes from step 2.</p>
-</div>
+<p>1a1. System shows a message informing the user of the clash.</p>
 </li>
 </ul>
 </div>
 </li>
-<li>
-<p>*a. At any time, user chooses to end the command.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>*a1. AddressBook abandons the event being set up and returns to original screen.</p>
+</ul>
+</div>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<h3 id="uc6-view-events-for-a-particular-week" class="discrete">UC6: View events for a particular week</h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User requests to view events for a given week.</p>
-</li>
-<li>
-<p>AddressBook displays events for that week.</p>
-<div class="paragraph">
-<p>User case ends.</p>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Extensions</strong></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>1a. User enters invalid date.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>1a1. AddressBook displays error message.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<h3 id="uc7-view-contacts-by-tag" class="discrete">UC7: View contacts by tag</h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User requests to view contacts for a given tag.</p>
-</li>
-<li>
-<p>AddressBook displays contacts under that tag.</p>
-<div class="paragraph">
-<p>User case ends.</p>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Extensions</strong></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>1a. User enters invalid tag.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>1a1. AddressBook displays invalid tag message and returns to original screen.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<h3 id="uc8-message-multiple-users" class="discrete">UC8: Message multiple users</h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User requests to send emails to a particular project group.</p>
-</li>
-<li>
-<p>System goes to email page and puts all contacts in the email recipient list.</p>
-</li>
-<li>
-<p>User sends email.</p>
-</li>
-<li>
-<p>System returns to original screen.</p>
-<div class="paragraph">
-<p>User case ends.</p>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Extensions</strong></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>3a. User exits email screen without sending email.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>3a1. AddressBook returns to original screen.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<h3 id="uc9-list-projects" class="discrete">UC9: List projects</h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User requests to view all projects.</p>
-</li>
-<li>
-<p>System displays the list of projects.</p>
-<div class="paragraph">
-<p>User case ends.</p>
-</div>
-</li>
-</ol>
-</div>
-<h3 id="uc10-find-projects-by-keyword" class="discrete">UC10: Find projects by keyword</h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User requests to get projects with a certain keyword.</p>
-</li>
-<li>
-<p>System displays all the projects containing that keyword.</p>
-<div class="paragraph">
-<p>User case ends.</p>
-</div>
-</li>
-</ol>
-</div>
-<h3 id="uc11-import-timetable" class="discrete">UC11: Import timetable</h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User is redirected to IVLE login for app to access IVLE data.</p>
-</li>
-<li>
-<p>Toast indicating successful import.</p>
-</li>
-<li>
-<p>User is redirected to timetable page on the app.</p>
-<div class="paragraph">
-<p>User case ends.</p>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Extensions</strong></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>2a. Incorrect login procedure is handled by IVLE.</p>
-</li>
-<li>
-<p>2b. AddressBook detects a clash with the user&#8217;s schedule.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>2b1. AddressBook displays error message showing a clash.</p>
-</li>
-<li>
-<p>2b2. AddressBook asks if user wants to add the event anyway.</p>
-</li>
-<li>
-<p>2b3. AddressBook adds the event (or not).</p>
-</li>
-<li>
-<p>If user does not want to add the event, use case ends.</p>
-</li>
-<li>
-<p>Else, use case resumes from step 3.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<h3 id="uc12-upcoming-event-notification" class="discrete">UC12: Upcoming event notification</h3>
+<h3 id="uc6-upcoming-event-notification" class="discrete">UC6: Upcoming event notification</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2680,6 +2455,46 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 </li>
 </ol>
+</div>
+<h3 id="uc7-find-common-event-location" class="discrete">UC7: Find common event location</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User selects the event that he/she wants to find the common event location for.</p>
+</li>
+<li>
+<p>System performs API calls with Google Maps API to generate the most central location for all members.</p>
+</li>
+<li>
+<p>User accepts or rejects the generated location.</p>
+</li>
+<li>
+<p>System sets event location.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>3a. User rejects the generated location.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>3a1. System gives user the option to state his/her preferred location and use case resumes from step 4.</p>
+</li>
+<li>
+<p>3a2. If user does not state location, no common event location is set and use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -2707,7 +2522,7 @@ for <code>RemarkCommandParser</code>.</p>
 <p>The system is not required to handle conflicts between group members’ schedules which are not stored in any online platform (recorded only in a paper diary, etc.)</p>
 </li>
 <li>
-<p>UI should be aesthetically pleasing i.e. colour, font, layout, pictorial-wise.</p>
+<p>The UI should display the information such that the user can see them clearly i.e. colour, font, layout, pictorial-wise.</p>
 </li>
 <li>
 <p>The basic usage of the application should be easy for a new user to pick up so as to ensure that the application continues to be used in the long term.</p>
@@ -2716,7 +2531,7 @@ for <code>RemarkCommandParser</code>.</p>
 <p>Privacy of user groups should be ensured - developers should not be able to view the contacts or groups or events of the user.</p>
 </li>
 <li>
-<p>Each user should be able to have up to 50 <a href="#groups">group</a> that the user can be in at any one point in time.</p>
+<p>Each user should be able to have up to 50 <a href="#group">groups</a> that the user can be in at any one point in time.</p>
 </li>
 <li>
 <p>User activities should be logged in a separate file.</p>
@@ -2863,4 +2678,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-16 05:10:25 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-16 13:50:24 UTC</div></div></div></body></html>
