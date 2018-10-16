@@ -29,11 +29,12 @@
 </li>
 <li><a href="#implementation">3. Implementation</a>
 <ul class="sectlevel2">
-<li><a href="#undo-redo-feature">3.1. Undo/Redo feature</a></li>
-<li><a href="#import-contacts">3.2. Import Contacts</a></li>
-<li><a href="#proposed-data-encryption">3.3. [Proposed] Data Encryption</a></li>
-<li><a href="#logging">3.4. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.5. Configuration</a></li>
+<li><a href="#enable-disable-notification-feature">3.1. Enable/Disable Notification feature</a></li>
+<li><a href="#undo-redo-feature">3.2. Undo/Redo feature</a></li>
+<li><a href="#add-events-feature">3.3. Add Events feature</a></li>
+<li><a href="#import-contacts">3.4. Import Contacts</a></li>
+<li><a href="#logging">3.5. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.6. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -586,9 +587,126 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book<
 <p>This section describes some noteworthy details on how certain features are implemented.</p>
 </div>
 <div class="sect2">
-<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">3.1. Undo/Redo feature</a></h3>
+<h3 id="enable-disable-notification-feature"><a class="link" href="#enable-disable-notification-feature">3.1. Enable/Disable Notification feature</a></h3>
 <div class="sect3">
 <h4 id="current-implementation"><a class="link" href="#current-implementation">3.1.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>Notification preference is stored in the preferences.json file.
+The notification mechanism is facilitated by Javafx.
+Upon startup, notification preference is loaded from preferences.json and saved to the model.
+Upon exit, the model&#8217;s notification preference is saved to preferences.json to ensure statefulness.
+When enabled, it creates a child stage and scene from the main window and displays with a countdown timer to automatically close the stage.
+Additionally, it implements the following operations</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ui#NotificationWindow()</code>&#8201;&#8212;&#8201;creates the stage and scene for the notification using 2 String inputs: <code>title</code> and <code>message</code></p>
+</li>
+<li>
+<p><code>logic#parser#NotificationCommandParser()</code>&#8201;&#8212;&#8201;creates a the relevant NotificationCommand object based on user&#8217;s input</p>
+</li>
+<li>
+<p><code>logic#commands#NotificationCommand()</code>&#8201;&#8212;&#8201;updates the model&#8217;s notification preference</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Given below is an example usage scenario and how the enable/disable notification mechanism behaves at each step.</p>
+</div>
+<div class="paragraph">
+<p>Step 1. The user launches the application for the first time. The model&#8217;s notification preference is initally enabled, the notification window appears.</p>
+</div>
+<div class="paragraph">
+<p>Step 2. The user executes <code>notification disable</code>. The <code>notification</code> command calls NotificationCommandParser which converts <code>disable</code> into the boolean <code>false</code> and creates a new Notification Command which updates the Model&#8217;s notification preference to false.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The notification command will update the notification preference regardless of whether the new preference is same as the previous preference.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">3.1.2. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-how-notification-preferences-updated"><a class="link" href="#aspect-how-notification-preferences-updated">Aspect: How notification preferences updated</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Re-assign Model&#8217;s notification preference regardless of previous preference</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement.</p>
+</li>
+<li>
+<p>Cons: Wasteful in the case of same notification preference.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Check current notification preference and only assign new value if it is different from the previous value.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Do not waste computing cycles on unecessary re-assingment of notification preference.</p>
+</li>
+<li>
+<p>Cons: Code becomes more complicated because additional check required.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-writing-to-preferences-json"><a class="link" href="#aspect-writing-to-preferences-json">Aspect: Writing to preferences.json</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Write all Model preferences to preferences.json</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement.</p>
+</li>
+<li>
+<p>Cons: Unecessary computing cycles wasted on writing when possibly no change</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Check for difference between Model preferences and preferences.json, only write to preferences.json if there is difference.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Efficient.</p>
+</li>
+<li>
+<p>Cons: Code becomes more complicated because additional check required</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">3.2. Undo/Redo feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">3.2.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The undo/redo mechanism is facilitated by <code>VersionedSystem</code>.
 It extends <code>System</code> with an undo/redo history, stored internally as an <code>SystemStateList</code> and <code>currentStatePointer</code>.
@@ -718,7 +836,7 @@ If the <code>currentStatePointer</code> is at index <code>SystemStateList.size()
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">3.1.2. Design Considerations</a></h4>
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-undo-redo-executes"><a class="link" href="#aspect-how-undo-redo-executes">Aspect: How undo &amp; redo executes</a></h5>
 <div class="ulist">
@@ -788,9 +906,125 @@ If the <code>currentStatePointer</code> is at index <code>SystemStateList.size()
 </div>
 </div>
 <div class="sect2">
-<h3 id="import-contacts"><a class="link" href="#import-contacts">3.2. Import Contacts</a></h3>
+<h3 id="add-events-feature"><a class="link" href="#add-events-feature">3.3. Add Events feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">3.2.1. Current Implementation</a></h4>
+<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.3.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>The adding of events is mainly carried out from <code>Model</code>. In the <code>Model</code> component, an <code>Event</code> class, as well as classes for <code>Event</code> attributes were created.
+Namely, the classes <code>EventName</code>, <code>EventDescription</code>, <code>EventDate</code>, <code>EventTime</code>, <code>EventAddress</code> were created to represent their respective information in an <code>Event</code>,
+as shown in the Class diagram below. Note that <code>EventDay</code> is generated from <code>EventDate</code> values.<br></p>
+</div>
+<div class="paragraph">
+<p>By doing so, we achieve more abstraction and cohesion, and this abides by the Separation of Concerns (SoC) principle at the class level.
+On top of facilitating checking of bugs within the individual attributes,
+doing so will also allow the developer to alter the definition of the different attribute classes, as well as to add more attributes into the
+<code>Event</code> class easily.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Event.png" alt="Event class">
+</div>
+</div>
+<div class="paragraph">
+<p>+</p>
+</div>
+<div class="paragraph">
+<p>Methods have been added to <code>ModelManager</code>, <code>AddressBook</code> and the newly-added class <code>UniqueEventList</code> to facilitate adding of persons.
+In order to limit modification of the internal list of <code>Event</code> objects, changes to this list is only carried out at the most fundamental level,
+which is <code>UniqueEventList</code>. <code>ModelManager</code> stores an unmodifiable copy of the list, and <code>AddressBook</code> the reference to the internal list.</p>
+</div>
+<div class="paragraph">
+<p>An example usage scenario of the adding of events is as shown in the sequence diagram below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/add-event-component.png" alt="Interactions between components">
+</div>
+</div>
+<div class="paragraph">
+<p>When the events are triggered from the <code>Model</code> component, they are handled by the UI, which updates the displayed information, and the
+<code>Storage</code> component, which saves the information to XML format. The event triggers are handled as follows.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/add-event-event-trigger.png" alt="Handling of events triggered">
+</div>
+</div>
+<div class="paragraph">
+<p>To display the event information according to their date, a list of lists of events grouped by <code>EventDate</code> is set in the <code>ListView</code> object in the <code>EventPanelList</code>.
+Each cell represents the <code>EventListCard</code> for a particular date, which contains all the events, each displayed in a <code>EventCard</code>. For this implementation,
+we require <code>ModelManager</code> to be able to return such an <code>ObservableList&lt;List&lt;Event&gt;&gt;</code> object to the UI class <code>MainWindow</code>, and this is achieved via the method
+<code>ModelManager#getFilteredEventListByDate</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.3.2. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-data-structure-to-support-the-ui-events-display"><a class="link" href="#aspect-data-structure-to-support-the-ui-events-display">Aspect: Data Structure to Support the UI Events Display</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Store a list of type <code>ObservableList&lt;List&lt;Event&gt;&gt;</code> in the <code>ListView</code> object in the <code>EventPanelList</code>.
+This list is re-computed in <code>ModelManager</code> each time a change in the internal list of events is detected, and passed to the UI class <code>MainWindow</code>.
+This facilitates a regeneration of the <code>TabPanel</code> stored in <code>MainWindow</code>, updating the display of events to the user.</p>
+<div class="paragraph">
+<p>Here, we only need to maintain one list of <code>Event</code> objects.
+Since this is the case, there is no change to the <code>ObservableList&lt;List&lt;Event&gt;&gt;</code> object passed into the <code>UI</code> classes. For the UI
+to be updated with new information whenever events are added into the underlying <code>Event</code> list, we make use of a listener on the list <code>filteredEvents</code>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Whenever there is a change detected by <code>filteredEvents</code>, an <code>AddressBookEventChangedEvent</code> is posted</p>
+</li>
+<li>
+<p><code>MainWindow</code> resets its <code>TabPanel</code> and passes the re-computed list (events grouped by date) into it.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>While this means that there is a regeneration of the <code>TabPanel</code> object in <code>MainWindow</code> each time such an event occurs,
+this overhead is still acceptable given the current scale of the <code>AddressBook</code>.</p>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Store a list of type <code>ObservableList&lt;ObservableList&lt;Event&gt;&gt;</code> in the <code>ListView</code> object,
+as well as in <code>ModelManager</code>, and update this alongside the <code>filteredEvent</code> list in <code>ModelManager</code>.
+By doing so, we will not have to regenerate the <code>TabPanel</code> in <code>MainWindow</code> each time there is a change in the internal event list.</p>
+<div class="paragraph">
+<p>To do so, we can add a listener to <code>filteredEvents</code> such that each time the internal list of events changes, the corresponding change is done to a list of type <code>ObservableList&lt;List&lt;Event&gt;&gt;</code>.</p>
+</div>
+<div class="paragraph">
+<p>However, this will mean that if more actions are carried out on the internal event list, more updates will have be made to the way the listener is set up,
+as it will have to listen to more types of changes and perform more actions accordingly. Though reducing overhead incurred
+(as there is no need to regenerate the list each time a change occurs),
+this could potentially create more bugs in the code, which is not desirable in the long run.</p>
+</div>
+</li>
+<li>
+<p><strong>Alternative 3:</strong> Store a list of type <code>ObservableList&lt;ObservableList&lt;Event&gt;&gt;</code> in the <code>ListView</code> object,
+as well as in <code>Model</code>, and create another internal list <code>UniqueEventListByDate</code> for this list of lists. Update this alongside <code>UniqueEventList</code>.
+By doing so, we also will not have to regenerate the <code>TabPanel</code> in <code>MainWindow</code> each time there is a change in the internal event list, and no such listener
+as in Alternative 2 is required.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>However, this means that we have to maintain two lists, both storing <code>Event</code> objects.
+The task of maintaining two lists may lead to inconsistencies between the two lists and more complex code in future,
+should future developers decide to include more actions to mutate the underlying list of <code>Event</code> objects.
+Hence, this is not preferred in our implementation.</p>
+</div>
+<div class="paragraph">
+<p>+</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="import-contacts"><a class="link" href="#import-contacts">3.4. Import Contacts</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.4.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p><code>ModelManager</code> now implements <code>readImportContactsFile</code> and it calls on <code>VersionedAddressBook</code>.<br>
 <code>VersionAddressBook</code> is being called so that undo redo can work on import contacts command.<br>
@@ -828,20 +1062,14 @@ The number of successful inserts and duplicated will be returned to display afte
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.3. [Proposed] Data Encryption</a></h3>
-<div class="paragraph">
-<p><em>{Explain here how the data encryption feature will be implemented}</em></p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.4. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.5. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.5, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.6, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -872,7 +1100,7 @@ The number of successful inserts and duplicated will be returned to display afte
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.5. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.6. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -2719,4 +2947,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-16 15:54:42 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-16 15:57:05 UTC</div></div></div></body></html>
