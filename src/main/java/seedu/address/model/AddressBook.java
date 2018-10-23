@@ -7,6 +7,8 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.UniqueEventList;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.UniqueGroupList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -18,7 +20,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
     private final UniqueEventList events;
-
+    private final UniqueGroupList groups;
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -29,6 +31,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         persons = new UniquePersonList();
         events = new UniqueEventList();
+        groups = new UniqueGroupList();
     }
 
     public AddressBook() {}
@@ -60,6 +63,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the group list with {@code groups}.
+     * {@code events} must not contain duplicate events.
+     */
+    public void setGroups(List<Group> groups) {
+        this.events.setGroups(groups);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
@@ -67,6 +78,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         setPersons(newData.getPersonList());
         setEvents(newData.getEventList());
+        setGroups(newData.getGroupList());
     }
 
     //// person-level operations
@@ -117,13 +129,49 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if a clashing event with {@code event} exists in the address book.
+     */
+    public boolean hasClashingEvent(Event event) {
+        requireNonNull(event);
+        return events.containsClashingEvent(event);
+    }
+
+    /**
      * Adds an event to the address book.
      * The event must not already exist in the address book.
      */
     public void addEvent(Event event) {
         assert !hasEvent(event);
+        assert !hasClashingEvent(event);
 
         events.add(event);
+    }
+
+    /**
+     * Returns true if an event with the same identity as {@code event} exists in the address book.
+     */
+    public boolean hasGroup(Group group) {
+        requireNonNull(group);
+        return groups.contains(group);
+    }
+
+
+    /**
+     * Adds a group to the address book.
+     * The group must not already exist in the address book.
+     */
+    public void addGroup(Group group) {
+        assert !hasGroup(group);
+
+        groups.add(group);
+    }
+
+    /**
+     * Removes {@code group} from this {@code AddressBook}.
+     * {@code group} must exist in the address book.
+     */
+    public void removeGroup(Group group) {
+        groups.remove(group);
     }
 
     //// util methods
@@ -131,7 +179,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public String toString() {
         return persons.asUnmodifiableObservableList().size() + " persons"
-                + "\n" + events.asUnmodifiableObservableList().size() + " events";
+                + "\n" + events.asUnmodifiableObservableList().size() + " events"
+                + "\n" + groups.asUnmodifiableObservableList().size() + " groups";
         // TODO: refine later
     }
 
@@ -146,15 +195,21 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
+    public ObservableList<Event> getGroupList() {
+        return groups.asUnmodifiableObservableList();
+    }
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
                 && persons.equals(((AddressBook) other).persons)
-                && events.equals(((AddressBook) other).events));
+                && events.equals(((AddressBook) other).events)
+                && groups.equals(((AddressBook) other).groups));
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode() + events.hashCode();
+        return persons.hashCode() + events.hashCode() + groups.hashCode();
     }
 }
