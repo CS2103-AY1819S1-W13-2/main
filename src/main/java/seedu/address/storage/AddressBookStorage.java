@@ -10,7 +10,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 /**
  * Represents a storage for {@link seedu.address.model.AddressBook}.
  */
-public interface AddressBookStorage {
+public interface  AddressBookStorage {
 
     /**
      * Returns the file path of the data file.
@@ -35,11 +35,14 @@ public interface AddressBookStorage {
      * @param addressBook cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
+
     void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
 
     /**
      * @see #saveAddressBook(ReadOnlyAddressBook)
      */
     void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException;
+
+    void backupAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
 
 }
