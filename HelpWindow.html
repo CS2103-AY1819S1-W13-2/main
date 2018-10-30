@@ -31,9 +31,10 @@
 <li><a href="#adding-an-event-code-addevent-code">3.16. Adding an event: <code>addEvent</code></a></li>
 <li><a href="#import-contacts-code-importcontacts-code">3.17. Import Contacts: <code>importContacts</code></a></li>
 <li><a href="#notifications-code-notification-code">3.18. Notifications: <code>notification</code></a></li>
-<li><a href="#clearing-all-entries-code-clear-code-alias-code-cls-code">3.19. Clearing all entries : <code>clear</code>, alias <code>cls</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code-alias-code-q-code">3.20. Exiting the program : <code>exit</code>, alias <code>q</code></a></li>
-<li><a href="#saving-the-data">3.21. Saving the data</a></li>
+<li><a href="#favourite-code-favourite-code">3.19. Favourite: <code>favourite</code></a></li>
+<li><a href="#clearing-all-entries-code-clear-code-alias-code-cls-code">3.20. Clearing all entries : <code>clear</code>, alias <code>cls</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code-alias-code-q-code">3.21. Exiting the program : <code>exit</code>, alias <code>q</code></a></li>
+<li><a href="#saving-the-data">3.22. Saving the data</a></li>
 </ul>
 </li>
 <li><a href="#features-coming-up-in-v2-0">4. Features coming up in V2.0</a>
@@ -709,10 +710,10 @@ Imports all contacts from root/Downloads/contacts1.csv into application address 
 <div class="sect2">
 <h3 id="notifications-code-notification-code"><a class="link" href="#notifications-code-notification-code">3.18. Notifications: <code>notification</code></a></h3>
 <div class="paragraph">
-<p>Allow users to disable notifications for upcoming events based on most recently displayed events list. All events initially have notifications enabled by default.</p>
+<p>Allow users to enable/disable notifications which appears upon application statrup. Notification is enabled by default.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>notification EVENT_INDEX enable/disable</code></p>
+<p>Format: <code>notification enable/disable</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -720,27 +721,46 @@ Imports all contacts from root/Downloads/contacts1.csv into application address 
 <div class="ulist">
 <ul>
 <li>
-<p><code>notification 2 disable</code></p>
+<p><code>notification disable</code></p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code-alias-code-cls-code"><a class="link" href="#clearing-all-entries-code-clear-code-alias-code-cls-code">3.19. Clearing all entries : <code>clear</code>, alias <code>cls</code></a></h3>
+<h3 id="favourite-code-favourite-code"><a class="link" href="#favourite-code-favourite-code">3.19. Favourite: <code>favourite</code></a></h3>
+<div class="paragraph">
+<p>Allow users to favourite a upcoming events based on most recently displayed events list. Favourite is null by default.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>favourite d/DATE i/EVENT_INDEX</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>favourite d/2018-04-01 i/1</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="clearing-all-entries-code-clear-code-alias-code-cls-code"><a class="link" href="#clearing-all-entries-code-clear-code-alias-code-cls-code">3.20. Clearing all entries : <code>clear</code>, alias <code>cls</code></a></h3>
 <div class="paragraph">
 <p>Clears all entries from the address book.<br>
 Format: <code>clear</code> or <code>cls</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code-alias-code-q-code"><a class="link" href="#exiting-the-program-code-exit-code-alias-code-q-code">3.20. Exiting the program : <code>exit</code>, alias <code>q</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code-alias-code-q-code"><a class="link" href="#exiting-the-program-code-exit-code-alias-code-q-code">3.21. Exiting the program : <code>exit</code>, alias <code>q</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.<br>
 Format: <code>exit</code> or <code>q</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.21. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.22. Saving the data</a></h3>
 <div class="paragraph">
 <p>Address book data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
@@ -1212,10 +1232,14 @@ e.g. <code>addGroupEvent n/Project Meeting dsc/First Meeting d/12-09-18 t/1200 a
 e.g. <code>importContacts file/~/Downloads/contacts1.csv</code></p>
 </li>
 <li>
-<p><strong>Disable and Enable Notification</strong> : <code>notification EVENT_INDEX enable/disable</code><br>
-e.g. <code>notification 2 disable</code></p>
+<p><strong>Disable and Enable Notification</strong> : <code>notification enable/disable</code><br>
+e.g. <code>notification disable</code></p>
+</li>
+<li>
+<p><strong>Favourite Event</strong> : <code>favourite d/EVENT_DATE i/EVENT_INDEX</code><br>
+e.g. <code>favourite d/2018-04-01 i/1</code></p>
 </li>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-30 04:30:28 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-30 05:26:25 UTC</div></div></div></body></html>

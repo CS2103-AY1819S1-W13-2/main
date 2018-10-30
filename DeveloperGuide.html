@@ -29,13 +29,14 @@
 </li>
 <li><a href="#implementation">3. Implementation</a>
 <ul class="sectlevel2">
-<li><a href="#enable-disable-notification-feature">3.1. Enable/Disable Notification feature</a></li>
-<li><a href="#undo-redo-feature">3.2. Undo/Redo feature</a></li>
-<li><a href="#add-events-feature">3.3. Add Events feature</a></li>
-<li><a href="#import-contacts">3.4. Import Contacts</a></li>
-<li><a href="#meeting-location">3.5. Meeting Location</a></li>
-<li><a href="#logging">3.6. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.7. Configuration</a></li>
+<li><a href="#select-an-existing-event-to-be-detailed-in-the-notification-if-notification-is-enabled">3.1. Select an existing event to be detailed in the notification if notification is enabled.</a></li>
+<li><a href="#enable-disable-notification-feature">3.2. Enable/Disable Notification feature</a></li>
+<li><a href="#undo-redo-feature">3.3. Undo/Redo feature</a></li>
+<li><a href="#add-events-feature">3.4. Add Events feature</a></li>
+<li><a href="#import-contacts">3.5. Import Contacts</a></li>
+<li><a href="#meeting-location">3.6. Meeting Location</a></li>
+<li><a href="#logging">3.7. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.8. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -588,38 +589,36 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book<
 <p>This section describes some noteworthy details on how certain features are implemented.</p>
 </div>
 <div class="sect2">
-<h3 id="enable-disable-notification-feature"><a class="link" href="#enable-disable-notification-feature">3.1. Enable/Disable Notification feature</a></h3>
+<h3 id="select-an-existing-event-to-be-detailed-in-the-notification-if-notification-is-enabled"><a class="link" href="#select-an-existing-event-to-be-detailed-in-the-notification-if-notification-is-enabled">3.1. Select an existing event to be detailed in the notification if notification is enabled.</a></h3>
 <div class="sect3">
 <h4 id="current-implementation"><a class="link" href="#current-implementation">3.1.1. Current Implementation</a></h4>
 <div class="paragraph">
-<p>Notification preference is stored in the preferences.json file.
-The notification mechanism is facilitated by Javafx.
-Upon startup, notification preference is loaded from preferences.json and saved to the model.
-Upon exit, the model&#8217;s notification preference is saved to preferences.json to ensure statefulness.
-When enabled, it creates a child stage and scene from the main window and displays with a countdown timer to automatically close the stage.
-Additionally, it implements the following operations</p>
+<p>Details of favourite event (i.e. event name, date, day, time, details) stored as a String "Favourite" in preferences.json file.
+The favourite mechanism is implemented through the ModelManager.
+Upon startup, if notification is enabled, and there is a String "favourite" in preferences.json is non-null, the notification will display the String "favourite".
+"Favourite" in preferences.json is also loaded into ModelManager.
+Upon executing FavouriteCommand, the event is selected based on the input parameters and the filteredEventsListByDate.
+The attributes of the event is formatted into a String and saved to the ModelManager.
+Upon exit, the formatted String in ModelManager is saved to preferences.json to ensure statefulness.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>ui#NotificationWindow()</code>&#8201;&#8212;&#8201;creates the stage and scene for the notification using 2 String inputs: <code>title</code> and <code>message</code></p>
+<p><code>logic#parser#FavouriteCommandParser()</code>&#8201;&#8212;&#8201;creates a FavouriteCommand object based on user&#8217;s inputs.</p>
 </li>
 <li>
-<p><code>logic#parser#NotificationCommandParser()</code>&#8201;&#8212;&#8201;creates a the relevant NotificationCommand object based on user&#8217;s input</p>
-</li>
-<li>
-<p><code>logic#commands#NotificationCommand()</code>&#8201;&#8212;&#8201;updates the model&#8217;s notification preference</p>
+<p><code>logic#commands#FavouriteCommand()</code>&#8201;&#8212;&#8201;updates the ModelManager&#8217;s favouriteEvent attribute.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Given below is an example usage scenario and how the enable/disable notification mechanism behaves at each step.</p>
+<p>Given below is an example usage scenario and how the favourite mechanism behaves at each step.</p>
 </div>
 <div class="paragraph">
-<p>Step 1. The user launches the application for the first time. The model&#8217;s notification preference is initally enabled, the notification window appears.</p>
+<p>Step 1. The user launches the application for the first time. The model&#8217;s favouriteEvent attribute is initially null.</p>
 </div>
 <div class="paragraph">
-<p>Step 2. The user executes <code>notification disable</code>. The <code>notification</code> command calls NotificationCommandParser which converts <code>disable</code> into the boolean <code>false</code> and creates a new Notification Command which updates the Model&#8217;s notification preference to false.</p>
+<p>Step 2. The user executes <code>favourite d/2018-04-01 i/1</code>. The <code>favourite</code> command calls FavouriteCommandParser which checks validity of user inputs and creates a new FavouriteCommand which selects the event and create a formatted String from the event details.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -628,7 +627,7 @@ Additionally, it implements the following operations</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The notification command will update the notification preference regardless of whether the new preference is same as the previous preference.
+The favourite command will update favouriteEvent regardless of whether the new favouriteEvent String is the same as the existing String.
 </td>
 </tr>
 </table>
@@ -636,29 +635,31 @@ The notification command will update the notification preference regardless of w
 </div>
 <div class="sect3">
 <h4 id="design-considerations"><a class="link" href="#design-considerations">3.1.2. Design Considerations</a></h4>
-<div class="sect4">
-<h5 id="aspect-how-notification-preferences-updated"><a class="link" href="#aspect-how-notification-preferences-updated">Aspect: How notification preferences updated</a></h5>
+
+</div>
+<div class="sect3">
+<h4 id="aspect-how-favourite-is-updated"><a class="link" href="#aspect-how-favourite-is-updated">3.1.3. Aspect: How favourite is updated</a></h4>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Re-assign Model&#8217;s notification preference regardless of previous preference</p>
+<p><strong>Alternative 1 (current choice):</strong> Re-assign Model&#8217;s favouriteEvet regardless of previous preference</p>
 <div class="ulist">
 <ul>
 <li>
 <p>Pros: Easy to implement.</p>
 </li>
 <li>
-<p>Cons: Wasteful in the case of same notification preference.</p>
+<p>Cons: Wasteful in the case of same favorite event.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Check current notification preference and only assign new value if it is different from the previous value.</p>
+<p><strong>Alternative 2:</strong> Check current favouriteEvent and only assign new value if it is different from the previous value.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Do not waste computing cycles on unecessary re-assingment of notification preference.</p>
+<p>Pros: Do not waste computing cycles on unecessary re-assingment of favouriteEvent.</p>
 </li>
 <li>
 <p>Cons: Code becomes more complicated because additional check required.</p>
@@ -667,7 +668,6 @@ The notification command will update the notification preference regardless of w
 </div>
 </li>
 </ul>
-</div>
 </div>
 <div class="sect4">
 <h5 id="aspect-writing-to-preferences-json"><a class="link" href="#aspect-writing-to-preferences-json">Aspect: Writing to preferences.json</a></h5>
@@ -705,9 +705,126 @@ The notification command will update the notification preference regardless of w
 </div>
 </div>
 <div class="sect2">
-<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">3.2. Undo/Redo feature</a></h3>
+<h3 id="enable-disable-notification-feature"><a class="link" href="#enable-disable-notification-feature">3.2. Enable/Disable Notification feature</a></h3>
 <div class="sect3">
 <h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">3.2.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>Notification preference is stored in the preferences.json file.
+The notification mechanism is facilitated by Javafx.
+Upon startup, notification preference is loaded from preferences.json and saved to the ModelManager.
+Upon exit, the model&#8217;s notification preference is saved to preferences.json to ensure statefulness.
+When enabled, it creates a child stage and scene from the main window and displays with a countdown timer to automatically close the stage.
+Additionally, it implements the following operations</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ui#NotificationWindow()</code>&#8201;&#8212;&#8201;creates the stage and scene for the notification using 2 String inputs: <code>title</code> and <code>message</code></p>
+</li>
+<li>
+<p><code>logic#parser#NotificationCommandParser()</code>&#8201;&#8212;&#8201;creates a NotificationCommand object based on user&#8217;s input</p>
+</li>
+<li>
+<p><code>logic#commands#NotificationCommand()</code>&#8201;&#8212;&#8201;updates the ModelManager&#8217;s notificationPref attribute.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Given below is an example usage scenario and how the enable/disable notification mechanism behaves at each step.</p>
+</div>
+<div class="paragraph">
+<p>Step 1. The user launches the application for the first time. The model&#8217;s notification preference is initally enabled, the notification window appears.</p>
+</div>
+<div class="paragraph">
+<p>Step 2. The user executes <code>notification disable</code>. The <code>notification</code> command calls NotificationCommandParser which converts <code>disable</code> into the boolean <code>false</code> and creates a new Notification Command which updates the Model&#8217;s notification preference to false.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The notification command will update the notification preference regardless of whether the new preference is same as the previous preference.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.2. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-how-notification-preferences-is-updated"><a class="link" href="#aspect-how-notification-preferences-is-updated">Aspect: How notification preferences is updated</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Re-assign Model&#8217;s notification preference regardless of previous preference</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement.</p>
+</li>
+<li>
+<p>Cons: Wasteful in the case of same notification preference.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Check current notification preference and only assign new value if it is different from the previous value.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Do not waste computing cycles on unecessary re-assingment of notification preference.</p>
+</li>
+<li>
+<p>Cons: Code becomes more complicated because additional check required.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-writing-to-preferences-json-2"><a class="link" href="#aspect-writing-to-preferences-json-2">Aspect: Writing to preferences.json</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Write all Model preferences to preferences.json</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement.</p>
+</li>
+<li>
+<p>Cons: Unecessary computing cycles wasted on writing when possibly no change</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Check for difference between Model preferences and preferences.json, only write to preferences.json if there is difference.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Efficient.</p>
+</li>
+<li>
+<p>Cons: Code becomes more complicated because additional check required</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">3.3. Undo/Redo feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.3.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The undo/redo mechanism is facilitated by <code>VersionedSystem</code>.
 It extends <code>System</code> with an undo/redo history, stored internally as an <code>SystemStateList</code> and <code>currentStatePointer</code>.
@@ -837,7 +954,7 @@ If the <code>currentStatePointer</code> is at index <code>SystemStateList.size()
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.2. Design Considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.3.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-undo-redo-executes"><a class="link" href="#aspect-how-undo-redo-executes">Aspect: How undo &amp; redo executes</a></h5>
 <div class="ulist">
@@ -912,9 +1029,9 @@ If the <code>currentStatePointer</code> is at index <code>SystemStateList.size()
 </div>
 </div>
 <div class="sect2">
-<h3 id="add-events-feature"><a class="link" href="#add-events-feature">3.3. Add Events feature</a></h3>
+<h3 id="add-events-feature"><a class="link" href="#add-events-feature">3.4. Add Events feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.3.1. Current Implementation</a></h4>
+<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.4.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The adding of events is mainly carried out from <code>Model</code>. In the <code>Model</code> component, an <code>Event</code> class, as well as classes for <code>Event</code> attributes were created.
 Namely, the classes <code>EventName</code>, <code>EventDescription</code>, <code>EventDate</code>, <code>EventTime</code>, <code>EventAddress</code> were created to represent their respective information in an <code>Event</code>,
@@ -961,7 +1078,7 @@ we require <code>ModelManager</code> to be able to return such an <code>Observab
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.3.2. Design Considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.4.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-data-structure-to-support-the-ui-events-display"><a class="link" href="#aspect-data-structure-to-support-the-ui-events-display">Aspect: Data Structure to Support the UI Events Display</a></h5>
 <div class="ulist">
@@ -1022,9 +1139,9 @@ Hence, this is not preferred in our implementation.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="import-contacts"><a class="link" href="#import-contacts">3.4. Import Contacts</a></h3>
+<h3 id="import-contacts"><a class="link" href="#import-contacts">3.5. Import Contacts</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.4.1. Current Implementation</a></h4>
+<h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">3.5.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p><code>ModelManager</code> now implements <code>readImportContactsFile</code> and it calls on <code>VersionedAddressBook</code>.<br>
 <code>VersionAddressBook</code> is being called so that undo redo can work on import contacts command.<br>
@@ -1062,7 +1179,7 @@ The number of successful inserts and duplicated will be returned to display afte
 </div>
 </div>
 <div class="sect2">
-<h3 id="meeting-location"><a class="link" href="#meeting-location">3.5. Meeting Location</a></h3>
+<h3 id="meeting-location"><a class="link" href="#meeting-location">3.6. Meeting Location</a></h3>
 <div class="paragraph">
 <p>The meeting location mechanism is facilitated by the presence of a Faculty field in the Person class.</p>
 </div>
@@ -1074,14 +1191,14 @@ The number of successful inserts and duplicated will be returned to display afte
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.6. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.7. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.7, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.8, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -1112,7 +1229,7 @@ The number of successful inserts and duplicated will be returned to display afte
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.7. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.8. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -3022,4 +3139,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-30 04:30:28 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-30 05:26:25 UTC</div></div></div></body></html>
