@@ -690,10 +690,35 @@ where the newly added event (as highlighted in green below) will be shown in the
 <div class="sect2">
 <h3 id="import-contacts-code-importcontacts-code"><a class="link" href="#import-contacts-code-importcontacts-code">3.17. Import Contacts: <code>importContacts</code></a></h3>
 <div class="paragraph">
-<p>Import contacts from a specified csv file. Duplicate contacts will be merged together.</p>
+<p>Import contacts from a specified csv file.<br>
+CSV file has to be exported from google contacts as Google CSV.<br></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Ensure that First Name, Email, Phone Number, Address and Company (faculty) is filled up</p>
+</li>
+<li>
+<p>Any missing field will result in failure in importing contacts</p>
+</li>
+<li>
+<p>Exported csv file will be named: google.csv</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>Format: <code>importContacts file/FILEPATH</code></p>
+<p>Format: <code>importContacts file/ABSOLUTE_FILEPATH</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -701,8 +726,8 @@ where the newly added event (as highlighted in green below) will be shown in the
 <div class="ulist">
 <ul>
 <li>
-<p><code>importContacts file/~/Downloads/contacts1.csv</code><br>
-Imports all contacts from root/Downloads/contacts1.csv into application address book</p>
+<p><code>importContacts file/~/Downloads/google.csv</code><br>
+Imports all contacts from root/Downloads/google.csv into application address book</p>
 </li>
 </ul>
 </div>
@@ -1228,8 +1253,8 @@ e.g. <code>addGroupEvent n/Project Meeting dsc/First Meeting d/12-09-18 t/1200 a
 <p><strong>List Group Events</strong> : <code>listGroupEvent</code></p>
 </li>
 <li>
-<p><strong>Import Contacts</strong> : <code>importContacts file/FILEPATH</code><br>
-e.g. <code>importContacts file/~/Downloads/contacts1.csv</code></p>
+<p><strong>Import Contacts</strong> : <code>importContacts file/ABSOLUTE_FILEPATH</code><br>
+e.g. <code>importContacts file/~/Downloads/google.csv</code></p>
 </li>
 <li>
 <p><strong>Disable and Enable Notification</strong> : <code>notification enable/disable</code><br>
@@ -1242,4 +1267,4 @@ e.g. <code>favourite d/2018-04-01 i/1</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-30 10:02:13 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-30 12:06:21 UTC</div></div></div></body></html>
