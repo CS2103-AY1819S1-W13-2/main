@@ -32,11 +32,14 @@
 <li><a href="#select-an-existing-event-to-be-detailed-in-the-notification-if-notification-is-enabled">3.1. Select an existing event to be detailed in the notification if notification is enabled.</a></li>
 <li><a href="#enable-disable-notification-feature">3.2. Enable/Disable Notification feature</a></li>
 <li><a href="#undo-redo-feature">3.3. Undo/Redo feature</a></li>
-<li><a href="#add-events-feature">3.4. Add Events feature</a></li>
-<li><a href="#import-contacts">3.5. Import Contacts</a></li>
-<li><a href="#meeting-location">3.6. Meeting Location</a></li>
-<li><a href="#logging">3.7. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.8. Configuration</a></li>
+<li><a href="#AddDeleteEvents">3.4. Add/Delete Events feature</a></li>
+<li><a href="#EventTags">3.5. Add Event Tags feature</a></li>
+<li><a href="#Autocomplete">3.6. Command Auto-completion feature</a></li>
+<li><a href="#tab-feature">3.7. Tab feature</a></li>
+<li><a href="#import-contacts">3.8. Import Contacts</a></li>
+<li><a href="#meeting-location">3.9. Meeting Location</a></li>
+<li><a href="#logging">3.10. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.11. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -1014,22 +1017,20 @@ If the <code>currentStatePointer</code> is at index <code>SystemStateList.size()
 </li>
 </ul>
 </div>
-<div class="exampleblock">
-<div class="content">
-
-</div>
-</div>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="add-events-feature"><a class="link" href="#add-events-feature">3.4. Add Events feature</a></h3>
+<h3 id="AddDeleteEvents"><a class="link" href="#AddDeleteEvents">3.4. Add/Delete Events feature</a></h3>
 <div class="sect3">
 <h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.4.1. Current Implementation</a></h4>
+<div class="sect4">
+<h5 id="structure-of-an-event"><a class="link" href="#structure-of-an-event">Structure of an Event</a></h5>
 <div class="paragraph">
-<p>The adding of events is mainly carried out from <code>Model</code>. In the <code>Model</code> component, an <code>Event</code> class, as well as classes for <code>Event</code> attributes were created.
-Namely, the classes <code>EventName</code>, <code>EventDescription</code>, <code>EventDate</code>, <code>EventTime</code>, <code>EventAddress</code> were created to represent their respective information in an <code>Event</code>,
-as shown in the Class diagram below. Note that <code>EventDay</code> is generated from <code>EventDate</code> values.<br></p>
+<p>In the <code>Model</code> component, an <code>Event</code> consists of various <code>Event</code> attributes.
+Namely, the classes <code>EventName</code>, <code>EventDescription</code>, <code>EventDate</code>, <code>EventTime</code>, <code>EventAddress</code> are used to represent respective information in an <code>Event</code>,
+as shown in the Class diagram below. Note that <code>EventDay</code> is generated from <code>EventDate</code> values, and each event also contains a <code>Set</code> of <code>Person</code> and <code>Tag</code> objects,
+which are used to represent the event contacts (from the address book) and event tags (from <a href="#EventTags">event tags</a> currently existing in the address book).<br></p>
 </div>
 <div class="paragraph">
 <p>By doing so, we achieve more abstraction and cohesion, and this abides by the Separation of Concerns (SoC) principle at the class level.
@@ -1042,13 +1043,18 @@ doing so will also allow the developer to alter the definition of the different 
 <img src="images/Event.png" alt="Event class">
 </div>
 </div>
+</div>
+<div class="sect4">
+<h5 id="adding-deleting-of-an-event"><a class="link" href="#adding-deleting-of-an-event">Adding/Deleting of an Event</a></h5>
 <div class="paragraph">
-<p>Methods have been added to <code>ModelManager</code>, <code>AddressBook</code> and the newly-added class <code>UniqueEventList</code> to facilitate adding of persons.
+<p>Methods have been added to <code>ModelManager</code>, <code>AddressBook</code> and the newly-added class <code>UniqueEventList</code> to facilitate adding and deleting of events.
 In order to limit modification of the internal list of <code>Event</code> objects, changes to this list is only carried out at the most fundamental level,
-which is <code>UniqueEventList</code>. <code>ModelManager</code> stores an unmodifiable copy of the list, and <code>AddressBook</code> the reference to the internal list.</p>
+which is <code>UniqueEventList</code>. <code>AddressBook</code> stores a reference to this internal list, and <code>ModelManager</code> stores an unmodifiable copy of this list.</p>
 </div>
 <div class="paragraph">
-<p>An example usage scenario of the adding of events is as shown in the sequence diagram below.</p>
+<p>An example usage scenario of the adding of events is as shown in the sequence diagram below.
+The diagram shows the interaction between the different components in the system when an event is added.
+The interaction between components is similar for the deletion of an event.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1060,30 +1066,64 @@ which is <code>UniqueEventList</code>. <code>ModelManager</code> stores an unmod
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/add-event_logic-model.png" alt="Interactions between components">
+<img src="images/add-event_logic-model.png" alt="Interactions between Logic and Model">
 </div>
 </div>
 <div class="paragraph">
-<p>Step 1. User enters command to add events<br>
-Step 2. <code>AddressBookParser</code> calls <code>AddEventCommandParser</code>, which generates an <code>AddEventCommand</code> with an <code>Event</code> and <code>Set&lt;Index&gt;</code> which specifies the contact indices to add into the event.<br>
+<p>Step 1. User enters command to add an event<br>
+Step 2. <code>AddressBookParser</code> calls <code>AddEventCommandParser</code>, which generates an <code>AddEventCommand</code> with an <code>Event</code> and <code>Set&lt;Index&gt;</code>. The latter specifies the contact indices to add into the event.<br>
 Step 3. <code>AddEventCommand</code> calls <code>Model#hasEvent</code>, <code>Model#hasClashingEvent</code>, <code>Model#hasEventTag</code> to check if the event information is valid<br>
 Step 4. <code>AddEventCommand</code> calls <code>Event#setEventContacts</code> to set the <code>Set&lt;Person&gt;</code> of event contacts (Each <code>Person</code> has to be in the existing address book records)<br>
-Step 5. <code>AddEventCommand</code> calls <code>Model#addEvent</code> after all checks have passed. The event is added into the address book from <code>Model</code>.</p>
+Step 5. <code>AddEventCommand</code> calls <code>Model#addEvent</code> after all checks have passed. The event is added into the system from the <code>Model</code> component.</p>
 </div>
 <div class="paragraph">
-<p>When the events are triggered from the <code>Model</code> component, they are handled by the UI, which updates the displayed information, and the
-<code>Storage</code> component, which saves the information to XML format. The event triggers are handled as follows.</p>
+<p>For deletion of event(s), the flow is similar.
+The sequence diagram for the deletion of event is shown below.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/add-event-event-trigger.png" alt="Handling of events triggered">
+<img src="images/delete-event_logic-model.png" alt="Deleting an event">
 </div>
 </div>
+<div class="paragraph">
+<p>Step 1. User enters command to delete an event based on the event date and index (as displayed in the UI)<br>
+Step 2. <code>AddressBookParser</code> calls <code>DeleteEventCommandParser</code>, which generates an <code>DeleteEventCommand</code> with an <code>EventDate</code> and <code>Index</code>.<br>
+Step 3. <code>DeleteEventCommand</code> calls <code>Model#getFilteredEventListByDate</code> to retrieve the last shown event list.
+Step 4. <code>DeleteEventCommand</code> calls <code>getTargetDateList</code> to retrieve the list from which the event belongs to. <br>
+Step 5. <code>DeleteEventCommand</code> calls <code>getEventToDelete</code> to retrieve the event based on its index in the list from step 4.
+Step 6. The event is deleted from the system from the <code>Model</code> component.</p>
+</div>
+<div class="paragraph">
+<p>Upon adding/deletion of events in <code>Model</code>, <code>AddressBookChangedEvent</code> and <code>AddressBookEventChangedEvent</code> are triggered from the <code>Model</code> component.
+The raised events are handled by:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>UI</code>, which updates the displayed information, and</p>
+</li>
+<li>
+<p><code>Storage</code>, which saves the information to an XML data file.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For instance, when an <code>Event</code> is added (or deleted), the event triggers are handled as follows.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/add-event-event-trigger.png" alt="Handling of triggered events">
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="ui-events-display"><a class="link" href="#ui-events-display">UI Events Display</a></h5>
 <div class="paragraph">
 <p>To display the event information according to their date, a list of lists of events grouped by <code>EventDate</code> is set in the <code>ListView</code> object in the <code>EventPanelList</code>.
 Each cell represents the <code>EventListCard</code> for a particular date, which contains all the events, each displayed in a <code>EventCard</code>. For this implementation,
 we require <code>ModelManager</code> to be able to return such an <code>ObservableList&lt;List&lt;Event&gt;&gt;</code> object to the UI class <code>MainWindow</code>, and this is achieved via the method
 <code>ModelManager#getFilteredEventListByDate</code>.</p>
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -1094,13 +1134,15 @@ we require <code>ModelManager</code> to be able to return such an <code>Observab
 <ul>
 <li>
 <p><strong>Alternative 1 (current choice):</strong> Store a list of type <code>ObservableList&lt;List&lt;Event&gt;&gt;</code> in the <code>ListView</code> object in the <code>EventPanelList</code>.
-This list is re-computed in <code>ModelManager</code> each time a change in the internal list of events is detected, and passed to the UI class <code>MainWindow</code>.
+This list is re-computed from <code>Model</code> each time a change in the internal list of events is detected, and the
+updated list is passed to the UI class <code>MainWindow</code>.
 This facilitates a regeneration of the <code>TabPanel</code> stored in <code>MainWindow</code>, updating the display of events to the user.</p>
-<div class="paragraph">
-<p>Here, we only need to maintain one list of <code>Event</code> objects.
-Since this is the case, there is no change to the <code>ObservableList&lt;List&lt;Event&gt;&gt;</code> object passed into the <code>UI</code> classes. For the UI
-to be updated with new information whenever events are added into the underlying <code>Event</code> list, we make use of a listener on the list <code>filteredEvents</code>.</p>
-</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> We only need to maintain one internal list of <code>Event</code> objects. For the UI
+to be updated with new information whenever events are added into/deleted from the underlying <code>Event</code> list,
+we make use of a listener on the <code>filteredEvents</code> list in <code>Model</code>.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1111,46 +1153,262 @@ to be updated with new information whenever events are added into the underlying
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>While this means that there is a regeneration of the <code>TabPanel</code> object in <code>MainWindow</code> each time such an event occurs,
-this overhead is still acceptable given the current scale of the <code>AddressBook</code>.</p>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Store a list of type <code>ObservableList&lt;ObservableList&lt;Event&gt;&gt;</code> in the <code>ListView</code> object,
-as well as in <code>ModelManager</code>, and update this alongside the <code>filteredEvent</code> list in <code>ModelManager</code>.
-By doing so, we will not have to regenerate the <code>TabPanel</code> in <code>MainWindow</code> each time there is a change in the internal event list.</p>
-<div class="paragraph">
-<p>To do so, we can add a listener to <code>filteredEvents</code> such that each time the internal list of events changes, the corresponding change is done to a list of type <code>ObservableList&lt;List&lt;Event&gt;&gt;</code>.</p>
-</div>
-<div class="paragraph">
-<p>However, this will mean that if more actions are carried out on the internal event list, more updates will have be made to the way the listener is set up,
-as it will have to listen to more types of changes and perform more actions accordingly. Though reducing overhead incurred
-(as there is no need to regenerate the list each time a change occurs),
-this could potentially create more bugs in the code, which is not desirable in the long run.</p>
-</div>
-</li>
-<li>
-<p><strong>Alternative 3:</strong> Store a list of type <code>ObservableList&lt;ObservableList&lt;Event&gt;&gt;</code> in the <code>ListView</code> object,
-as well as in <code>Model</code>, and create another internal list <code>UniqueEventListByDate</code> for this list of lists. Update this alongside <code>UniqueEventList</code>.
-By doing so, we also will not have to regenerate the <code>TabPanel</code> in <code>MainWindow</code> each time there is a change in the internal event list, and no such listener
-as in Alternative 2 is required.</p>
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>However, this means that we have to maintain two lists, both storing <code>Event</code> objects.
-The task of maintaining two lists may lead to inconsistencies between the two lists and more complex code in future,
-should future developers decide to include more actions to mutate the underlying list of <code>Event</code> objects.
-Hence, this is not preferred in our implementation.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ui-display-ad.png" alt="Refresh of Tab Panel on Event Change">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Cons:</strong> There is a regeneration of the <code>TabPanel</code> object in <code>MainWindow</code> each time such an event occurs.
+However, this overhead is still acceptable given the current scale of the <code>AddressBook</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 2:</strong> Store a list of type <code>ObservableList&lt;ObservableList&lt;Event&gt;&gt;</code> in <code>UI</code> and <code>Model</code>,
+where each <code>ObservableList&lt;Event&gt;</code> is the list of events for a given date.
+Update this alongside the <code>filteredEvent</code> list in <code>Model</code>, by adding a listener to <code>filteredEvents</code>,
+such that each time the internal list of events changes, the corresponding update is performed on the 2D-list.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Pros:</strong> There is no need to regenerate the list for <code>UI</code>, since information in this list stays updated.
+This reduces overhead incurred in list regeneration.</p>
+</li>
+<li>
+<p><strong>Cons</strong>: If more actions are carried out on the internal event list, the listener will have to be updated,
+as it will have to listen to more types of changes. This could potentially create more bugs in the code.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 3:</strong> Store a list of type <code>ObservableList&lt;ObservableList&lt;Event&gt;&gt;</code> (similar structure as in Alternative 2) in <code>UI</code> and <code>Model</code>.
+Create another internal list <code>UniqueEventListByDate</code> for this list of lists. Update this alongside <code>UniqueEventList</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Pros:</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>There is no need to regenerate the list for <code>UI</code>, since information in this list stays updated.</p>
+</li>
+<li>
+<p>No listener is required, since an event can be added to <code>UniqueEventList</code> and <code>UniqueEventListByDate</code> simultaneously.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Cons:</strong> Two lists have to be maintained, both storing the same <code>Event</code> objects.
+The task of maintaining two lists may lead to inconsistencies between the two lists and more complex code in future.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-restrictions-on-event-tags"><a class="link" href="#aspect-restrictions-on-event-tags">Aspect: Restrictions on Event Tags</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Valid event tags to be restricted to a list which can be edited by the user.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Allows event tags to be standardized, and the user can keep track of the all the types of events he/she has just
+by referring to the <code>Flowpane</code> containing all the event tags available in the system. This also facilitates finding of events
+by event tags.</p>
+</li>
+<li>
+<p><strong>Cons:</strong> More work has to be done from the user&#8217;s end, as he/she has to add an event tag in the system
+before adding an event with that tag.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> No restriction to event tags.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Less work by the user, as he/she can just add any event tag when adding an event into the system.</p>
+</li>
+<li>
+<p><strong>Cons:</strong> Less standardization of event tags, which may cause the user&#8217;s data to become more disorganized in future.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 3:</strong> (2-in-1 approach) Event tags that are non-existing in EventsPlus+ to be added upon adding an event with that new tag.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Less work by the user, and tag gets automatically added into the system.</p>
+</li>
+<li>
+<p><strong>Cons:</strong> The <code>addEvent</code> command will be performing two different actions - adding an event
+and adding an event tag. This may violate the Single Responsibility Principle (SRP) for the <code>AddEventCommand</code> class.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="import-contacts"><a class="link" href="#import-contacts">3.5. Import Contacts</a></h3>
+<h3 id="EventTags"><a class="link" href="#EventTags">3.5. Add Event Tags feature</a></h3>
 <div class="sect3">
 <h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">3.5.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>The list of event tags in the system is stored in a <code>UniqueTagList</code> in <code>Model</code>.
+This implementation requires all event <code>Tag</code> objects to be unique (using case-insensitive comparison)<br>
+All event tags are always shown, hence it is sufficient to
+to keep an <code>ObservableList&lt;Tag&gt;</code> in <code>ModelManager</code>, rather than a <code>FilteredList</code> which is used to store list of <code>Person</code> and <code>Event</code> objects.</p>
+</div>
+<div class="paragraph">
+<p>An event tag specified by the user is added in the system as depicted in the sequence diagram below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/add-event-tag_logic-model.png" alt="Interactions between Logic and Model">
+</div>
+</div>
+<div class="paragraph">
+<p>Step 1. User enters command to add an event<br>
+Step 2. <code>AddressBookParser</code> calls <code>AddEventTagCommandParser</code>, which generates an <code>AddEventTagCommand</code> with a <code>Set</code> of <code>Tag</code> objects<br>
+Step 3. <code>AddEventTagCommand</code> calls <code>Model#hasEventTag</code> to check for duplicate tags already in the system<br>
+Step 4. <code>AddEventTagCommand</code> calls <code>Model#addEventTag</code> to add the new event <code>Tag</code> into <code>Model</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Autocomplete"><a class="link" href="#Autocomplete">3.6. Command Auto-completion feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-6"><a class="link" href="#current-implementation-6">3.6.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>Command auto-completion uses a fixed list of all command words in EventsPlus+. Each time the user
+presses the <code>Tab</code> key, a check is run against the internal list of command words (including aliases)
+and the input is auto-completed to the nearest command word containing the current user input, if any.
+The following activity diagram outlines the typical usage of this feature.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/autocomplete-ad.png" alt="Auto-complete command activity diagram">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="aspect-computing-the-nearest-valid-command-word"><a class="link" href="#aspect-computing-the-nearest-valid-command-word">3.6.2. Aspect: Computing the nearest valid command word</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Each time the <code>Tab</code> key is pressed,
+<code>String#startsWithPrefix</code> is used to check against the internal list for the nearest possible
+command word.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> The implementation is neater as most of the checking is done by <code>String#startsWithPrefix</code>.</p>
+</li>
+<li>
+<p><strong>Cons:</strong> The current input has to be checked against potentially every valid command word.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Store a <code>HashMap</code> with maps every possible prefix of every command word to the corresponding command word.
+Do a lookup in the <code>HashMap</code> using current user input as the key and return the value (command word) if any.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Typically constant time lookup for each prefix in the <code>HashMap</code>.</p>
+</li>
+<li>
+<p><strong>Cons:</strong> More space required to store all the possible prefixes. Furthermore,
+if no such prefix is contained in the mapping, takes linear time with respect to size of the map.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 3</strong> Use a Prefix Tree (Trie) implementation, where the intermediate nodes are the prefixes and
+leaf nodes are the valid command words.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Provides a balance between time and space complexity.</p>
+</li>
+<li>
+<p><strong>Cons:</strong> Potentially more complex implementation.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="tab-feature"><a class="link" href="#tab-feature">3.7. Tab feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-7"><a class="link" href="#current-implementation-7">3.7.1. Current implementation</a></h4>
+<div class="paragraph">
+<p><code>UI</code> component consists of a <code>TabPanel</code> which stores all the <code>Tab</code> objects in the <code>UI</code> as follows.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/tabPanel.png" alt="Tab Panel basic class diagram">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> <code>TabPanel</code> to store all <code>Tab</code> objects.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> New tabs can be added easily as a class, and initialized in <code>TabPanel</code>.
+This abides by the SoC principle and each tab can be managed separately from the others.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Store the methods for each <code>Tab</code> in the same class <code>TabPanel</code>.
+Hence, all the tabs and their methods are contained in this class.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Less code needed, especially if some tabs have similar or overlapping methods.</p>
+</li>
+<li>
+<p><strong>Cons:</strong> Does not abide by SoC and SRP principle, since this one class would have to change for many reasons.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="import-contacts"><a class="link" href="#import-contacts">3.8. Import Contacts</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-8"><a class="link" href="#current-implementation-8">3.8.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p><code>ModelManager</code> now implements <code>readImportContactsFile</code> and it calls on <code>VersionedAddressBook</code>.<br>
 <code>VersionAddressBook</code> is being called so that undo redo can work on import contacts command.<br>
@@ -1188,7 +1446,7 @@ The number of successful inserts and duplicated will be returned to display afte
 </div>
 </div>
 <div class="sect2">
-<h3 id="meeting-location"><a class="link" href="#meeting-location">3.6. Meeting Location</a></h3>
+<h3 id="meeting-location"><a class="link" href="#meeting-location">3.9. Meeting Location</a></h3>
 <div class="paragraph">
 <p>The meeting location mechanism is facilitated by the presence of a Faculty field in the Person class.</p>
 </div>
@@ -1200,14 +1458,14 @@ The number of successful inserts and duplicated will be returned to display afte
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.7. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.10. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.8, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.11, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -1238,7 +1496,7 @@ The number of successful inserts and duplicated will be returned to display afte
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.8. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.11. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -2549,4 +2807,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-06 10:26:31 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-06 17:16:33 UTC</div></div></div></body></html>

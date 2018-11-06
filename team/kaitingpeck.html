@@ -10,7 +10,11 @@
 <h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>AddressBook - Level 4 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.</p>
+<p>EventsPlus+ is a desktop address book application catered for busy university students to
+manage their contacts, events, project meetings and ad-hoc events efficiently.
+EventsPlus+ aims to simplify some of the more time-consuming administrative tasks
+such as coordinating location and date of ad-hoc events using a Command Line Interface (CLI)
+The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.</p>
 </div>
 </div>
 </div>
@@ -20,26 +24,80 @@
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Major enhancement</strong>: added <strong>the ability to undo/redo previous commands</strong></p>
+<p><strong>Major enhancement</strong>: added <strong>the ability to add/delete events</strong></p>
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.</p>
+<p>What it does: Allows the user to add and delete events with event tags and reference to existing contacts in EventsPlus+</p>
 </li>
 <li>
-<p>Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.</p>
+<p>Justification: Users should be able to use the application to manage his/her events, and should be able to incorporate
+contacts in EventsPlus+ into events, since both are features of the application.</p>
 </li>
 <li>
-<p>Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.</p>
-</li>
-<li>
-<p>Credits: <em>{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}</em></p>
+<p>Highlights: Users are able to view the crucial person information from events by hovering over the contact in the event,
+without searching for the person directly. Event tags are standardized based on a list of event tags displayed, which can
+be modified by the user.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Minor enhancement</strong>: added a history command that allows the user to navigate to previous commands using up/down keys.</p>
+<p><strong>Other enhancements</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>added <strong>the ability to add event tags</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: Allows the user to add event tags into the system, which are needed for tagging new events added into
+EventsPlus+.</p>
+</li>
+<li>
+<p>Justification: This is required standardization of events tagging in EventsPlus+</p>
+</li>
+<li>
+<p>Highlights: Event tags are shown in a flowpane at the top of the <strong>Events</strong> tab</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>added <strong>the ability to find events by event tags</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: Allows the user to find events based on their tags.</p>
+</li>
+<li>
+<p>Justification: Users should be able to search for a certain type of event quickly, instead of scanning through the whole list.</p>
+</li>
+<li>
+<p>Highlights: Since event tags are displayed on the top of the <strong>Events</strong> tab, users can refer to the list easily and
+find all events tagged as that particular type easily.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>added <strong>the ability to auto-complete commands</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: Reduces the time required for user to finish a command, especially when command words are long.</p>
+</li>
+<li>
+<p>Justification: Saves time on the user on typing commands, and reduces effort on users to remember the whole command word.</p>
+</li>
+<li>
+<p>Highlights: Only requires a simple pressing of the <code>Tab</code> key for command auto-completion.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
 </li>
 <li>
 <p><strong>Code contributed</strong>: [<a href="https://github.com">Functional code</a>] [<a href="https://github.com">Test code</a>] <em>{give links to collated code files}</em></p>
@@ -53,7 +111,10 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Managed releases <code>v1.3</code> - <code>v1.5rc</code> (3 releases) on GitHub</p>
+<p>Set up Travis and Appveyor for the repository</p>
+</li>
+<li>
+<p>Managed releases <code>v1.2</code> and <code>v1.4.1</code> (2 releases) on GitHub</p>
 </li>
 </ul>
 </div>
@@ -63,10 +124,29 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Updated the GUI color scheme (Pull requests <a href="https://github.com">#33</a>, <a href="https://github.com">#34</a>)</p>
+<p>Added the AddEvent feature and tests (Pull requests <a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/60">#60</a>,
+<a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/83">#83</a>,
+<a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/88">#88</a>,
+<a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/95">#95</a>,
+<a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/119">#119</a>,
+<a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/120">#120</a>,
+<a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/130">#130</a>,
+<a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/138">#138</a>)</p>
 </li>
 <li>
-<p>Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests <a href="https://github.com">#36</a>, <a href="https://github.com">#38</a>)</p>
+<p>Added the DeleteEvent feature and tests (Pull requests <a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/121">#121</a>)</p>
+</li>
+<li>
+<p>Added the AddEventTag feature and tests (Pull requests <a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/138">#138</a>)</p>
+</li>
+<li>
+<p>Added the FindEvent feature and tests (Pull requests <a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/175">#175</a>)</p>
+</li>
+<li>
+<p>Added the command auto-completion feature (Pull requests <a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/174">#174</a>)</p>
+</li>
+<li>
+<p>Re-organized <code>BrowserPanel</code> to be grouped under a <code>TabPanel</code> (Pull requests <a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/88">#88</a>)</p>
 </li>
 </ul>
 </div>
@@ -76,7 +156,20 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Did cosmetic tweaks to existing contents of the User Guide: <a href="https://github.com">#14</a></p>
+<p>Updated</p>
+</li>
+<li>
+<p>Updated documentation for the enhancements as above: (Pull requests  <a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/99">#99</a>,
+<a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/102">#102</a>,
+<a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/141">#141</a>,
+<a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/178">#178</a>)</p>
+</li>
+<li>
+<p>Created initial UI Mockup of the product (Pull requests <a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/38">#38</a>)</p>
+</li>
+<li>
+<p>Updated Developer Guide with use stories and some use cases (Pull requests <a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/38">#38</a>,
+<a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/73">#73</a>)</p>
 </li>
 </ul>
 </div>
@@ -89,26 +182,12 @@
 <p>PRs reviewed (with non-trivial review comments): <a href="https://github.com">#12</a>, <a href="https://github.com">#32</a>, <a href="https://github.com">#19</a>, <a href="https://github.com">#42</a></p>
 </li>
 <li>
-<p>Contributed to forum discussions (examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>, <a href="https://github.com">4</a>)</p>
+<p>Contributed to forum discussions (examples: <a href="https://github.com/nus-cs2103-AY1819S1/forum/issues/116">#116</a>)</p>
 </li>
 <li>
-<p>Reported bugs and suggestions for other teams in the class (examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>)</p>
-</li>
-<li>
-<p>Some parts of the history feature I added was adopted by several other class mates (<a href="https://github.com">1</a>, <a href="https://github.com">2</a>)</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Tools:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Integrated a third party library (Natty) to the project (<a href="https://github.com">#42</a>)</p>
-</li>
-<li>
-<p>Integrated a new Github plugin (CircleCI) to the team repo</p>
+<p>Reported bugs and suggestions for other teams in the class (examples:  <a href="https://github.com/CS2103-AY1819S1-W17-3/main/issues/186">1</a>,
+<a href="https://github.com/CS2103-AY1819S1-W17-3/main/issues/181">2</a>,
+<a href="https://github.com/CS2103-AY1819S1-W17-3/main/issues/184">3</a>)</p>
 </li>
 </ul>
 </div>
@@ -117,9 +196,6 @@
 </div>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p><em>{you can add/remove categories in the list above}</em></p>
 </div>
 </div>
 </div>
@@ -137,20 +213,80 @@
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code-alias-code-u-code"><a class="link" href="#undoing-previous-command-code-undo-code-alias-code-u-code">Undoing previous command : <code>undo</code>, alias <code>u</code></a></h3>
+<h3 id="adding-an-event-code-addevent-code"><a class="link" href="#adding-an-event-code-addevent-code">Adding an event: <code>addEvent</code></a></h3>
 <div class="paragraph">
-<p>Restores the address book to the state before the previous <em>undoable</em> command was executed.<br>
-Format: <code>undo</code></p>
+<p>Adds an event in the system with information specified by the user.</p>
 </div>
-<div class="admonitionblock note">
+<div class="paragraph">
+<p>Format: <code>addEvent n/EVENT_NAME dsc/EVENT_DESCRIPTION d/DATE(YYYY-MM-DD) st/START_TIME(HHMM) et/END_TIME(HHMM) a/ADDRESS [i/CONTACT_INDEX]&#8230;&#8203; [t/EVENT_TAG]&#8230;&#8203;</code></p>
+</div>
+<div class="paragraph">
+<p>The user can input values for the following fields when adding an event:<br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Event name<br></p>
+</li>
+<li>
+<p>Event description<br></p>
+</li>
+<li>
+<p>Event date<br></p>
+</li>
+<li>
+<p>Event start time<br></p>
+</li>
+<li>
+<p>Event end time<br></p>
+</li>
+<li>
+<p>Address of event<br></p>
+</li>
+<li>
+<p>Contact Index / Indices<br></p>
+</li>
+<li>
+<p>Event Type(s)<br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Note that each of these fields, except for contact indices and event type, are mandatory, and has to be supplied by the user
+before the event can be successfully added into the system.
+In addition, note the following constraints for the input values.</p>
+</div>
+<div class="admonitionblock tip">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-<div class="paragraph">
-<p>Undoable commands: those commands that modify the address book&#8217;s content (<code>add</code>, <code>delete</code>, <code>edit</code> and <code>clear</code>).</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Event names and descriptions should only contain alphanumeric characters
+and should not have any special characters e.g. *, &amp;, etc.</p>
+</li>
+<li>
+<p>Event dates should be in the format YYYY-MM-DD</p>
+</li>
+<li>
+<p>Event times (start or end time) should be in the 24-hour format HHMM</p>
+</li>
+<li>
+<p>Start and end times for a given event can be the same.<br>
+e.g. <code>addEvent n/Doctor Appointment dsc/Consultation d/2018-10-14 st/1030 et/1030 a/123, Clementi Rd, 1234665</code> is a valid command</p>
+</li>
+<li>
+<p>Contact indices should be based on the latest displayed person list.</p>
+</li>
+<li>
+<p>Event type has to be one of the existing tags in the EventsPlus+. If an event tag does not exist
+in EventsPlus+, it has to be added in before creating the event with the new event tag.</p>
+</li>
+</ul>
 </div>
 </td>
 </tr>
@@ -162,55 +298,211 @@ Format: <code>undo</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>delete 1</code><br>
-<code>list</code><br>
-<code>undo</code> or <code>u</code> (reverses the <code>delete 1</code> command)<br></p>
+<p>Without contacts and event tags<br>
+<code>addEvent n/Doctor Appointment dsc/Consultation d/2018-10-14 st/1030 et/1200 a/123, Clementi Rd, 1234665</code><br></p>
 </li>
 <li>
-<p><code>select 1</code><br>
-<code>list</code><br>
-<code>undo</code><br>
-The <code>undo</code> command fails as there are no undoable commands executed previously.</p>
+<p>With a single contact<br>
+ <code>list</code><br>
+<code>addEvent n/Doctor Appointment dsc/Consultation d/2018-10-14 st/1030 et/1200 a/123, Clementi Rd, 1234665 i/1</code></p>
 </li>
 <li>
-<p><code>delete 1</code><br>
-<code>clear</code><br>
-<code>undo</code> or <code>u</code> (reverses the <code>clear</code> command)<br>
-<code>undo</code> or <code>u</code> (reverses the <code>delete 1</code> command)<br></p>
+<p>With multiple contacts<br>
+<code>Find Betsy Tim John</code><br>
+<code>addEvent n/Meeting  dsc/Project meeting d/2018-10-14 st/1030 et/1200 a/123, Clementi Rd, 1234665 i/1 i/2 i/3</code></p>
+</li>
+<li>
+<p>With contact indices and event tags<br>
+<code>addEventTag t/Meeting t/Appointment</code><br>
+<code>addEvent n/Doctor Appointment dsc/Consultation d/2018-10-14 st/1030 et/1200 a/123, Clementi Rd, 1234665 i/1 t/Meeting t/Appointment</code><br></p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>In EventsPlus+, the events can be found in the Events tab,
+and are displayed according to their date, in decreasing date order.
+Within each date, the events are ordered from earliest to latest.</p>
+</div>
+<div class="paragraph">
+<p>After the user executes the command, a message indicating successful execution of the command will be displayed.
+The user will be automatically directed to the Events tab,
+where the newly added event (as highlighted in green below) will be shown in the tab.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/add-event_new-event.PNG" alt="Adding an event">
+</div>
+</div>
 </div>
 <div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code-alias-code-r-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code-alias-code-r-code">Redoing the previously undone command : <code>redo</code>, alias <code>r</code></a></h3>
+<h3 id="adding-an-event-tag-code-addeventtag-code"><a class="link" href="#adding-an-event-tag-code-addeventtag-code">Adding an event tag: <code>addEventTag</code></a></h3>
 <div class="paragraph">
-<p>Reverses the most recent <code>undo</code> command.<br>
-Format: <code>redo</code></p>
+<p>Adds an event tag specified by the user into the system.</p>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p>Format: <code>addEventTag t/EVENT_TAG [t/EVENT_TAG&#8230;&#8203;]</code></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Event tags are case-insensitive, and will always be converted into lowercase.
+i.e. <code>MEETING</code> and <code>meeting</code> are considered the same tag,
+and only <code>meeting</code> will be shown in EventsPlus+
+Executing <code>addEventTag t/MEETING t/meeting</code> will only result in the first tag being added.
+Executing <code>addEventTag t/MEETING</code> again will not be successful, as the tag already exists in the system.</p>
+</li>
+<li>
+<p>Event tags should only be alphanumeric (A-Z, a-z, 0-9) and hence should exclude any spaces, special characters or symbols such as '%', '*', '~'</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Example:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>delete 1</code><br>
-<code>undo</code> or <code>u</code> (reverses the <code>delete 1</code> command)<br>
-<code>redo</code> or <code>r</code> (reapplies the <code>delete 1</code> command)<br></p>
-</li>
-<li>
-<p><code>delete 1</code><br>
-<code>redo</code> or <code>r</code><br>
-The <code>redo</code> command fails as there are no <code>undo</code> commands executed previously.</p>
-</li>
-<li>
-<p><code>delete 1</code><br>
-<code>clear</code><br>
-<code>undo</code> or <code>u</code> (reverses the <code>clear</code> command)<br>
-<code>undo</code> or <code>u</code> (reverses the <code>delete 1</code> command)<br>
-<code>redo</code> or <code>r</code> (reapplies the <code>delete 1</code> command)<br>
-<code>redo</code> or <code>r</code> (reapplies the <code>clear</code> command)<br></p>
+<p><code>addEventTag t/Lecture t/Dinner</code><br>
+Adds the event tags into the system, if they do not already exist in the system.
+The newly added tags are highlighted in green below.</p>
 </li>
 </ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/add-event-tag_new-event-tag.PNG" alt="Adding an event tag">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-an-event-code-deleteevent-code"><a class="link" href="#deleting-an-event-code-deleteevent-code">Deleting an event: <code>deleteEvent</code></a></h3>
+<div class="paragraph">
+<p>Adds an event in the system with information specified by the user.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>deleteEvent d/DATE(YYYY-MM-DD) i/EVENT_INDEX</code></p>
+</div>
+<div class="paragraph">
+<p>Each of the fields are mandatory, and has to be supplied by the user
+before the event can be successfully deleted from the system.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Event dates should be in the format YYYY-MM-DD</p>
+</li>
+<li>
+<p>Event index is based on the displayed index of each event <strong>within each date</strong> in the displayed list (see example below).<br>
+e.g. In the screenshot below, the event named "Meeting" is the 1st event on the date 2018-04-01,
+hence the command <code>deleteEvent d/2018-04-01 i/1</code> will delete this event.<br>
+The event named "Lecture" is the 2nd event on the date 2018-10-18,
+hence the command <code>deleteEvent d/2018-10-18 i/2</code> will delete this event.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>deleteEvent d/2018-04-01 i/1</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Before Deletion</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/delete-event-before.PNG" alt="Deleting an event">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>After Deletion</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/delete-event-after.PNG" alt="Deleting an event">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="list-all-events-code-listevent-code"><a class="link" href="#list-all-events-code-listevent-code">List all events: <code>listEvent</code></a></h3>
+<div class="paragraph">
+<p>Shows a list of all events in the address book.<br>
+Format: <code>listEvent</code>
+=== Find events by event tags: <code>findEvent</code></p>
+</div>
+<div class="paragraph">
+<p>Shows a list of all events in the address book which are tagged as the specified tags in the command.
+Event tags are case-insensitive, as described in the <a href="#addEventTag">addEventTag</a> section.<br>
+i.e. <code>MEETING</code> and <code>meeting</code> are regarded as the same tag.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>findEvent EVENT_TAG [EVENT_TAG&#8230;&#8203;]</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="paragraph">
+<p><strong>Before <code>findEvent</code> Execution</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/find-event-before.PNG" alt="Finding an event">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>After <code>findEvent</code> Execution</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>findEvent LECTURE</code><br>
+Shows all the events tagged as <code>lecture</code></p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/find-event-lecture.PNG" alt="Finding an event">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>findEvent Class lecture</code><br>
+Shows all the events tagged as <code>lecture</code> or <code>class</code></p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/find-event-lecture-class.PNG" alt="Finding an event">
+</div>
 </div>
 </div>
 </div>
@@ -229,215 +521,371 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">Undo/Redo feature</a></h3>
+<h3 id="add-delete-events-feature"><a class="link" href="#add-delete-events-feature">Add/Delete Events feature</a></h3>
 <div class="sect3">
 <h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
+<div class="sect4">
+<h5 id="structure-of-an-event"><a class="link" href="#structure-of-an-event">Structure of an Event</a></h5>
 <div class="paragraph">
-<p>The undo/redo mechanism is facilitated by <code>VersionedSystem</code>.
-It extends <code>System</code> with an undo/redo history, stored internally as an <code>SystemStateList</code> and <code>currentStatePointer</code>.
-Additionally, it implements the following operations:</p>
+<p>In the <code>Model</code> component, an <code>Event</code> consists of various <code>Event</code> attributes.
+Namely, the classes <code>EventName</code>, <code>EventDescription</code>, <code>EventDate</code>, <code>EventTime</code>, <code>EventAddress</code> are used to represent respective information in an <code>Event</code>,
+as shown in the Class diagram below. Note that <code>EventDay</code> is generated from <code>EventDate</code> values, and each event also contains a <code>Set</code> of <code>Person</code> and <code>Tag</code> objects,
+which are used to represent the event contacts (from the address book) and event tags (from <a href="#EventTags">event tags</a> currently existing in the address book).<br></p>
+</div>
+<div class="paragraph">
+<p>By doing so, we achieve more abstraction and cohesion, and this abides by the Separation of Concerns (SoC) principle at the class level.
+On top of facilitating checking of bugs within the individual attributes,
+doing so will also allow the developer to alter the definition of the different attribute classes, as well as to add more attributes into the
+<code>Event</code> class easily.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/Event.png" alt="Event class">
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="adding-deleting-of-an-event"><a class="link" href="#adding-deleting-of-an-event">Adding/Deleting of an Event</a></h5>
+<div class="paragraph">
+<p>Methods have been added to <code>ModelManager</code>, <code>AddressBook</code> and the newly-added class <code>UniqueEventList</code> to facilitate adding and deleting of events.
+In order to limit modification of the internal list of <code>Event</code> objects, changes to this list is only carried out at the most fundamental level,
+which is <code>UniqueEventList</code>. <code>AddressBook</code> stores a reference to this internal list, and <code>ModelManager</code> stores an unmodifiable copy of this list.</p>
+</div>
+<div class="paragraph">
+<p>An example usage scenario of the adding of events is as shown in the sequence diagram below.
+The diagram shows the interaction between the different components in the system when an event is added.
+The interaction between components is similar for the deletion of an event.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/add-event-component.png" alt="Interactions between components">
+</div>
+</div>
+<div class="paragraph">
+<p>More specific interactions between <code>Logic</code> and <code>Model</code> are as shown in the diagram below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/add-event_logic-model.png" alt="Interactions between Logic and Model">
+</div>
+</div>
+<div class="paragraph">
+<p>Step 1. User enters command to add an event<br>
+Step 2. <code>AddressBookParser</code> calls <code>AddEventCommandParser</code>, which generates an <code>AddEventCommand</code> with an <code>Event</code> and <code>Set&lt;Index&gt;</code>. The latter specifies the contact indices to add into the event.<br>
+Step 3. <code>AddEventCommand</code> calls <code>Model#hasEvent</code>, <code>Model#hasClashingEvent</code>, <code>Model#hasEventTag</code> to check if the event information is valid<br>
+Step 4. <code>AddEventCommand</code> calls <code>Event#setEventContacts</code> to set the <code>Set&lt;Person&gt;</code> of event contacts (Each <code>Person</code> has to be in the existing address book records)<br>
+Step 5. <code>AddEventCommand</code> calls <code>Model#addEvent</code> after all checks have passed. The event is added into the system from the <code>Model</code> component.</p>
+</div>
+<div class="paragraph">
+<p>For deletion of event(s), the flow is similar.
+The sequence diagram for the deletion of event is shown below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/delete-event_logic-model.png" alt="Deleting an event">
+</div>
+</div>
+<div class="paragraph">
+<p>Step 1. User enters command to delete an event based on the event date and index (as displayed in the UI)<br>
+Step 2. <code>AddressBookParser</code> calls <code>DeleteEventCommandParser</code>, which generates an <code>DeleteEventCommand</code> with an <code>EventDate</code> and <code>Index</code>.<br>
+Step 3. <code>DeleteEventCommand</code> calls <code>Model#getFilteredEventListByDate</code> to retrieve the last shown event list.
+Step 4. <code>DeleteEventCommand</code> calls <code>getTargetDateList</code> to retrieve the list from which the event belongs to. <br>
+Step 5. <code>DeleteEventCommand</code> calls <code>getEventToDelete</code> to retrieve the event based on its index in the list from step 4.
+Step 6. The event is deleted from the system from the <code>Model</code> component.</p>
+</div>
+<div class="paragraph">
+<p>Upon adding/deletion of events in <code>Model</code>, <code>AddressBookChangedEvent</code> and <code>AddressBookEventChangedEvent</code> are triggered from the <code>Model</code> component.
+The raised events are handled by:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>VersionedSystem#commit()</code>&#8201;&#8212;&#8201;Saves the current address book state in its history.</p>
+<p><code>UI</code>, which updates the displayed information, and</p>
 </li>
 <li>
-<p><code>VersionedSystem#undo()</code>&#8201;&#8212;&#8201;Restores the previous address book state from its history.</p>
-</li>
-<li>
-<p><code>VersionedSystem#redo()</code>&#8201;&#8212;&#8201;Restores a previously undone address book state from its history.</p>
+<p><code>Storage</code>, which saves the information to an XML data file.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>These operations are exposed in the <code>Model</code> interface as <code>Model#commitSystem()</code>, <code>Model#undoSystem()</code> and <code>Model#redoSystem()</code> respectively.</p>
-</div>
-<div class="paragraph">
-<p>Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.</p>
-</div>
-<div class="paragraph">
-<p>Step 1. The user launches the application for the first time. The <code>VersionedSystem</code> will be initialized with the initial address book state, and the <code>currentStatePointer</code> pointing to that single address book state.</p>
+<p>For instance, when an <code>Event</code> is added (or deleted), the event triggers are handled as follows.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/UndoRedoStartingStateListDiagram.png" alt="UndoRedoStartingStateListDiagram" width="800">
+<img src="../images/add-event-event-trigger.png" alt="Handling of triggered events">
 </div>
 </div>
+</div>
+<div class="sect4">
+<h5 id="ui-events-display"><a class="link" href="#ui-events-display">UI Events Display</a></h5>
 <div class="paragraph">
-<p>Step 2. The user executes <code>delete 5</code> command to delete the 5th person in the address book. The <code>delete</code> command calls <code>Model#commitSystem()</code>, causing the modified state of the address book after the <code>delete 5</code> command executes to be saved in the <code>SystemStateList</code>, and the <code>currentStatePointer</code> is shifted to the newly inserted address book state.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoNewCommand1StateListDiagram.png" alt="UndoRedoNewCommand1StateListDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>Step 3. The user executes <code>add n/David &#8230;&#8203;</code> to add a new person. The <code>add</code> command also calls <code>Model#commitSystem()</code>, causing another modified address book state to be saved into the <code>SystemStateList</code>.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoNewCommand2StateListDiagram.png" alt="UndoRedoNewCommand2StateListDiagram" width="800">
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If a command fails its execution, it will not call <code>Model#commitSystem()</code>, so the address book state will not be saved into the <code>SystemStateList</code>.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the <code>undo</code> command. The <code>undo</code> command will call <code>Model#undoSystem()</code>, which will shift the <code>currentStatePointer</code> once to the left, pointing it to the previous address book state, and restores the address book to that state.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoExecuteUndoStateListDiagram.png" alt="UndoRedoExecuteUndoStateListDiagram" width="800">
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If the <code>currentStatePointer</code> is at index 0, pointing to the initial address book state, then there are no previous address book states to restore. The <code>undo</code> command uses <code>Model#canUndoSystem()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The following sequence diagram shows how the undo operation works:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoSequenceDiagram.png" alt="UndoRedoSequenceDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>The <code>redo</code> command does the opposite&#8201;&#8212;&#8201;it calls <code>Model#redoSystem()</code>, which shifts the <code>currentStatePointer</code> once to the right, pointing to the previously undone state, and restores the address book to that state.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If the <code>currentStatePointer</code> is at index <code>SystemStateList.size() - 1</code>, pointing to the latest address book state, then there are no undone address book states to restore. The <code>redo</code> command uses <code>Model#canRedoSystem()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Step 5. The user then decides to execute the command <code>list</code>. Commands that do not modify the address book, such as <code>list</code>, will usually not call <code>Model#commitSystem()</code>, <code>Model#undoSystem()</code> or <code>Model#redoSystem()</code>. Thus, the <code>SystemStateList</code> remains unchanged.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoNewCommand3StateListDiagram.png" alt="UndoRedoNewCommand3StateListDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>Step 6. The user executes <code>clear</code>, which calls <code>Model#commitSystem()</code>. Since the <code>currentStatePointer</code> is not pointing at the end of the <code>SystemStateList</code>, all address book states after the <code>currentStatePointer</code> will be purged. We designed it this way because it no longer makes sense to redo the <code>add n/David &#8230;&#8203;</code> command. This is the behavior that most modern desktop applications follow.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoNewCommand4StateListDiagram.png" alt="UndoRedoNewCommand4StateListDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>The following activity diagram summarizes what happens when a user executes a new command:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoActivityDiagram.png" alt="UndoRedoActivityDiagram" width="650">
+<p>To display the event information according to their date, a list of lists of events grouped by <code>EventDate</code> is set in the <code>ListView</code> object in the <code>EventPanelList</code>.
+Each cell represents the <code>EventListCard</code> for a particular date, which contains all the events, each displayed in a <code>EventCard</code>. For this implementation,
+we require <code>ModelManager</code> to be able to return such an <code>ObservableList&lt;List&lt;Event&gt;&gt;</code> object to the UI class <code>MainWindow</code>, and this is achieved via the method
+<code>ModelManager#getFilteredEventListByDate</code>.</p>
 </div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
 <div class="sect4">
-<h5 id="aspect-how-undo-redo-executes"><a class="link" href="#aspect-how-undo-redo-executes">Aspect: How undo &amp; redo executes</a></h5>
+<h5 id="aspect-data-structure-to-support-the-ui-events-display"><a class="link" href="#aspect-data-structure-to-support-the-ui-events-display">Aspect: Data Structure to Support the UI Events Display</a></h5>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Saves the entire address book.</p>
+<p><strong>Alternative 1 (current choice):</strong> Store a list of type <code>ObservableList&lt;List&lt;Event&gt;&gt;</code> in the <code>ListView</code> object in the <code>EventPanelList</code>.
+This list is re-computed from <code>Model</code> each time a change in the internal list of events is detected, and the
+updated list is passed to the UI class <code>MainWindow</code>.
+This facilitates a regeneration of the <code>TabPanel</code> stored in <code>MainWindow</code>, updating the display of events to the user.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Easy to implement.</p>
+<p><strong>Pros:</strong> We only need to maintain one internal list of <code>Event</code> objects. For the UI
+to be updated with new information whenever events are added into/deleted from the underlying <code>Event</code> list,
+we make use of a listener on the <code>filteredEvents</code> list in <code>Model</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Whenever there is a change detected by <code>filteredEvents</code>, an <code>AddressBookEventChangedEvent</code> is posted</p>
 </li>
 <li>
-<p>Cons: May have performance issues in terms of memory usage.</p>
+<p><code>MainWindow</code> resets its <code>TabPanel</code> and passes the re-computed list (events grouped by date) into it.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ui-display-ad.png" alt="Refresh of Tab Panel on Event Change">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Cons:</strong> There is a regeneration of the <code>TabPanel</code> object in <code>MainWindow</code> each time such an event occurs.
+However, this overhead is still acceptable given the current scale of the <code>AddressBook</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 2:</strong> Store a list of type <code>ObservableList&lt;ObservableList&lt;Event&gt;&gt;</code> in <code>UI</code> and <code>Model</code>,
+where each <code>ObservableList&lt;Event&gt;</code> is the list of events for a given date.
+Update this alongside the <code>filteredEvent</code> list in <code>Model</code>, by adding a listener to <code>filteredEvents</code>,
+such that each time the internal list of events changes, the corresponding update is performed on the 2D-list.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Individual command knows how to undo/redo by itself.</p>
+<p><strong>Pros:</strong> There is no need to regenerate the list for <code>UI</code>, since information in this list stays updated.
+This reduces overhead incurred in list regeneration.</p>
+</li>
+<li>
+<p><strong>Cons</strong>: If more actions are carried out on the internal event list, the listener will have to be updated,
+as it will have to listen to more types of changes. This could potentially create more bugs in the code.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Will use less memory (e.g. for <code>delete</code>, just save the person being deleted).</p>
-</li>
-<li>
-<p>Cons: We must ensure that the implementation of each individual command are correct.</p>
+<p><strong>Alternative 3:</strong> Store a list of type <code>ObservableList&lt;ObservableList&lt;Event&gt;&gt;</code> (similar structure as in Alternative 2) in <code>UI</code> and <code>Model</code>.
+Create another internal list <code>UniqueEventListByDate</code> for this list of lists. Update this alongside <code>UniqueEventList</code>.</p>
 </li>
 </ul>
 </div>
+</li>
+<li>
+<p><strong>Pros:</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>There is no need to regenerate the list for <code>UI</code>, since information in this list stays updated.</p>
+</li>
+<li>
+<p>No listener is required, since an event can be added to <code>UniqueEventList</code> and <code>UniqueEventListByDate</code> simultaneously.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Cons:</strong> Two lists have to be maintained, both storing the same <code>Event</code> objects.
+The task of maintaining two lists may lead to inconsistencies between the two lists and more complex code in future.</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect4">
-<h5 id="aspect-data-structure-to-support-the-undo-redo-commands"><a class="link" href="#aspect-data-structure-to-support-the-undo-redo-commands">Aspect: Data structure to support the undo/redo commands</a></h5>
+<h5 id="aspect-restrictions-on-event-tags"><a class="link" href="#aspect-restrictions-on-event-tags">Aspect: Restrictions on Event Tags</a></h5>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Use a list to store the history of address book states.</p>
+<p><strong>Alternative 1 (current choice):</strong> Valid event tags to be restricted to a list which can be edited by the user.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.</p>
+<p><strong>Pros:</strong> Allows event tags to be standardized, and the user can keep track of the all the types of events he/she has just
+by referring to the <code>Flowpane</code> containing all the event tags available in the system. This also facilitates finding of events
+by event tags.</p>
 </li>
 <li>
-<p>Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both <code>HistoryManager</code> and <code>VersionedSystem</code>.</p>
+<p><strong>Cons:</strong> More work has to be done from the user&#8217;s end, as he/she has to add an event tag in the system
+before adding an event with that tag.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Use <code>HistoryManager</code> for undo/redo</p>
+<p><strong>Alternative 2:</strong> No restriction to event tags.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.</p>
+<p><strong>Pros:</strong> Less work by the user, as he/she can just add any event tag when adding an event into the system.</p>
 </li>
 <li>
-<p>Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as <code>HistoryManager</code> now needs to do two different things.</p>
+<p><strong>Cons:</strong> Less standardization of event tags, which may cause the user&#8217;s data to become more disorganized in future.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 3:</strong> (2-in-1 approach) Event tags that are non-existing in EventsPlus+ to be added upon adding an event with that new tag.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Less work by the user, and tag gets automatically added into the system.</p>
+</li>
+<li>
+<p><strong>Cons:</strong> The <code>addEvent</code> command will be performing two different actions - adding an event
+and adding an event tag. This may violate the Single Responsibility Principle (SRP) for the <code>AddEventCommand</code> class.
+=== Add Event Tags feature
+==== Current Implementation
+The list of event tags in the system is stored in a <code>UniqueTagList</code> in <code>Model</code>.
+This implementation requires all event <code>Tag</code> objects to be unique (using case-insensitive comparison)<br>
+All event tags are always shown, hence it is sufficient to
+to keep an <code>ObservableList&lt;Tag&gt;</code> in <code>ModelManager</code>, rather than a <code>FilteredList</code> which is used to store list of <code>Person</code> and <code>Event</code> objects.</p>
 </li>
 </ul>
 </div>
 </li>
 </ul>
 </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="project-powerpointlabs"><a class="link" href="#project-powerpointlabs">PROJECT: PowerPointLabs</a></h2>
-<div class="sectionbody">
-<hr>
 <div class="paragraph">
-<p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
+<p>An event tag specified by the user is added in the system as depicted in the sequence diagram below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/add-event-tag_logic-model.png" alt="Interactions between Logic and Model">
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-06 10:26:31 UTC</div></div></div></body></html>
+<div class="paragraph">
+<p>Step 1. User enters command to add an event<br>
+Step 2. <code>AddressBookParser</code> calls <code>AddEventTagCommandParser</code>, which generates an <code>AddEventTagCommand</code> with a <code>Set</code> of <code>Tag</code> objects<br>
+Step 3. <code>AddEventTagCommand</code> calls <code>Model#hasEventTag</code> to check for duplicate tags already in the system<br>
+Step 4. <code>AddEventTagCommand</code> calls <code>Model#addEventTag</code> to add the new event <code>Tag</code> into <code>Model</code>.
+=== Command Auto-completion feature
+==== Current Implementation
+Command auto-completion uses a fixed list of all command words in EventsPlus+. Each time the user
+presses the <code>Tab</code> key, a check is run against the internal list of command words (including aliases)
+and the input is auto-completed to the nearest command word containing the current user input, if any.
+The following activity diagram outlines the typical usage of this feature.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/autocomplete-ad.png" alt="Auto-complete command activity diagram">
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="aspect-computing-the-nearest-valid-command-word"><a class="link" href="#aspect-computing-the-nearest-valid-command-word">Aspect: Computing the nearest valid command word</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Each time the <code>Tab</code> key is pressed,
+<code>String#startsWithPrefix</code> is used to check against the internal list for the nearest possible
+command word.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> The implementation is neater as most of the checking is done by <code>String#startsWithPrefix</code>.</p>
+</li>
+<li>
+<p><strong>Cons:</strong> The current input has to be checked against potentially every valid command word.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Store a <code>HashMap</code> with maps every possible prefix of every command word to the corresponding command word.
+Do a lookup in the <code>HashMap</code> using current user input as the key and return the value (command word) if any.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Typically constant time lookup for each prefix in the <code>HashMap</code>.</p>
+</li>
+<li>
+<p><strong>Cons:</strong> More space required to store all the possible prefixes. Furthermore,
+if no such prefix is contained in the mapping, takes linear time with respect to size of the map.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 3</strong> Use a Prefix Tree (Trie) implementation, where the intermediate nodes are the prefixes and
+leaf nodes are the valid command words.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Provides a balance between time and space complexity.</p>
+</li>
+<li>
+<p><strong>Cons:</strong> Potentially more complex implementation.
+=== Tab feature
+==== Current implementation
+<code>UI</code> component consists of a <code>TabPanel</code> which stores all the <code>Tab</code> objects in the <code>UI</code> as follows.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/tabPanel.png" alt="Tab Panel basic class diagram">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> <code>TabPanel</code> to store all <code>Tab</code> objects.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> New tabs can be added easily as a class, and initialized in <code>TabPanel</code>.
+This abides by the SoC principle and each tab can be managed separately from the others.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Store the methods for each <code>Tab</code> in the same class <code>TabPanel</code>.
+Hence, all the tabs and their methods are contained in this class.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros:</strong> Less code needed, especially if some tabs have similar or overlapping methods.</p>
+</li>
+<li>
+<p><strong>Cons:</strong> Does not abide by SoC and SRP principle, since this one class would have to change for many reasons.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-06 17:16:33 UTC</div></div></div></body></html>
