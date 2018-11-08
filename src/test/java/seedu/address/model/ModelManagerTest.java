@@ -135,7 +135,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasImportContactsPerson_returnsTtue() {
+    public void hasImportContactsPerson_returnsTrue() {
         FileReader fileReader = new FileReaderBuilder().build();
 
         modelManager.importContacts(fileReader);
