@@ -182,7 +182,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         for (String s : contacts) {
             String[] parts = s.split(",");
             String nameString = parts[fileReader.getNameIndex()];
-            String phoneString = parts[fileReader.getPhoneIndex()].replaceAll("\\s", "");
+            String phoneString = parts[fileReader.getPhoneIndex()].replaceAll("[^0-9]", "");
             String addressString = parts[fileReader.getAddressIndex()];
             String emailString = parts[fileReader.getEmailIndex()];
             String facultyString = parts[fileReader.getFacultyIndex()];

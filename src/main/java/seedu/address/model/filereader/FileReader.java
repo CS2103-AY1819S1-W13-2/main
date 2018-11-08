@@ -13,7 +13,7 @@ import java.util.Scanner;
  * Guarantees: file path is present and not null, validated, immutable.
  */
 public class FileReader {
-    public static final String CSV_HEADER_NAME = "Name";
+    public static final String CSV_HEADER_NAME = "Given Name";
     public static final String CSV_HEADER_PHONE = "Phone 1 - Value";
     public static final String CSV_HEADER_ADDRESS = "Address 1 - Street";
     public static final String CSV_HEADER_EMAIL = "E-mail 1 - Value";
