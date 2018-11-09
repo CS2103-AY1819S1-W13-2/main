@@ -37,9 +37,10 @@
 <li><a href="#Autocomplete">3.6. Command Auto-completion feature</a></li>
 <li><a href="#tab-feature">3.7. Tab feature</a></li>
 <li><a href="#import-contacts">3.8. Import Contacts</a></li>
-<li><a href="#meeting-location">3.9. Meeting Location</a></li>
-<li><a href="#logging">3.10. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.11. Configuration</a></li>
+<li><a href="#show-person-s-faculty-location-visually">3.9. Show Person&#8217;s faculty location visually</a></li>
+<li><a href="#generate-a-random-meeting-location-for-event">3.10. Generate a random meeting location for event</a></li>
+<li><a href="#logging">3.11. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.12. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -78,7 +79,9 @@
 <ul class="sectlevel2">
 <li><a href="#launch-and-shutdown">F.1. Launch and Shutdown</a></li>
 <li><a href="#deleting-a-person">F.2. Deleting a person</a></li>
-<li><a href="#saving-data">F.3. Saving data</a></li>
+<li><a href="#showing-a-person-s-faculty">F.3. Showing a person&#8217;s faculty</a></li>
+<li><a href="#generating-a-possible-meeting-location">F.4. Generating a possible meeting location</a></li>
+<li><a href="#saving-data">F.5. Saving data</a></li>
 </ul>
 </li>
 </ul>
@@ -639,7 +642,7 @@ The favourite command will update favouriteEvent regardless of whether the new f
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Re-assign Model&#8217;s favouriteEvet regardless of previous preference</p>
+<p><strong>Alternative 1 (current choice):</strong> Re-assign Model&#8217;s favouriteEvent regardless of previous preference</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1436,7 +1439,7 @@ Returned <code>Person</code> objects are then inserted into <code>UniquePersonsL
 The number of successful inserts and duplicated will be returned to display after reading EOF.<br></p>
 </div>
 <div class="paragraph">
-<p>The following sequence diagram shows how the readImportContactsFile operatoin works:</p>
+<p>The following sequence diagram shows how the readImportContactsFile operation works:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1446,26 +1449,153 @@ The number of successful inserts and duplicated will be returned to display afte
 </div>
 </div>
 <div class="sect2">
-<h3 id="meeting-location"><a class="link" href="#meeting-location">3.9. Meeting Location</a></h3>
+<h3 id="show-person-s-faculty-location-visually"><a class="link" href="#show-person-s-faculty-location-visually">3.9. Show Person&#8217;s faculty location visually</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-9"><a class="link" href="#current-implementation-9">3.9.1. Current Implementation</a></h4>
 <div class="paragraph">
-<p>The meeting location mechanism is facilitated by the presence of a Faculty field in the Person class.</p>
+<p>The displaying of the a <code>Person</code>'s faculty is facilitated by the newly added <code>Faculty</code> field in the <code>Person</code> class. This
+<code>Faculty</code> field is defined as a separate class (akin to other classes constituting the <code>Person</code> class such as <code>Email</code> and <code>Address</code>).</p>
 </div>
 <div class="paragraph">
-<p>The Faculty field stores the information about the person&#8217;s location using conventional NUS naming (e.g. SDE, COM).</p>
+<p>During the adding of <code>Person</code>'s to the EventsPlus+ address book, the <code>Faculty</code> class will ensure that the argument passed in is that of
+a valid NUS faculty. It does this via an inner enum class called <code>Faculties</code> which stores as constants the only accepted <code>Faculty</code>
+argument values. The <code>isInEnum</code> method is used to check that the argument passed already exists as one of the constants.</p>
 </div>
 <div class="paragraph">
-<p>The information from this field will be used to perform Google Maps URL API calls so as to display a common meeting location for two people.</p>
+<p>The valid arguments allowed are namely:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>SOC (School of Computing)</p>
+</li>
+<li>
+<p>FOS (Faculty of Science)</p>
+</li>
+<li>
+<p>YLLSOM (Yong Loo Lin School of Medicine)</p>
+</li>
+<li>
+<p>FOD (Faculty of Dentistry)</p>
+</li>
+<li>
+<p>BIZ (NUS Business School)</p>
+</li>
+<li>
+<p>SDE (School of Design and Environment)</p>
+</li>
+<li>
+<p>FOE (Faculty of Engineering)</p>
+</li>
+<li>
+<p>FOL (Faculty of Law)</p>
+</li>
+<li>
+<p>YSTCOM (Yong Siew Toh Conservatory of Music)</p>
+</li>
+<li>
+<p>FASS (Faculty of Arts and Social Sciences)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>A "-" response is also allowed as it is possible that the address book may indeed have contacts who are not in NUS at the
+current point in time.</p>
+</div>
+<div class="paragraph">
+<p>The command used to display the faculty visually is <code>showLocation</code>.</p>
+</div>
+<div class="paragraph">
+<p>In addition to the <code>Faculty</code> field, the showLocation command is assisted by Google Maps Embed API that allows for locations
+to be displayed visually in a separate tab, Location Display Tab. Google Maps uses unique Place IDs to identify locations
+on the map. For each faculty, these place IDs are stored in a newly created class <code>EmbedGoogleMaps</code> in the logic component of the
+application. Together with the Google Maps API key, the place ID allows for the generation of the exact spot of the person&#8217;s
+faculty to be displayed in the Location Display Tab.</p>
+</div>
+<div class="paragraph">
+<p>When the (correct) showLocation command is input together with the index of the individual whose faculty location is to be displayed,
+the index is first checked to determine if it is correct (more than 0 and not larger than the size of the list of contacts
+in the address book). Following this, the appropriate person is obtained from the <code>FilteredPersonList</code> (note: this is so as to allow
+the displaying of the contact&#8217;s faculty location even if the list is filtered).</p>
+</div>
+<div class="paragraph">
+<p>A event, <code>FacultyLocationDisplayChangedEvent</code>, also newly created for this showLocation command, is posted and is then handled by <code>TabPanel</code> (which switches to the Location
+Display Tab) and subsequently by <code>LocationDisplayPanel</code>. The status message will show "Selected person: [INDEX] faculty location being displayed."</p>
+</div>
+<div class="paragraph">
+<p>If the contact has no faculty, a default location - University Hall - is displayed on the map.</p>
+</div>
+<div class="paragraph">
+<p>The above-mentioned information can be represented in the following sequence diagram:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/showLocation_UI_LogicManager_seqDiagram.PNG" alt="showLocation UI LogicManager seqDiagram" width="800">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/showLocation_EventsCenter_seqDiagram.PNG" alt="showLocation EventsCenter seqDiagram" width="800">
+</div>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.10. Logging</a></h3>
+<h3 id="generate-a-random-meeting-location-for-event"><a class="link" href="#generate-a-random-meeting-location-for-event">3.10. Generate a random meeting location for event</a></h3>
+<div class="paragraph">
+<p>The generation of a random meeting location primarily builds upon the visual display of a <code>Person</code>'s faculty. However
+there are a few key differences in the process that one needs to take note of.</p>
+</div>
+<div class="paragraph">
+<p>The command used to generate this possible meeting location is <code>generateLocation</code>.</p>
+</div>
+<div class="paragraph">
+<p>In order to generate a random location for an event, the user needs to input (in addition to the command) the event name,
+event date and event time. This is to detect the unique event (because some events may have the same name) and to ensure
+that this event is currently in the address book.</p>
+</div>
+<div class="paragraph">
+<p>Command parsing is handled in a similar manner as other commands but there exists a specific GenerateLocationCommandParser to specifically parse
+these kind of commands. The GenerateLocationCommand object created will then consist of three fields:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Event name</p>
+</li>
+<li>
+<p>Event date</p>
+</li>
+<li>
+<p>Event start time</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The values for these fields are based on the input given by the user. These values are checked for validity as per other event-related
+commands before the object is created. Following this, the address book is checked to determine whether this event does
+exist and if it does the status message indicates that a meeting location has been generated, if not it indicates to the user
+that such as event does not exist.</p>
+</div>
+<div class="paragraph">
+<p>A random meeting location is generated based on 7 locations (for now) that have their Google Maps Place IDs stored in the EmbedGoogleMaps class.
+A call to the method that generates this location (more specifically, returns the Place ID of the location) is made in the execute
+method of the GenerateLocationCommand.</p>
+</div>
+<div class="paragraph">
+<p>Following this, a event, <code>RandomMeetingLocationGeneratedEvent</code>, newly created for this generateLocation command, is posted and is then handled by <code>TabPanel</code> (which switches to the Location
+Display Tab) and subsequently by <code>LocationDisplayPanel</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="logging"><a class="link" href="#logging">3.11. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.11, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.12, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -1496,7 +1626,7 @@ The number of successful inserts and duplicated will be returned to display afte
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.11. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.12. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -1946,7 +2076,12 @@ b. Require developers to download those libraries manually (this creates extra w
 <p>Avoid contact duplication, so the user has a clean and well-maintained address book.</p>
 </li>
 <li>
-<p>Provide suggested locations and timings for events or meetings based on participants’ locations and timetable. This eases for the user the process of asking people for available timings / places to meet, by automating it.</p>
+<p>Show location of a person&#8217;s faculty visually, so that it is easier for user to see the location
+(and can even use the embedded Google Maps to show walking directions).</p>
+</li>
+<li>
+<p>Provide suggested locations for events or meetings to prevent the need for the user to spend energy thinking
+about where the group can meet by providing a list of locations that can be considered.</p>
 </li>
 <li>
 <p>Notifications to alert the user to favourited events</p>
@@ -2314,81 +2449,7 @@ b. Require developers to download those libraries manually (this creates extra w
 </li>
 </ul>
 </div>
-<h3 id="uc3-create-new-group" class="discrete">UC3: Create new group</h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User requests to add new group of persons</p>
-</li>
-<li>
-<p>System creates a new group with that name and displays the newly created group</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Extensions</strong></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>1a. The input information is invalid.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>1a1. System shows an error message.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<h3 id="uc4-view-contacts-for-a-group" class="discrete">UC4: View contacts for a group</h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User requests to view contacts for a particular group</p>
-</li>
-<li>
-<p>System displays all contacts in that group</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Extensions</strong></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>1a. The group name is invalid.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>1a1. System shows an error message.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<h3 id="uc5-add-events" class="discrete">UC5: Add events</h3>
+<h3 id="uc3-add-events" class="discrete">UC3: Add events</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2422,7 +2483,7 @@ b. Require developers to download those libraries manually (this creates extra w
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
-<h3 id="uc7-view-all-events" class="discrete">UC7: View all events</h3>
+<h3 id="uc4-view-all-events" class="discrete">UC4: View all events</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2459,7 +2520,7 @@ b. Require developers to download those libraries manually (this creates extra w
 </li>
 </ul>
 </div>
-<h3 id="uc8-delete-an-event" class="discrete">UC8: Delete an event</h3>
+<h3 id="uc5-delete-an-event" class="discrete">UC5: Delete an event</h3>
 <div class="paragraph">
 <p>Guarantees: Only the selected event will be deleted from the existing list.</p>
 </div>
@@ -2522,23 +2583,43 @@ b. Require developers to download those libraries manually (this creates extra w
 </li>
 </ol>
 </div>
-<h3 id="uc7-find-common-event-location" class="discrete">UC7: Find common event location</h3>
+<h3 id="uc7-show-contact-s-faculty-location-visually" class="discrete">UC7: Show contact&#8217;s faculty location visually</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User selects the event that he/she wants to find the common event location for.</p>
+<p>User selects a person that he/she wants to have their faculty location displayed on Google Maps.</p>
 </li>
 <li>
-<p>System performs API calls with Google Maps API to generate the most central location for all members.</p>
+<p>System makes Google Maps Embed API calls to display this location.</p>
 </li>
 <li>
-<p>User accepts or rejects the generated location.</p>
+<p>System switches to the location display tab automatically to show the result.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+<h3 id="uc8-generate-possible-event-location" class="discrete">UC8: Generate possible event location</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User selects the event (using name, date and start time) that he/she wants to find an event location for.</p>
 </li>
 <li>
-<p>System sets event location.</p>
+<p>System randomly generates a meeting location from those stored and displays it to user in location display tab using Google Maps Embed API.</p>
+</li>
+<li>
+<p>User considers the location and deems it to be acceptable or not.</p>
+</li>
+<li>
+<p>System indicates in status message what course of action to take from here.</p>
 </li>
 </ol>
 </div>
@@ -2548,21 +2629,27 @@ b. Require developers to download those libraries manually (this creates extra w
 <div class="ulist">
 <ul>
 <li>
-<p>3a. User rejects the generated location.</p>
+<p>4a. User accepts the generated location.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>3a1. System gives user the option to state his/her preferred location and use case resumes from step 4.</p>
+<p>4a1. User uses the editEventLocation command (as indicated in the status message) to edit event location with the one generated.</p>
 </li>
 <li>
-<p>3a2. If user does not state location, no common event location is set and use case ends.</p>
+<p>4a2. Handling of the editing of event location is taken care of by editEventLocation command.</p>
 </li>
-</ul>
+<li>
+<p>4a3. If user does not like the generated location, user does not have to do anything and continues using the application according to what he/she wants to do.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
 </div>
 </li>
 </ul>
 </div>
-<h3 id="uc8-import-contacts" class="discrete">UC8: Import contacts</h3>
+</li>
+</ul>
+</div>
+<h3 id="uc9-import-contacts" class="discrete">UC9: Import contacts</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2729,7 +2816,7 @@ These instructions only provide a starting point for testers to work on; testers
 </li>
 <li>
 <p>Double-click the jar file<br>
-Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.</p>
+Expected: Shows the GUI with a set of sample contacts. The application will launch in full screen.</p>
 </li>
 </ol>
 </div>
@@ -2739,7 +2826,7 @@ Expected: Shows the GUI with a set of sample contacts. The window size may not b
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Resize the window to an optimum size. Move the window to a different location. Close the window.</p>
+<p>Resize the window to a size of your preference. Move the window to a different location. Close the window.</p>
 </li>
 <li>
 <p>Re-launch the app by double-clicking the jar file.<br>
@@ -2749,9 +2836,6 @@ Expected: The most recent window size and location is retained.</p>
 </div>
 </li>
 </ol>
-</div>
-<div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
 </div>
 </div>
 <div class="sect2">
@@ -2774,7 +2858,7 @@ Expected: First contact is deleted from the list. Details of the deleted contact
 Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.</p>
 </li>
 <li>
-<p>Other incorrect delete commands to try: <code>delete</code>, <code>delete x</code> (where x is larger than the list size) <em>{give more}</em><br>
+<p>Other incorrect delete commands to try: <code>delete</code>, <code>delete x</code> (where x is larger than the list size)<br>
 Expected: Similar to previous.</p>
 </li>
 </ol>
@@ -2782,12 +2866,66 @@ Expected: Similar to previous.</p>
 </li>
 </ol>
 </div>
-<div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
+</div>
+<div class="sect2">
+<h3 id="showing-a-person-s-faculty"><a class="link" href="#showing-a-person-s-faculty">F.3. Showing a person&#8217;s faculty</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Showing a person&#8217;s faculty visually while all persons are listed</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: List all persons using the <code>list</code> command. Multiple persons in the list.</p>
+</li>
+<li>
+<p>Test case: <code>showLocation 1</code><br>
+Expected: First contact&#8217;s faculty location is displayed visually. Status message indicates that selected person&#8217;s faculty location is being displayed.</p>
+</li>
+<li>
+<p>Test case: <code>showLocation 0</code><br>
+Expected: No contact&#8217;s location is displayed. Status message indicates that command is incorrect and shows proper usage.</p>
+</li>
+<li>
+<p>Other incorrect faculty location display commands: <code>showLocation</code>, <code>showLocation x</code> (where x is larger than the list size).</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-data"><a class="link" href="#saving-data">F.3. Saving data</a></h3>
+<h3 id="generating-a-possible-meeting-location"><a class="link" href="#generating-a-possible-meeting-location">F.4. Generating a possible meeting location</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Generating a possible meeting location for an event</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Event must already exist inside the current list of events stored.</p>
+</li>
+<li>
+<p>Test case: <code>generateLocation n/Meeting d/2018-04-01 st/1400</code><br>
+Expected: A random meeting location (Kent Ridge MRT, YIH, Coffee Roasters, Humble Origins, i3, The Deck or The Terrace) is generated and displayed.
+Status message indicates that meeting location is being generated and what to do if meeting location is acceptable.</p>
+</li>
+<li>
+<p>Test case: <code>generateLocation n/Meeting</code><br>
+Expected: No possible meeting location is displayed. Status message indicates that command is incorrect and shows proper usage.</p>
+</li>
+<li>
+<p>Other incorrect faculty location display commands: <code>generateLocation</code>, <code>generateLocation st/1400</code>, <code>generateLocation d/2018-04-01</code></p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="saving-data"><a class="link" href="#saving-data">F.5. Saving data</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2802,9 +2940,6 @@ Expected: Similar to previous.</p>
 </li>
 </ol>
 </div>
-<div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
 </div>
 </div>
-</div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-07 05:37:32 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-09 03:59:35 UTC</div></div></div></body></html>
