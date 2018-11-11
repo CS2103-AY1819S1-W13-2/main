@@ -26,17 +26,19 @@
 <li><a href="#redoing-the-previously-undone-command-code-redo-code-alias-code-r-code">3.11. Redoing the previously undone command : <code>redo</code>, alias <code>r</code></a></li>
 <li><a href="#show-faculty-location-code-showlocation-code">3.12. Show Faculty Location : <code>showLocation</code></a></li>
 <li><a href="#suggested-location-code-generatelocation-code">3.13. Suggested Location : <code>generateLocation</code></a></li>
-<li><a href="#adding-an-event-code-addevent-code">3.14. Adding an event: <code>addEvent</code></a></li>
-<li><a href="#addEventTag">3.15. Adding an event tag: <code>addEventTag</code></a></li>
-<li><a href="#deleting-an-event-code-deleteevent-code">3.16. Deleting an event: <code>deleteEvent</code></a></li>
-<li><a href="#list-all-events-code-listevent-code">3.17. List all events: <code>listEvent</code></a></li>
-<li><a href="#find-events-by-event-tags-code-findevent-code">3.18. Find events by event tags: <code>findEvent</code></a></li>
-<li><a href="#import-contacts-code-importcontacts-code-alias-code-ic-code">3.19. Import Contacts: <code>importContacts</code>, alias <code>ic</code></a></li>
-<li><a href="#notifications-code-notification-code">3.20. Notifications: <code>notification</code></a></li>
-<li><a href="#favourite-code-favourite-code">3.21. Favourite: <code>favourite</code></a></li>
-<li><a href="#clearing-all-entries-code-clear-code-alias-code-cls-code">3.22. Clearing all entries : <code>clear</code>, alias <code>cls</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code-alias-code-q-code">3.23. Exiting the program : <code>exit</code>, alias <code>q</code></a></li>
-<li><a href="#saving-the-data">3.24. Saving the data</a></li>
+<li><a href="#adding-an-event-code-addevent-code-alias-code-ae-code">3.14. Adding an event: <code>addEvent</code>, alias <code>ae</code></a></li>
+<li><a href="#seeEventContacts">3.15. Viewing an event&#8217;s contacts: <code>seeEventContacts</code>, alias <code>sec</code></a></li>
+<li><a href="#addEventTag">3.16. Adding an event tag: <code>addEventTag</code>, alias <code>aet</code></a></li>
+<li><a href="#deleting-an-event-code-deleteevent-code-alias-code-de-code">3.17. Deleting an event: <code>deleteEvent</code>, alias <code>de</code></a></li>
+<li><a href="#edit-event-address-code-editeventaddress-code-alias-code-eea-code">3.18. Edit event address: <code>editEventAddress</code>, alias <code>eea</code></a></li>
+<li><a href="#list-all-events-code-listevent-code-alias-code-lse-code">3.19. List all events: <code>listEvent</code>, alias <code>lse</code></a></li>
+<li><a href="#find-events-by-event-tags-code-findevent-code-alias-code-fe-code">3.20. Find events by event tags: <code>findEvent</code>, alias <code>fe</code></a></li>
+<li><a href="#import-contacts-code-importcontacts-code-alias-code-ic-code">3.21. Import Contacts: <code>importContacts</code>, alias <code>ic</code></a></li>
+<li><a href="#notifications-code-notification-code">3.22. Notifications: <code>notification</code></a></li>
+<li><a href="#favourite-code-favourite-code">3.23. Favourite: <code>favourite</code></a></li>
+<li><a href="#clearing-all-entries-code-clear-code-alias-code-cls-code">3.24. Clearing all entries : <code>clear</code>, alias <code>cls</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code-alias-code-q-code">3.25. Exiting the program : <code>exit</code>, alias <code>q</code></a></li>
+<li><a href="#saving-the-data">3.26. Saving the data</a></li>
 </ul>
 </li>
 <li><a href="#features-coming-up-in-v2-0">4. Features coming up in V2.0</a>
@@ -539,12 +541,12 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-an-event-code-addevent-code"><a class="link" href="#adding-an-event-code-addevent-code">3.14. Adding an event: <code>addEvent</code></a></h3>
+<h3 id="adding-an-event-code-addevent-code-alias-code-ae-code"><a class="link" href="#adding-an-event-code-addevent-code-alias-code-ae-code">3.14. Adding an event: <code>addEvent</code>, alias <code>ae</code></a></h3>
 <div class="paragraph">
 <p>Adds an event in the system with information specified by the user.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>addEvent n/EVENT_NAME dsc/EVENT_DESCRIPTION d/DATE(YYYY-MM-DD) st/START_TIME(HHMM) et/END_TIME(HHMM) a/ADDRESS [i/CONTACT_INDEX]&#8230;&#8203; [t/EVENT_TAG]&#8230;&#8203;</code></p>
+<p>Format: <code>addEvent n/EVENT_NAME dsc/EVENT_DESCRIPTION d/DATE(YYYY-MM-DD) st/START_TIME(HHMM) et/END_TIME(HHMM) a/EVENT_ADDRESS [i/CONTACT_INDEX]&#8230;&#8203; [t/EVENT_TAG]&#8230;&#8203;</code></p>
 </div>
 <div class="paragraph">
 <p>The user can input values for the following fields when adding an event:<br></p>
@@ -567,7 +569,7 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 <p>Event end time<br></p>
 </li>
 <li>
-<p>Address of event<br></p>
+<p>Event address<br></p>
 </li>
 <li>
 <p>Contact Index / Indices<br></p>
@@ -578,7 +580,7 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </ul>
 </div>
 <div class="paragraph">
-<p>Note that each of these fields, except for contact indices and event type, are mandatory, and has to be supplied by the user
+<p>Note that each of these fields, except for address, contact indices and event type, are mandatory, and has to be supplied by the user
 before the event can be successfully added into the system.
 In addition, note the following constraints for the input values.</p>
 </div>
@@ -611,6 +613,9 @@ e.g. <code>addEvent n/Doctor Appointment dsc/Consultation d/2018-10-14 st/1030 e
 <li>
 <p>Event type has to be one of the existing tags in the EventsPlus+. If an event tag does not exist
 in EventsPlus+, it has to be added in before creating the event with the new event tag.</p>
+</li>
+<li>
+<p>If no event address is supplied by the user, "TBD" will be set in place of the address.</p>
 </li>
 </ul>
 </div>
@@ -650,7 +655,8 @@ and are displayed according to their date, in decreasing date order.
 Within each date, the events are ordered from earliest to latest.</p>
 </div>
 <div class="paragraph">
-<p>After the user executes the command, a message indicating successful execution of the command will be displayed.
+<p>After the user executes the command <code>addEvent n/Doctor Appointment dsc/Consultation d/2018-10-14 st/1030 et/1200 a/123, Clementi Rd, 1234665 i/1 t/Meeting t/Appointment</code>,
+a message indicating successful execution of the command will be displayed.
 The user will be automatically directed to the Events tab,
 where the newly added event (as highlighted in green below) will be shown in the tab.</p>
 </div>
@@ -659,9 +665,123 @@ where the newly added event (as highlighted in green below) will be shown in the
 <img src="images/add-event_new-event.PNG" alt="Adding an event">
 </div>
 </div>
+<div class="paragraph">
+<p>If no address is supplied, "TBD" will be set in place of the address field. For instance, upon execution of the command
+<code>addEvent n/Doctor Appointment dsc/Consultation d/2018-10-14 st/1030 et/1200</code>, the newly added event is as highlighted below.
+The address field is set to "TBD".</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/add-event-no-address.PNG" alt="Adding an event without an address">
+</div>
+</div>
 </div>
 <div class="sect2">
-<h3 id="addEventTag"><a class="link" href="#addEventTag">3.15. Adding an event tag: <code>addEventTag</code></a></h3>
+<h3 id="seeEventContacts"><a class="link" href="#seeEventContacts">3.15. Viewing an event&#8217;s contacts: <code>seeEventContacts</code>, alias <code>sec</code></a></h3>
+<div class="paragraph">
+<p>Shows an event&#8217;s contacts in the persons list. The information displayed in aligned with that in the UI
+when hovering over the event contact.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>seeEventContacts d/DATE(YYYY-MM-DD) i/EVENT_INDEX</code></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Event dates should be in the format YYYY-MM-DD</p>
+</li>
+<li>
+<p>Event index is based on the displayed index of each event <strong>within each date</strong> in the displayed list (see example below).<br>
+e.g. In the screenshot below, the event named "Meeting" is the 1st event on the date 2018-04-01,
+hence the command <code>seeEventContacts d/2018-04-01 i/1</code> will refer to this event.<br>
+The event named "Lecture" is the 2nd event on the date 2018-10-18,
+hence the command <code>seeEventContacts d/2018-10-18 i/2</code> will refer to this event.</p>
+</li>
+<li>
+<p>When a person is deleted or no longer exists in the system, he/she will not appear in the displayed persons list.
+Also, when hovering over the event contact in the UI, a message indicating that this person no longer exists in EventsPlus+ is displayed.</p>
+</li>
+<li>
+<p>If a person has been edited such that it still has the same identity as the original person added as an event contact into
+the event, the updated details (which is the latest information of the edited person) is shown, both in the persons list
+and when hovering over the event contact.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>seeEventContacts d/2018-04-01 i/1</code></p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/see-event-contacts-1.PNG" alt="Event contact display">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>edit 1 p/12345678</code><br>
+<code>seeEventContacts d/2018-04-01 i/1</code>
+The phone number of the person is edited, but is still the same person as the originally-added event contact.
+Hence, the system will show the edited event contact.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/see-event-contacts-2.PNG" alt="Event contact display after edit">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>edit 1 n/Alex Lim</code><br>
+<code>seeEventContacts d/2018-04-01 i/1</code>
+The edited is a different person from the originally-added event contact.
+There is no existing person in the system who is the same as the originally-added event contact.
+No persons are shown.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/see-event-contacts-3.PNG" alt="Event contact display after edit">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>delete 1</code><br>
+ <code>seeEventContacts d/2018-04-01 i/1</code>
+As <code>Alex</code> has been deleted, no persons are shown.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/see-event-contacts-4.PNG" alt="Event contact display after delete">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="addEventTag"><a class="link" href="#addEventTag">3.16. Adding an event tag: <code>addEventTag</code>, alias <code>aet</code></a></h3>
 <div class="paragraph">
 <p>Adds an event tag specified by the user into the system.</p>
 </div>
@@ -712,7 +832,7 @@ The newly added tags are highlighted in green below.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-an-event-code-deleteevent-code"><a class="link" href="#deleting-an-event-code-deleteevent-code">3.16. Deleting an event: <code>deleteEvent</code></a></h3>
+<h3 id="deleting-an-event-code-deleteevent-code-alias-code-de-code"><a class="link" href="#deleting-an-event-code-deleteevent-code-alias-code-de-code">3.17. Deleting an event: <code>deleteEvent</code>, alias <code>de</code></a></h3>
 <div class="paragraph">
 <p>Adds an event in the system with information specified by the user.</p>
 </div>
@@ -776,14 +896,77 @@ hence the command <code>deleteEvent d/2018-10-18 i/2</code> will delete this eve
 </div>
 </div>
 <div class="sect2">
-<h3 id="list-all-events-code-listevent-code"><a class="link" href="#list-all-events-code-listevent-code">3.17. List all events: <code>listEvent</code></a></h3>
+<h3 id="edit-event-address-code-editeventaddress-code-alias-code-eea-code"><a class="link" href="#edit-event-address-code-editeventaddress-code-alias-code-eea-code">3.18. Edit event address: <code>editEventAddress</code>, alias <code>eea</code></a></h3>
+<div class="paragraph">
+<p>Edits the address of the specified event in the address book.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>editEventAddress d/DATE(YYYY-MM-DD) i/EVENT_INDEX a/EVENT_ADDRESS</code></p>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>editEventAddress d/2018-04-01 i/1 a/NUS SoC</code></p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Event dates should be in the format YYYY-MM-DD</p>
+</li>
+<li>
+<p>Event index is based on the displayed index of each event <strong>within each date</strong> in the displayed list (see example below).<br>
+e.g. In the screenshot below, the event named "Meeting" is the 1st event on the date 2018-04-01,
+hence the command <code>deleteEvent d/2018-04-01 i/1</code> will delete this event.<br>
+The event named "Lecture" is the 2nd event on the date 2018-10-18,
+hence the command <code>deleteEvent d/2018-10-18 i/2</code> will delete this event.</p>
+</li>
+<li>
+<p>the EVENT_ADDRESS field is mandatory</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Before command execution</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/edit-address-before.PNG" alt="Editing an event address">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>After command execution</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/edit-address-after.PNG" alt="Editing an event address">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="list-all-events-code-listevent-code-alias-code-lse-code"><a class="link" href="#list-all-events-code-listevent-code-alias-code-lse-code">3.19. List all events: <code>listEvent</code>, alias <code>lse</code></a></h3>
 <div class="paragraph">
 <p>Shows a list of all events in the address book.<br>
 Format: <code>listEvent</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="find-events-by-event-tags-code-findevent-code"><a class="link" href="#find-events-by-event-tags-code-findevent-code">3.18. Find events by event tags: <code>findEvent</code></a></h3>
+<h3 id="find-events-by-event-tags-code-findevent-code-alias-code-fe-code"><a class="link" href="#find-events-by-event-tags-code-findevent-code-alias-code-fe-code">3.20. Find events by event tags: <code>findEvent</code>, alias <code>fe</code></a></h3>
 <div class="paragraph">
 <p>Shows a list of all events in the address book which are tagged as the specified tags in the command.
 Event tags are case-insensitive, as described in the <a href="#addEventTag">addEventTag</a> section.<br>
@@ -834,7 +1017,7 @@ Shows all the events tagged as <code>lecture</code> or <code>class</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="import-contacts-code-importcontacts-code-alias-code-ic-code"><a class="link" href="#import-contacts-code-importcontacts-code-alias-code-ic-code">3.19. Import Contacts: <code>importContacts</code>, alias <code>ic</code></a></h3>
+<h3 id="import-contacts-code-importcontacts-code-alias-code-ic-code"><a class="link" href="#import-contacts-code-importcontacts-code-alias-code-ic-code">3.21. Import Contacts: <code>importContacts</code>, alias <code>ic</code></a></h3>
 <div class="paragraph">
 <p>Import contacts from a specified csv file.<br>
 CSV file has to be exported from google contacts as Google CSV.<br></p>
@@ -884,7 +1067,7 @@ Imports all contacts from root/Downloads/google.csv into application address boo
 </div>
 </div>
 <div class="sect2">
-<h3 id="notifications-code-notification-code"><a class="link" href="#notifications-code-notification-code">3.20. Notifications: <code>notification</code></a></h3>
+<h3 id="notifications-code-notification-code"><a class="link" href="#notifications-code-notification-code">3.22. Notifications: <code>notification</code></a></h3>
 <div class="paragraph">
 <p>Allow users to enable/disable notifications which appears upon application statrup. Notification is enabled by default.</p>
 </div>
@@ -903,7 +1086,7 @@ Imports all contacts from root/Downloads/google.csv into application address boo
 </div>
 </div>
 <div class="sect2">
-<h3 id="favourite-code-favourite-code"><a class="link" href="#favourite-code-favourite-code">3.21. Favourite: <code>favourite</code></a></h3>
+<h3 id="favourite-code-favourite-code"><a class="link" href="#favourite-code-favourite-code">3.23. Favourite: <code>favourite</code></a></h3>
 <div class="paragraph">
 <p>Allow users to favourite a upcoming events based on most recently displayed events list. Favourite is null by default.</p>
 </div>
@@ -922,21 +1105,21 @@ Imports all contacts from root/Downloads/google.csv into application address boo
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code-alias-code-cls-code"><a class="link" href="#clearing-all-entries-code-clear-code-alias-code-cls-code">3.22. Clearing all entries : <code>clear</code>, alias <code>cls</code></a></h3>
+<h3 id="clearing-all-entries-code-clear-code-alias-code-cls-code"><a class="link" href="#clearing-all-entries-code-clear-code-alias-code-cls-code">3.24. Clearing all entries : <code>clear</code>, alias <code>cls</code></a></h3>
 <div class="paragraph">
 <p>Clears all entries from the address book.<br>
 Format: <code>clear</code> or <code>cls</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code-alias-code-q-code"><a class="link" href="#exiting-the-program-code-exit-code-alias-code-q-code">3.23. Exiting the program : <code>exit</code>, alias <code>q</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code-alias-code-q-code"><a class="link" href="#exiting-the-program-code-exit-code-alias-code-q-code">3.25. Exiting the program : <code>exit</code>, alias <code>q</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.<br>
 Format: <code>exit</code> or <code>q</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.24. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.26. Saving the data</a></h3>
 <div class="paragraph">
 <p>Address book data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
@@ -1277,90 +1460,136 @@ Sends the 2nd, 3rd and 4th person to 1st person in the (same) list.</p>
 <div class="sect1">
 <h2 id="command-summary"><a class="link" href="#command-summary">6. Command Summary</a></h2>
 <div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Add</strong> : <code>add n/NAME p/PHONE_NUMBER&#8230;&#8203; e/EMAIL a/ADDRESS [t/TAG] f/FACULTY `<br>
-e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague f/FOS</code></p>
-</li>
-<li>
-<p><strong>Clear</strong> : <code>clear</code></p>
-</li>
-<li>
-<p><strong>Delete</strong> : <code>delete INDEX</code><br>
-e.g. <code>delete 3</code></p>
-</li>
-<li>
-<p><strong>Edit</strong> : <code>edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code><br>
-e.g. <code>edit 2 n/James Lee e/jameslee@example.com</code></p>
-</li>
-<li>
-<p><strong>Find</strong> : <code>find KEYWORD [MORE_KEYWORDS]</code><br>
-e.g. <code>find James Jake</code></p>
-</li>
-<li>
-<p><strong>List</strong> : <code>list</code></p>
-</li>
-<li>
-<p><strong>Help</strong> : <code>help</code></p>
-</li>
-<li>
-<p><strong>Select</strong> : <code>select INDEX</code><br>
-e.g.<code>select 2</code></p>
-</li>
-<li>
-<p><strong>History</strong> : <code>history</code></p>
-</li>
-<li>
-<p><strong>Undo</strong> : <code>undo</code></p>
-</li>
-<li>
-<p><strong>Redo</strong> : <code>redo</code></p>
-</li>
-</ul>
+<table class="tableblock frame-all grid-all" style="width: 70%;">
+<colgroup>
+<col style="width: 21.875%;">
+<col style="width: 39.0625%;">
+<col style="width: 39.0625%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Command</th>
+<th class="tableblock halign-left valign-top">Format</th>
+<th class="tableblock halign-left valign-top">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Add Person</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>add n/NAME p/PHONE_NUMBER&#8230;&#8203; e/EMAIL a/ADDRESS [t/TAG] f/FACULTY</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague f/FOS</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Clear Address Book</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>clear</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Delete Person</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>delete INDEX</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>delete 3</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Edit Person</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>edit 2 n/James Lee e/jameslee@example.com</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Find Persons</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>find KEYWORD [MORE_KEYWORDS]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>find James Jake</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>List Persons</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>list</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Select Person</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>select INDEX</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>select 2</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Show Faculty Location visually</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>showLocation INDEX</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>showLocation 5</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Suggest Location</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>generateLocation n/EVENT_NAME d/EVENT_DATE st/EVENT_START_TIME</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>generateLocation n/First Meeting d/2018-01-14 st/1330</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Add Event</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>addEvent n/EVENT_NAME dsc/EVENT_DESCRIPTION d/DATE(YYYY-MM-DD) st/START_TIME(HHMM) et/END_TIME(HHMM) [a/EVENT_ADDRESS] [i/CONTACT_INDEX]&#8230;&#8203; [t/EVENT_TAG]&#8230;&#8203;</code><br></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>addEvent n/Doctor Appointment dsc/Consultation d/2018-10-14 st/1030 et/1200 a/123, Clementi Rd, 1234665 i/1 t/Meeting t/Appointment</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>View an Event&#8217;s Contacts</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>seeEventContacts d/DATE(YYYY-MM-DD) i/EVENT_INDEX</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>seeEventContacts d/2018-10-18 i/1</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Delete Event</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>deleteEvent d/DATE(YYYY-MM-DD) i/EVENT_INDEX</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>deleteEvent d/2018-10-18 i/1</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Edit Event Address</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>editEventAddress d/DATE(YYYY-MM-DD) i/EVENT_INDEX a/EVENT_ADDRESS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>editEventAddress d/2018-04-01 i/1 a/NUS SoC</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Add Event Tag</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>addEventTag EVENT_TAG [t/EVENT_TAG&#8230;&#8203;]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>addEventTag t/Lecture t/Dinner</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>List Events</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>listEvent</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Find Events by Event Tag(s)</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>findEvent EVENT_TAG [EVENT_TAG&#8230;&#8203;]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>findEvent Class lecture</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Import Contacts</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>importContacts file/FILEPATH</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>importContacts file/~/Downloads/contacts1.csv</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Disable and Enable Notification</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>notification enable/disable</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>notification disable</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Favourite Event</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>favourite d/EVENT_DATE i/EVENT_INDEX</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>favourite d/2018-04-01 i/1</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Help</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>help</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>History</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>history</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Undo</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>undo</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Redo</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>redo</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Show Faculty Location visually</strong> : <code>showLocation INDEX</code><br>
-e.g. <code>showLocation 5</code></p>
-</li>
-<li>
-<p><strong>Suggest Location</strong> : <code>generateLocation n/EVENT_NAME d/EVENT_DATE st/EVENT_START_TIME</code><br>
-e.g. <code>generateLocation n/First Meeting d/2018-01-14 st/1330</code></p>
-</li>
-<li>
-<p><strong>Add Event</strong> : <code>addEvent n/EVENT_NAME dsc/EVENT_DESCRIPTION d/DATE(YYYY-MM-DD) st/START_TIME(HHMM) et/END_TIME(HHMM) a/ADDRESS [i/CONTACT_INDEX]&#8230;&#8203; [t/EVENT_TAG]&#8230;&#8203;</code><br>
-e.g. <code>addEvent n/Doctor Appointment dsc/Consultation d/2018-10-14 st/1030 et/1200 a/123, Clementi Rd, 1234665 i/1 t/Meeting t/Appointment</code></p>
-</li>
-<li>
-<p><strong>Delete Event</strong> : <code>deleteEvent d/DATE(YYYY-MM-DD) i/EVENT_INDEX</code><br>
-e.g. <code>deleteEvent d/2018-10-18 i/1</code></p>
-</li>
-<li>
-<p><strong>Add Event Tag</strong>: <code>addEventTag [t/EVENT_TAG&#8230;&#8203;]</code><br>
-e.g. <code>addEventTag t/Lecture t/Dinner</code></p>
-</li>
-<li>
-<p><strong>List Events</strong> : <code>listEvent</code><br></p>
-</li>
-<li>
-<p><strong>Find Events by Event Tag(s)</strong> <code>findEvent EVENT_TAG [EVENT_TAG&#8230;&#8203;]</code><br>
-e.g. <code>findEvent Class lecture</code></p>
-</li>
-<li>
-<p><strong>Import Contacts</strong> : <code>importContacts file/FILEPATH</code><br>
-e.g. <code>importContacts file/~/Downloads/contacts1.csv</code></p>
-</li>
-<li>
-<p><strong>Disable and Enable Notification</strong> : <code>notification enable/disable</code><br>
-e.g. <code>notification disable</code></p>
-</li>
-<li>
-<p><strong>Favourite Event</strong> : <code>favourite d/EVENT_DATE i/EVENT_INDEX</code><br>
-e.g. <code>favourite d/2018-04-01 i/1</code></p>
-</li>
-</ul>
-</div>
-</div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 16:13:13 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 16:30:21 UTC</div></div></div></body></html>

@@ -24,11 +24,14 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Major enhancement</strong>: added <strong>the ability to add/delete events</strong></p>
+<p><strong>Code contributed</strong>: [<a href="https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&amp;search=kaitingpeck">RepoSense</a>]</p>
+</li>
+<li>
+<p><strong>Major enhancement</strong>: added the <strong>Events feature</strong></p>
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: Allows the user to add and delete events with event tags and reference to existing contacts in EventsPlus+</p>
+<p>What it does: Allows the user to manage events with event tags and reference to existing contacts in EventsPlus+.</p>
 </li>
 <li>
 <p>Justification: Users should be able to use the application to manage his/her events, and should be able to incorporate
@@ -37,7 +40,7 @@ contacts in EventsPlus+ into events, since both are features of the application.
 <li>
 <p>Highlights: Users are able to view the crucial person information from events by hovering over the contact in the event,
 without searching for the person directly. Event tags are standardized based on a list of event tags displayed, which can
-be modified by the user.</p>
+be modified by the user. This feature sets the foundation for the inclusion of more event-related functionalities in future.</p>
 </li>
 </ul>
 </div>
@@ -47,7 +50,7 @@ be modified by the user.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>added <strong>the ability to add event tags</strong></p>
+<p>added <strong>the ability to add Event tags</strong></p>
 <div class="ulist">
 <ul>
 <li>
@@ -58,28 +61,19 @@ EventsPlus+.</p>
 <p>Justification: This is required standardization of events tagging in EventsPlus+</p>
 </li>
 <li>
-<p>Highlights: Event tags are shown in a flowpane at the top of the <strong>Events</strong> tab</p>
+<p>Highlights: Event tags are shown at the top of the <strong>Events</strong> tab and can be used for easy reference of all types of events
+in EventsPlus+.</p>
 </li>
 </ul>
 </div>
 </li>
-<li>
-<p>added <strong>the ability to find events by event tags</strong></p>
+</ul>
+</div>
+</li>
+</ul>
+</div>
 <div class="ulist">
 <ul>
-<li>
-<p>What it does: Allows the user to find events based on their tags.</p>
-</li>
-<li>
-<p>Justification: Users should be able to search for a certain type of event quickly, instead of scanning through the whole list.</p>
-</li>
-<li>
-<p>Highlights: Since event tags are displayed on the top of the <strong>Events</strong> tab, users can refer to the list easily and
-find all events tagged as that particular type easily.</p>
-</li>
-</ul>
-</div>
-</li>
 <li>
 <p>added <strong>the ability to auto-complete commands</strong></p>
 <div class="ulist">
@@ -96,25 +90,35 @@ find all events tagged as that particular type easily.</p>
 </ul>
 </div>
 </li>
+<li>
+<p>re-organised the <code>BrowserPanel</code> under <code>TabPanel</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Justification: Sets the foundation for more tabs to be included in the application.</p>
+</li>
+<li>
+<p>Highlights: Tabs with different functionalities can be added as separate classes in the source code.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Other contributions</strong>:</p>
+</li>
 </ul>
 </div>
 </li>
-<li>
-<p><strong>Code contributed</strong>: [<a href="https://github.com">Functional code</a>] [<a href="https://github.com">Test code</a>] <em>{give links to collated code files}</em></p>
+</ul>
+</div>
 </li>
-<li>
-<p><strong>Other contributions</strong>:</p>
-<div class="ulist">
-<ul>
 <li>
 <p>Project management:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Set up Travis and Appveyor for the repository</p>
+<p>Set up Travis, Appveyor and auto-publishing of documentation</p>
 </li>
 <li>
-<p>Managed releases <code>v1.2</code> and <code>v1.4.1</code> (2 releases) on GitHub</p>
+<p>Managed releases <code>v1.2</code> and <code>v1.4.1</code> on GitHub</p>
 </li>
 </ul>
 </div>
@@ -124,23 +128,21 @@ find all events tagged as that particular type easily.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Added the AddEvent feature and tests (Pull requests <a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/60">#60</a>,
+<p>Added the add event/delete event/view event contacts/edit event address functionalities and tests (Pull requests <a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/60">#60</a>,
 <a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/83">#83</a>,
 <a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/88">#88</a>,
 <a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/95">#95</a>,
 <a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/119">#119</a>,
 <a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/120">#120</a>,
+<a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/121">#121</a>,
 <a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/130">#130</a>,
-<a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/138">#138</a>)</p>
+<a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/138">#138</a>,
+<a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/177">#177</a>,
+<a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/177">#177</a>)</p>
 </li>
 <li>
-<p>Added the DeleteEvent feature and tests (Pull requests <a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/121">#121</a>)</p>
-</li>
-<li>
-<p>Added the AddEventTag feature and tests (Pull requests <a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/138">#138</a>)</p>
-</li>
-<li>
-<p>Added the FindEvent feature and tests (Pull requests <a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/175">#175</a>)</p>
+<p>Added the add event tag/find event functionalities and tests (Pull requests <a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/138">#138</a>,
+<a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/175">#175</a>)</p>
 </li>
 <li>
 <p>Added the command auto-completion feature (Pull requests <a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/174">#174</a>)</p>
@@ -159,17 +161,15 @@ find all events tagged as that particular type easily.</p>
 <p>Updated</p>
 </li>
 <li>
-<p>Updated documentation for the enhancements as above: (Pull requests  <a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/99">#99</a>,
+<p>Updated documentation for the enhancements as above: (Pull requests <a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/38">#38</a>,
+<a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/73">#73</a>,
+<a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/99">#99</a>,
 <a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/102">#102</a>,
 <a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/141">#141</a>,
 <a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/178">#178</a>)</p>
 </li>
 <li>
 <p>Created initial UI Mockup of the product (Pull requests <a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/38">#38</a>)</p>
-</li>
-<li>
-<p>Updated Developer Guide with use stories and some use cases (Pull requests <a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/38">#38</a>,
-<a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/73">#73</a>)</p>
 </li>
 </ul>
 </div>
@@ -185,12 +185,14 @@ find all events tagged as that particular type easily.</p>
 <p>Contributed to forum discussions (examples: <a href="https://github.com/nus-cs2103-AY1819S1/forum/issues/116">#116</a>)</p>
 </li>
 <li>
-<p>Reported bugs and suggestions for other teams in the class (examples:  <a href="https://github.com/CS2103-AY1819S1-W17-3/main/issues/186">1</a>,
-<a href="https://github.com/CS2103-AY1819S1-W17-3/main/issues/181">2</a>,
-<a href="https://github.com/CS2103-AY1819S1-W17-3/main/issues/184">3</a>)</p>
-</li>
-</ul>
-</div>
+<p>Reported bugs and suggestions for other teams in the class (examples:  <a href="https://github.com/CS2103-AY1819S1-W17-3/main/issues/177">1</a>,
+<a href="https://github.com/CS2103-AY1819S1-W17-3/main/issues/179">2</a>,
+<a href="https://github.com/CS2103-AY1819S1-W17-3/main/issues/181">3</a>,
+<a href="https://github.com/CS2103-AY1819S1-W17-3/main/issues/182">4</a>,
+<a href="https://github.com/CS2103-AY1819S1-W17-3/main/issues/183">5</a>,
+<a href="https://github.com/CS2103-AY1819S1-W17-3/main/issues/184">6</a>,
+<a href="https://github.com/CS2103-AY1819S1-W17-3/main/issues/185">7</a>,
+<a href="https://github.com/CS2103-AY1819S1-W17-3/main/issues/186">8</a>)</p>
 </li>
 </ul>
 </div>
@@ -213,12 +215,12 @@ find all events tagged as that particular type easily.</p>
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="adding-an-event-code-addevent-code"><a class="link" href="#adding-an-event-code-addevent-code">Adding an event: <code>addEvent</code></a></h3>
+<h3 id="adding-an-event-code-addevent-code-alias-code-ae-code"><a class="link" href="#adding-an-event-code-addevent-code-alias-code-ae-code">Adding an event: <code>addEvent</code>, alias <code>ae</code></a></h3>
 <div class="paragraph">
 <p>Adds an event in the system with information specified by the user.</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>addEvent n/EVENT_NAME dsc/EVENT_DESCRIPTION d/DATE(YYYY-MM-DD) st/START_TIME(HHMM) et/END_TIME(HHMM) a/ADDRESS [i/CONTACT_INDEX]&#8230;&#8203; [t/EVENT_TAG]&#8230;&#8203;</code></p>
+<p>Format: <code>addEvent n/EVENT_NAME dsc/EVENT_DESCRIPTION d/DATE(YYYY-MM-DD) st/START_TIME(HHMM) et/END_TIME(HHMM) a/EVENT_ADDRESS [i/CONTACT_INDEX]&#8230;&#8203; [t/EVENT_TAG]&#8230;&#8203;</code></p>
 </div>
 <div class="paragraph">
 <p>The user can input values for the following fields when adding an event:<br></p>
@@ -241,7 +243,7 @@ find all events tagged as that particular type easily.</p>
 <p>Event end time<br></p>
 </li>
 <li>
-<p>Address of event<br></p>
+<p>Event address<br></p>
 </li>
 <li>
 <p>Contact Index / Indices<br></p>
@@ -252,7 +254,7 @@ find all events tagged as that particular type easily.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>Note that each of these fields, except for contact indices and event type, are mandatory, and has to be supplied by the user
+<p>Note that each of these fields, except for address, contact indices and event type, are mandatory, and has to be supplied by the user
 before the event can be successfully added into the system.
 In addition, note the following constraints for the input values.</p>
 </div>
@@ -285,6 +287,9 @@ e.g. <code>addEvent n/Doctor Appointment dsc/Consultation d/2018-10-14 st/1030 e
 <li>
 <p>Event type has to be one of the existing tags in the EventsPlus+. If an event tag does not exist
 in EventsPlus+, it has to be added in before creating the event with the new event tag.</p>
+</li>
+<li>
+<p>If no event address is supplied by the user, "TBD" will be set in place of the address.</p>
 </li>
 </ul>
 </div>
@@ -324,7 +329,8 @@ and are displayed according to their date, in decreasing date order.
 Within each date, the events are ordered from earliest to latest.</p>
 </div>
 <div class="paragraph">
-<p>After the user executes the command, a message indicating successful execution of the command will be displayed.
+<p>After the user executes the command <code>addEvent n/Doctor Appointment dsc/Consultation d/2018-10-14 st/1030 et/1200 a/123, Clementi Rd, 1234665 i/1 t/Meeting t/Appointment</code>,
+a message indicating successful execution of the command will be displayed.
 The user will be automatically directed to the Events tab,
 where the newly added event (as highlighted in green below) will be shown in the tab.</p>
 </div>
@@ -333,60 +339,19 @@ where the newly added event (as highlighted in green below) will be shown in the
 <img src="../images/add-event_new-event.PNG" alt="Adding an event">
 </div>
 </div>
-</div>
-<div class="sect2">
-<h3 id="adding-an-event-tag-code-addeventtag-code"><a class="link" href="#adding-an-event-tag-code-addeventtag-code">Adding an event tag: <code>addEventTag</code></a></h3>
 <div class="paragraph">
-<p>Adds an event tag specified by the user into the system.</p>
-</div>
-<div class="paragraph">
-<p>Format: <code>addEventTag t/EVENT_TAG [t/EVENT_TAG&#8230;&#8203;]</code></p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Event tags are case-insensitive, and will always be converted into lowercase.
-i.e. <code>MEETING</code> and <code>meeting</code> are considered the same tag,
-and only <code>meeting</code> will be shown in EventsPlus+
-Executing <code>addEventTag t/MEETING t/meeting</code> will only result in the first tag being added.
-Executing <code>addEventTag t/MEETING</code> again will not be successful, as the tag already exists in the system.</p>
-</li>
-<li>
-<p>Event tags should only be alphanumeric (A-Z, a-z, 0-9) and hence should exclude any spaces, special characters or symbols such as '%', '*', '~'</p>
-</li>
-</ul>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Example:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>addEventTag t/Lecture t/Dinner</code><br>
-Adds the event tags into the system, if they do not already exist in the system.
-The newly added tags are highlighted in green below.</p>
-</li>
-</ul>
+<p>If no address is supplied, "TBD" will be set in place of the address field. For instance, upon execution of the command
+<code>addEvent n/Doctor Appointment dsc/Consultation d/2018-10-14 st/1030 et/1200</code>, the newly added event is as highlighted below.
+The address field is set to "TBD".</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/add-event-tag_new-event-tag.PNG" alt="Adding an event tag">
+<img src="../images/add-event-no-address.PNG" alt="Adding an event without an address">
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-an-event-code-deleteevent-code"><a class="link" href="#deleting-an-event-code-deleteevent-code">Deleting an event: <code>deleteEvent</code></a></h3>
+<h3 id="deleting-an-event-code-deleteevent-code-alias-code-de-code"><a class="link" href="#deleting-an-event-code-deleteevent-code-alias-code-de-code">Deleting an event: <code>deleteEvent</code>, alias <code>de</code></a></h3>
 <div class="paragraph">
 <p>Adds an event in the system with information specified by the user.</p>
 </div>
@@ -446,62 +411,6 @@ hence the command <code>deleteEvent d/2018-10-18 i/2</code> will delete this eve
 <div class="imageblock">
 <div class="content">
 <img src="../images/delete-event-after.PNG" alt="Deleting an event">
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="list-all-events-code-listevent-code"><a class="link" href="#list-all-events-code-listevent-code">List all events: <code>listEvent</code></a></h3>
-<div class="paragraph">
-<p>Shows a list of all events in the address book.<br>
-Format: <code>listEvent</code>
-=== Find events by event tags: <code>findEvent</code></p>
-</div>
-<div class="paragraph">
-<p>Shows a list of all events in the address book which are tagged as the specified tags in the command.
-Event tags are case-insensitive, as described in the <a href="#addEventTag">addEventTag</a> section.<br>
-i.e. <code>MEETING</code> and <code>meeting</code> are regarded as the same tag.</p>
-</div>
-<div class="paragraph">
-<p>Format: <code>findEvent EVENT_TAG [EVENT_TAG&#8230;&#8203;]</code></p>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="paragraph">
-<p><strong>Before <code>findEvent</code> Execution</strong></p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/find-event-before.PNG" alt="Finding an event">
-</div>
-</div>
-<div class="paragraph">
-<p><strong>After <code>findEvent</code> Execution</strong></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>findEvent LECTURE</code><br>
-Shows all the events tagged as <code>lecture</code></p>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/find-event-lecture.PNG" alt="Finding an event">
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>findEvent Class lecture</code><br>
-Shows all the events tagged as <code>lecture</code> or <code>class</code></p>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/find-event-lecture-class.PNG" alt="Finding an event">
 </div>
 </div>
 </div>
@@ -566,7 +475,7 @@ The interaction between components is similar for the deletion of an event.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/add-event_logic-model.png" alt="Interactions between Logic and Model">
+<img src="../images/add-event_logic-model.png" alt="Interactions between Logic and Model" width="800">
 </div>
 </div>
 <div class="paragraph">
@@ -574,7 +483,7 @@ The interaction between components is similar for the deletion of an event.</p>
 Step 2. <code>AddressBookParser</code> calls <code>AddEventCommandParser</code>, which generates an <code>AddEventCommand</code> with an <code>Event</code> and <code>Set&lt;Index&gt;</code>. The latter specifies the contact indices to add into the event.<br>
 Step 3. <code>AddEventCommand</code> calls <code>Model#hasEvent</code>, <code>Model#hasClashingEvent</code>, <code>Model#hasEventTag</code> to check if the event information is valid<br>
 Step 4. <code>AddEventCommand</code> calls <code>Event#setEventContacts</code> to set the <code>Set&lt;Person&gt;</code> of event contacts (Each <code>Person</code> has to be in the existing address book records)<br>
-Step 5. <code>AddEventCommand</code> calls <code>Model#addEvent</code> after all checks have passed. The event is added into the system from the <code>Model</code> component.</p>
+Step 5. <code>AddEventCommand</code> calls <code>Model#addEvent</code> after all checks have passed. The event is added into the system from the <code>Model</code> component.<br></p>
 </div>
 <div class="paragraph">
 <p>For deletion of event(s), the flow is similar.
@@ -582,25 +491,38 @@ The sequence diagram for the deletion of event is shown below.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/delete-event_logic-model.png" alt="Deleting an event">
+<img src="../images/delete-event-condensed_logic-model.png" alt="Deleting an event" width="800">
 </div>
 </div>
 <div class="paragraph">
 <p>Step 1. User enters command to delete an event based on the event date and index (as displayed in the UI)<br>
 Step 2. <code>AddressBookParser</code> calls <code>DeleteEventCommandParser</code>, which generates an <code>DeleteEventCommand</code> with an <code>EventDate</code> and <code>Index</code>.<br>
-Step 3. <code>DeleteEventCommand</code> calls <code>Model#getFilteredEventListByDate</code> to retrieve the last shown event list.
-Step 4. <code>DeleteEventCommand</code> calls <code>getTargetDateList</code> to retrieve the list from which the event belongs to. <br>
-Step 5. <code>DeleteEventCommand</code> calls <code>getEventToDelete</code> to retrieve the event based on its index in the list from step 4.
-Step 6. The event is deleted from the system from the <code>Model</code> component.</p>
+Step 3. <code>DeleteEventCommand</code> <a href="#gettingAnEvent">gets the event</a>.
+Step 4. The event from step 3 is deleted from the system from the <code>Model</code> component.<br></p>
+</div>
+<div id="gettingAnEvent" class="paragraph">
+<p>Events are retrieved based on their date and index in the displayed events list, as shown in the diagram below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/get-event.png" alt="Getting an event">
+</div>
 </div>
 <div class="paragraph">
-<p>Upon adding/deletion of events in <code>Model</code>, <code>AddressBookChangedEvent</code> and <code>AddressBookEventChangedEvent</code> are triggered from the <code>Model</code> component.
+<p>For the case of <code>DeleteEventCommand</code>, we let <code>XYZCommand</code> be <code>DeleteEventCommand</code>.
+Step 1. <code>DeleteEventCommand</code> calls <code>Model#getFilteredEventListByDate</code> to retrieve the last shown event list.<br>
+Step 2. <code>DeleteEventCommand</code> calls <code>getTargetDateList</code> to retrieve the list from which the event belongs to. <br>
+Step 3. <code>DeleteEventCommand</code> calls <code>getEvent</code> to retrieve the event based on its index in the list from step 2.<br></p>
+</div>
+<div class="paragraph">
+<p>Upon adding/deletion of events in <code>Model</code>, <code>AddressBookChangedEvent</code>, <code>AddressBookEventChangedEvent</code> and <code>EventPanelDisplayChangedEvent</code>
+are triggered from the <code>Model</code> component.
 The raised events are handled by:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>UI</code>, which updates the displayed information, and</p>
+<p><code>UI</code>, which updates the displayed information and updates the active tab to the Events tab, and</p>
 </li>
 <li>
 <p><code>Storage</code>, which saves the information to an XML data file.</p>
@@ -612,7 +534,7 @@ The raised events are handled by:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/add-event-event-trigger.png" alt="Handling of triggered events">
+<img src="../images/add-event_event-trigger.png" alt="Handling of triggered events">
 </div>
 </div>
 </div>
@@ -661,7 +583,7 @@ we make use of a listener on the <code>filteredEvents</code> list in <code>Model
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/ui-display-ad.png" alt="Refresh of Tab Panel on Event Change">
+<img src="../images/ui-display-ad.png" alt="Refresh of Tab Panel on Event Change" width="800">
 </div>
 </div>
 <div class="ulist">
@@ -758,127 +680,7 @@ before adding an event with that tag.</p>
 </li>
 <li>
 <p><strong>Cons:</strong> The <code>addEvent</code> command will be performing two different actions - adding an event
-and adding an event tag. This may violate the Single Responsibility Principle (SRP) for the <code>AddEventCommand</code> class.
-=== Add Event Tags feature
-==== Current Implementation
-The list of event tags in the system is stored in a <code>UniqueTagList</code> in <code>Model</code>.
-This implementation requires all event <code>Tag</code> objects to be unique (using case-insensitive comparison)<br>
-All event tags are always shown, hence it is sufficient to
-to keep an <code>ObservableList&lt;Tag&gt;</code> in <code>ModelManager</code>, rather than a <code>FilteredList</code> which is used to store list of <code>Person</code> and <code>Event</code> objects.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>An event tag specified by the user is added in the system as depicted in the sequence diagram below.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/add-event-tag_logic-model.png" alt="Interactions between Logic and Model">
-</div>
-</div>
-<div class="paragraph">
-<p>Step 1. User enters command to add an event<br>
-Step 2. <code>AddressBookParser</code> calls <code>AddEventTagCommandParser</code>, which generates an <code>AddEventTagCommand</code> with a <code>Set</code> of <code>Tag</code> objects<br>
-Step 3. <code>AddEventTagCommand</code> calls <code>Model#hasEventTag</code> to check for duplicate tags already in the system<br>
-Step 4. <code>AddEventTagCommand</code> calls <code>Model#addEventTag</code> to add the new event <code>Tag</code> into <code>Model</code>.
-=== Command Auto-completion feature
-==== Current Implementation
-Command auto-completion uses a fixed list of all command words in EventsPlus+. Each time the user
-presses the <code>Tab</code> key, a check is run against the internal list of command words (including aliases)
-and the input is auto-completed to the nearest command word containing the current user input, if any.
-The following activity diagram outlines the typical usage of this feature.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/autocomplete-ad.png" alt="Auto-complete command activity diagram">
-</div>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="aspect-computing-the-nearest-valid-command-word"><a class="link" href="#aspect-computing-the-nearest-valid-command-word">Aspect: Computing the nearest valid command word</a></h4>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (current choice):</strong> Each time the <code>Tab</code> key is pressed,
-<code>String#startsWithPrefix</code> is used to check against the internal list for the nearest possible
-command word.</p>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Pros:</strong> The implementation is neater as most of the checking is done by <code>String#startsWithPrefix</code>.</p>
-</li>
-<li>
-<p><strong>Cons:</strong> The current input has to be checked against potentially every valid command word.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Store a <code>HashMap</code> with maps every possible prefix of every command word to the corresponding command word.
-Do a lookup in the <code>HashMap</code> using current user input as the key and return the value (command word) if any.</p>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Pros:</strong> Typically constant time lookup for each prefix in the <code>HashMap</code>.</p>
-</li>
-<li>
-<p><strong>Cons:</strong> More space required to store all the possible prefixes. Furthermore,
-if no such prefix is contained in the mapping, takes linear time with respect to size of the map.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 3</strong> Use a Prefix Tree (Trie) implementation, where the intermediate nodes are the prefixes and
-leaf nodes are the valid command words.</p>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Pros:</strong> Provides a balance between time and space complexity.</p>
-</li>
-<li>
-<p><strong>Cons:</strong> Potentially more complex implementation.
-=== Tab feature
-==== Current implementation
-<code>UI</code> component consists of a <code>TabPanel</code> which stores all the <code>Tab</code> objects in the <code>UI</code> as follows.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/tabPanel.png" alt="Tab Panel basic class diagram">
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (current choice):</strong> <code>TabPanel</code> to store all <code>Tab</code> objects.</p>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Pros:</strong> New tabs can be added easily as a class, and initialized in <code>TabPanel</code>.
-This abides by the SoC principle and each tab can be managed separately from the others.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Store the methods for each <code>Tab</code> in the same class <code>TabPanel</code>.
-Hence, all the tabs and their methods are contained in this class.</p>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Pros:</strong> Less code needed, especially if some tabs have similar or overlapping methods.</p>
-</li>
-<li>
-<p><strong>Cons:</strong> Does not abide by SoC and SRP principle, since this one class would have to change for many reasons.</p>
+and adding an event tag. This may violate the Single Responsibility Principle (SRP) for the <code>AddEventCommand</code> class.</p>
 </li>
 </ul>
 </div>
@@ -888,4 +690,5 @@ Hence, all the tabs and their methods are contained in this class.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 16:13:13 UTC</div></div></div></body></html>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 16:30:21 UTC</div></div></div></body></html>
