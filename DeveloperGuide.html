@@ -29,21 +29,22 @@
 </li>
 <li><a href="#implementation">3. Implementation</a>
 <ul class="sectlevel2">
-<li><a href="#select-an-existing-event-to-be-detailed-in-the-notification-if-notification-is-enabled">3.1. Select an existing event to be detailed in the notification if notification is enabled.</a></li>
-<li><a href="#enable-disable-notification-feature">3.2. Enable/Disable Notification feature</a></li>
-<li><a href="#undo-redo-feature">3.3. Undo/Redo feature</a></li>
-<li><a href="#AddDeleteEvents">3.4. Add/Delete Events feature</a></li>
-<li><a href="#seeEventContacts">3.5. See Event Contacts feature</a></li>
-<li><a href="#EditEventAddress">3.6. Edit Event Address feature</a></li>
-<li><a href="#EventTags">3.7. Add Event Tags feature</a></li>
-<li><a href="#filteringEvents">3.8. Filtering of Events</a></li>
-<li><a href="#Autocomplete">3.9. Command Auto-completion feature</a></li>
-<li><a href="#tab-feature">3.10. Tab feature</a></li>
-<li><a href="#import-contacts">3.11. Import Contacts</a></li>
-<li><a href="#show-person-s-faculty-location-visually">3.12. Show Person&#8217;s faculty location visually</a></li>
-<li><a href="#generate-a-random-meeting-location-for-event">3.13. Generate a random meeting location for event</a></li>
-<li><a href="#logging">3.14. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.15. Configuration</a></li>
+<li><a href="#toggles-the-ui-tab-to-the-tab-on-its-right">3.1. Toggles the UI tab to the tab on its right.</a></li>
+<li><a href="#select-an-existing-event-to-be-detailed-in-the-notification-if-notification-is-enabled">3.2. Select an existing event to be detailed in the notification if notification is enabled.</a></li>
+<li><a href="#enable-disable-notification-feature">3.3. Enable/Disable Notification feature</a></li>
+<li><a href="#undo-redo-feature">3.4. Undo/Redo feature</a></li>
+<li><a href="#AddDeleteEvents">3.5. Add/Delete Events feature</a></li>
+<li><a href="#seeEventContacts">3.6. See Event Contacts feature</a></li>
+<li><a href="#EditEventAddress">3.7. Edit Event Address feature</a></li>
+<li><a href="#EventTags">3.8. Add Event Tags feature</a></li>
+<li><a href="#filteringEvents">3.9. Filtering of Events</a></li>
+<li><a href="#Autocomplete">3.10. Command Auto-completion feature</a></li>
+<li><a href="#tab-feature">3.11. Tab feature</a></li>
+<li><a href="#import-contacts">3.12. Import Contacts</a></li>
+<li><a href="#show-person-s-faculty-location-visually">3.13. Show Person&#8217;s faculty location visually</a></li>
+<li><a href="#generate-a-random-meeting-location-for-event">3.14. Generate a random meeting location for event</a></li>
+<li><a href="#logging">3.15. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.16. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -573,9 +574,78 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <p>This section describes some noteworthy details on how certain features are implemented.</p>
 </div>
 <div class="sect2">
-<h3 id="select-an-existing-event-to-be-detailed-in-the-notification-if-notification-is-enabled"><a class="link" href="#select-an-existing-event-to-be-detailed-in-the-notification-if-notification-is-enabled">3.1. Select an existing event to be detailed in the notification if notification is enabled.</a></h3>
+<h3 id="toggles-the-ui-tab-to-the-tab-on-its-right"><a class="link" href="#toggles-the-ui-tab-to-the-tab-on-its-right">3.1. Toggles the UI tab to the tab on its right.</a></h3>
 <div class="sect3">
 <h4 id="current-implementation"><a class="link" href="#current-implementation">3.1.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>Toggle command raises a TabPanelSelectionChangedEvent event through the ModelManager.
+The tab panel is subscribed to this event and will loop the tabList and change the selected tab to its adjacent tab when the event is raised.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>logic#parser#ToggleCommandParser()</code>&#8201;&#8212;&#8201;creates a ToggleCommand object.</p>
+</li>
+<li>
+<p><code>logic#commands#ToggleCommand()</code>&#8201;&#8212;&#8201;raises a TabPanelSelectionChangedEvent through the ModelManager.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+ToggleCommand is not compatible with undo/redo since there is no writing of data to storage.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">3.1.2. Design Considerations</a></h4>
+
+</div>
+<div class="sect3">
+<h4 id="aspect-how-change-of-ui-tab-is-executed"><a class="link" href="#aspect-how-change-of-ui-tab-is-executed">3.1.3. Aspect: How change of UI tab is executed</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> TabPanel subscribe to an event which will be raised by ToggleCommand</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Convenient to implement.</p>
+</li>
+<li>
+<p>Cons: Creates a new object and a new handler method.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Pass TabPanel into the ToggleCommand and select the new tab from ToggleCommand</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Does not require new event to be raised.</p>
+</li>
+<li>
+<p>Cons: Increases coupling.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="select-an-existing-event-to-be-detailed-in-the-notification-if-notification-is-enabled"><a class="link" href="#select-an-existing-event-to-be-detailed-in-the-notification-if-notification-is-enabled">3.2. Select an existing event to be detailed in the notification if notification is enabled.</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">3.2.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>Details of favourite event (i.e. event name, date, day, time, details) stored as a String "Favourite" in preferences.json file.
 The favourite mechanism is implemented through the ModelManager.
@@ -618,11 +688,11 @@ The favourite command will update favouriteEvent regardless of whether the new f
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">3.1.2. Design Considerations</a></h4>
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.2. Design Considerations</a></h4>
 
 </div>
 <div class="sect3">
-<h4 id="aspect-how-favourite-is-updated"><a class="link" href="#aspect-how-favourite-is-updated">3.1.3. Aspect: How favourite is updated</a></h4>
+<h4 id="aspect-how-favourite-is-updated"><a class="link" href="#aspect-how-favourite-is-updated">3.2.3. Aspect: How favourite is updated</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -689,9 +759,9 @@ The favourite command will update favouriteEvent regardless of whether the new f
 </div>
 </div>
 <div class="sect2">
-<h3 id="enable-disable-notification-feature"><a class="link" href="#enable-disable-notification-feature">3.2. Enable/Disable Notification feature</a></h3>
+<h3 id="enable-disable-notification-feature"><a class="link" href="#enable-disable-notification-feature">3.3. Enable/Disable Notification feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">3.2.1. Current Implementation</a></h4>
+<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.3.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>Notification preference is stored in the preferences.json file.
 The notification mechanism is facilitated by Javafx.
@@ -736,7 +806,7 @@ The notification command will update the notification preference regardless of w
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.2. Design Considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.3.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-notification-preferences-is-updated"><a class="link" href="#aspect-how-notification-preferences-is-updated">Aspect: How notification preferences is updated</a></h5>
 <div class="ulist">
@@ -806,9 +876,9 @@ The notification command will update the notification preference regardless of w
 </div>
 </div>
 <div class="sect2">
-<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">3.3. Undo/Redo feature</a></h3>
+<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">3.4. Undo/Redo feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.3.1. Current Implementation</a></h4>
+<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.4.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The undo/redo mechanism is facilitated by <code>VersionedSystem</code>.
 It extends <code>System</code> with an undo/redo history, stored internally as an <code>SystemStateList</code> and <code>currentStatePointer</code>.
@@ -938,7 +1008,7 @@ If the <code>currentStatePointer</code> is at index <code>SystemStateList.size()
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.3.2. Design Considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.4.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-undo-redo-executes"><a class="link" href="#aspect-how-undo-redo-executes">Aspect: How undo &amp; redo executes</a></h5>
 <div class="ulist">
@@ -1008,9 +1078,9 @@ If the <code>currentStatePointer</code> is at index <code>SystemStateList.size()
 </div>
 </div>
 <div class="sect2">
-<h3 id="AddDeleteEvents"><a class="link" href="#AddDeleteEvents">3.4. Add/Delete Events feature</a></h3>
+<h3 id="AddDeleteEvents"><a class="link" href="#AddDeleteEvents">3.5. Add/Delete Events feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.4.1. Current Implementation</a></h4>
+<h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">3.5.1. Current Implementation</a></h4>
 <div class="sect4">
 <h5 id="structure-of-an-event"><a class="link" href="#structure-of-an-event">Structure of an Event</a></h5>
 <div class="paragraph">
@@ -1129,7 +1199,7 @@ we require <code>ModelManager</code> to be able to return such an <code>Observab
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.4.2. Design Considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.5.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-data-structure-to-support-the-ui-events-display"><a class="link" href="#aspect-data-structure-to-support-the-ui-events-display">Aspect: Data Structure to Support the UI Events Display</a></h5>
 <div class="ulist">
@@ -1267,9 +1337,9 @@ and adding an event tag. This may violate the Single Responsibility Principle (S
 </div>
 </div>
 <div class="sect2">
-<h3 id="seeEventContacts"><a class="link" href="#seeEventContacts">3.5. See Event Contacts feature</a></h3>
+<h3 id="seeEventContacts"><a class="link" href="#seeEventContacts">3.6. See Event Contacts feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">3.5.1. Current Implementation</a></h4>
+<h4 id="current-implementation-6"><a class="link" href="#current-implementation-6">3.6.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>To obtain an event&#8217;s contacts, comparisons are done using <code>Person#isSamePerson</code> to check if for each event contact, there exists a person in the system
 who is the same person as the contact. By the use of a <code>Predicate</code> with this logic, we then apply the filter on <code>filteredPersons</code> in <code>Model</code>.<br></p>
@@ -1292,7 +1362,7 @@ Step 5. <code>SeeEventContactsCommand</code> calls <code>Model#updateFilteredEve
 </div>
 </div>
 <div class="sect3">
-<h4 id="considerations"><a class="link" href="#considerations">3.5.2. Considerations</a></h4>
+<h4 id="considerations"><a class="link" href="#considerations">3.6.2. Considerations</a></h4>
 <div class="paragraph">
 <p>The displayed person list shown using this feature is aligned with the contact information displayed in the UI when hovering over the event contact.<br>
 Namely, both the displayed person list and information displayed in the UI are obtained by checking if there is a same person as the person originally
@@ -1323,9 +1393,9 @@ the user would see a message indicating that the person has been deleted from th
 </div>
 </div>
 <div class="sect2">
-<h3 id="EditEventAddress"><a class="link" href="#EditEventAddress">3.6. Edit Event Address feature</a></h3>
+<h3 id="EditEventAddress"><a class="link" href="#EditEventAddress">3.7. Edit Event Address feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-6"><a class="link" href="#current-implementation-6">3.6.1. Current Implementation</a></h4>
+<h4 id="current-implementation-7"><a class="link" href="#current-implementation-7">3.7.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>To edit an event&#8217;s existing address, the system first retrieves the event from the address book. This process is similar to that for
 deleting an event. A new <code>Event</code> object is created with the same details as the old <code>Event</code> object, but with the updated <code>EventAddress</code>.
@@ -1352,7 +1422,7 @@ Step 5. The old event is replaced with the new one in the system from the <code>
 </div>
 </div>
 <div class="sect3">
-<h4 id="considerations-2"><a class="link" href="#considerations-2">3.6.2. Considerations</a></h4>
+<h4 id="considerations-2"><a class="link" href="#considerations-2">3.7.2. Considerations</a></h4>
 <div class="paragraph">
 <p>When editing an event, there are several possible values that can be updated, including the event&#8217;s name, description, etc.
 However, this functionality is mainly catered to complement the <code>suggestLocation</code> functionality, whereby the user
@@ -1362,9 +1432,9 @@ edit the suggested location in afterwards.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="EventTags"><a class="link" href="#EventTags">3.7. Add Event Tags feature</a></h3>
+<h3 id="EventTags"><a class="link" href="#EventTags">3.8. Add Event Tags feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-7"><a class="link" href="#current-implementation-7">3.7.1. Current Implementation</a></h4>
+<h4 id="current-implementation-8"><a class="link" href="#current-implementation-8">3.8.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The list of event tags in the system is stored in a <code>UniqueTagList</code> in <code>Model</code>.
 This implementation requires all event <code>Tag</code> objects to be unique (using case-insensitive comparison)<br>
@@ -1388,11 +1458,11 @@ Step 4. <code>AddEventTagCommand</code> calls <code>Model#addEventTag</code> to 
 </div>
 </div>
 <div class="sect2">
-<h3 id="filteringEvents"><a class="link" href="#filteringEvents">3.8. Filtering of Events</a></h3>
+<h3 id="filteringEvents"><a class="link" href="#filteringEvents">3.9. Filtering of Events</a></h3>
 <div class="sect3">
-<h4 id="findEvent"><a class="link" href="#findEvent">3.8.1. Find Event (by tag) feature</a></h4>
+<h4 id="findEvent"><a class="link" href="#findEvent">3.9.1. Find Event (by tag) feature</a></h4>
 <div class="sect4">
-<h5 id="current-implementation-8"><a class="link" href="#current-implementation-8">Current Implementation</a></h5>
+<h5 id="current-implementation-9"><a class="link" href="#current-implementation-9">Current Implementation</a></h5>
 <div class="paragraph">
 <p>To find events by their tags, we make use of a <code>Predicate</code>. The <code>EventTagMatchesKeywordsPredicate</code> is used in filtering
 all events which have at least one tag matching at least one of the keywords provided by the user.<br></p>
@@ -1420,9 +1490,9 @@ The details of the event triggers are as follows.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="listEvent"><a class="link" href="#listEvent">3.8.2. Listing of all events</a></h4>
+<h4 id="listEvent"><a class="link" href="#listEvent">3.9.2. Listing of all events</a></h4>
 <div class="sect4">
-<h5 id="current-implementation-9"><a class="link" href="#current-implementation-9">Current Implementation</a></h5>
+<h5 id="current-implementation-10"><a class="link" href="#current-implementation-10">Current Implementation</a></h5>
 <div class="paragraph">
 <p>To list all events, we make use of a <code>Predicate</code> which is always true (the <code>PREDICATE_LIST_ALL_EVENTS</code> constant).</p>
 </div>
@@ -1442,9 +1512,9 @@ even if there is no change to data in the filtered list
 </div>
 </div>
 <div class="sect2">
-<h3 id="Autocomplete"><a class="link" href="#Autocomplete">3.9. Command Auto-completion feature</a></h3>
+<h3 id="Autocomplete"><a class="link" href="#Autocomplete">3.10. Command Auto-completion feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-10"><a class="link" href="#current-implementation-10">3.9.1. Current Implementation</a></h4>
+<h4 id="current-implementation-11"><a class="link" href="#current-implementation-11">3.10.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>Command auto-completion uses a fixed list of all command words in EventsPlus+. Each time the user
 presses the <code>Tab</code> key, a check is run against the internal list of command words (including aliases)
@@ -1458,7 +1528,7 @@ The following activity diagram outlines the typical usage of this feature.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="aspect-computing-the-nearest-valid-command-word"><a class="link" href="#aspect-computing-the-nearest-valid-command-word">3.9.2. Aspect: Computing the nearest valid command word</a></h4>
+<h4 id="aspect-computing-the-nearest-valid-command-word"><a class="link" href="#aspect-computing-the-nearest-valid-command-word">3.10.2. Aspect: Computing the nearest valid command word</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1510,9 +1580,9 @@ leaf nodes are the valid command words.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="tab-feature"><a class="link" href="#tab-feature">3.10. Tab feature</a></h3>
+<h3 id="tab-feature"><a class="link" href="#tab-feature">3.11. Tab feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-11"><a class="link" href="#current-implementation-11">3.10.1. Current implementation</a></h4>
+<h4 id="current-implementation-12"><a class="link" href="#current-implementation-12">3.11.1. Current implementation</a></h4>
 <div class="paragraph">
 <p><code>UI</code> component consists of a <code>TabPanel</code> which stores all the <code>Tab</code> objects in the <code>UI</code> as follows.</p>
 </div>
@@ -1553,9 +1623,9 @@ Hence, all the tabs and their methods are contained in this class.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="import-contacts"><a class="link" href="#import-contacts">3.11. Import Contacts</a></h3>
+<h3 id="import-contacts"><a class="link" href="#import-contacts">3.12. Import Contacts</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-12"><a class="link" href="#current-implementation-12">3.11.1. Current Implementation</a></h4>
+<h4 id="current-implementation-13"><a class="link" href="#current-implementation-13">3.12.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>When <code>FileReader</code> is created, it will read the provided CSV file, breaking the first line into Arrays of Strings.<br>
 <code>FileReader</code> then take note of the index of mandatory fields:</p>
@@ -1599,9 +1669,9 @@ The number of successful inserts will be displayed.<br></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="show-person-s-faculty-location-visually"><a class="link" href="#show-person-s-faculty-location-visually">3.12. Show Person&#8217;s faculty location visually</a></h3>
+<h3 id="show-person-s-faculty-location-visually"><a class="link" href="#show-person-s-faculty-location-visually">3.13. Show Person&#8217;s faculty location visually</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-13"><a class="link" href="#current-implementation-13">3.12.1. Current Implementation</a></h4>
+<h4 id="current-implementation-14"><a class="link" href="#current-implementation-14">3.13.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The displaying of the a <code>Person</code>'s faculty is facilitated by the newly added <code>Faculty</code> field in the <code>Person</code> class. This
 <code>Faculty</code> field is defined as a separate class (akin to other classes constituting the <code>Person</code> class such as <code>Email</code> and <code>Address</code>).</p>
@@ -1691,7 +1761,7 @@ Display Tab) and subsequently by <code>LocationDisplayPanel</code>. The status m
 </div>
 </div>
 <div class="sect2">
-<h3 id="generate-a-random-meeting-location-for-event"><a class="link" href="#generate-a-random-meeting-location-for-event">3.13. Generate a random meeting location for event</a></h3>
+<h3 id="generate-a-random-meeting-location-for-event"><a class="link" href="#generate-a-random-meeting-location-for-event">3.14. Generate a random meeting location for event</a></h3>
 <div class="paragraph">
 <p>The generation of a random meeting location primarily builds upon the visual display of a <code>Person</code>'s faculty. However
 there are a few key differences in the process that one needs to take note of.</p>
@@ -1744,14 +1814,14 @@ Display Tab) and subsequently by <code>LocationDisplayPanel</code>.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.14. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.15. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.15, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.16, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -1782,7 +1852,7 @@ Display Tab) and subsequently by <code>LocationDisplayPanel</code>.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.15. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.16. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -3474,4 +3544,4 @@ To resolve the issue, manually add the missing event tags into the XML file.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 11:23:13 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 11:32:26 UTC</div></div></div></body></html>
