@@ -10,11 +10,11 @@
 <h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>EventsPlus+ is a desktop address book application catered for busy university students to
+<p>EventsPlus+ is a Command Line Interface (CLI) desktop address book application catered for busy university students to
 manage their contacts, events, project meetings and ad-hoc events efficiently.
-EventsPlus+ aims to simplify some of the more time-consuming administrative tasks
-such as coordinating location and date of ad-hoc events using a Command Line Interface (CLI)
-The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.</p>
+It aims to simplify some of the more time-consuming administrative tasks
+such as coordinating location and date of ad-hoc events.
+The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has more than 10 kLoC.</p>
 </div>
 </div>
 </div>
@@ -100,7 +100,6 @@ be modified by the user. This feature sets the foundation for the inclusion of m
 <a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/121">#121</a>,
 <a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/130">#130</a>,
 <a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/138">#138</a>,
-<a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/177">#177</a>,
 <a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/177">#177</a>)</p>
 </li>
 <li>
@@ -185,42 +184,6 @@ be modified by the user. This feature sets the foundation for the inclusion of m
 <div class="paragraph">
 <p>Format: <code>addEvent n/EVENT_NAME dsc/EVENT_DESCRIPTION d/DATE(YYYY-MM-DD) st/START_TIME(HHMM) et/END_TIME(HHMM) a/EVENT_ADDRESS [i/CONTACT_INDEX]&#8230;&#8203; [t/EVENT_TAG]&#8230;&#8203;</code></p>
 </div>
-<div class="paragraph">
-<p>The user can input values for the following fields when adding an event:<br></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Event name<br></p>
-</li>
-<li>
-<p>Event description<br></p>
-</li>
-<li>
-<p>Event date<br></p>
-</li>
-<li>
-<p>Event start time<br></p>
-</li>
-<li>
-<p>Event end time<br></p>
-</li>
-<li>
-<p>Event address<br></p>
-</li>
-<li>
-<p>Contact Index / Indices<br></p>
-</li>
-<li>
-<p>Event Type(s)<br></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Note that each of these fields, except for address, contact indices and event type, are mandatory, and has to be supplied by the user
-before the event can be successfully added into the system.
-In addition, note the following constraints for the input values.</p>
-</div>
 <div class="admonitionblock tip">
 <table>
 <tr>
@@ -289,28 +252,95 @@ in EventsPlus+, it has to be added in before creating the event with the new eve
 <div class="paragraph">
 <p>In EventsPlus+, the events can be found in the Events tab,
 and are displayed according to their date, in decreasing date order.
-Within each date, the events are ordered from earliest to latest.</p>
+Within each date, the events are ordered from earliest to latest.<br></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="viewing-an-event-s-contacts-code-seeeventcontacts-code-alias-code-sec-code"><a class="link" href="#viewing-an-event-s-contacts-code-seeeventcontacts-code-alias-code-sec-code">Viewing an event&#8217;s contacts: <code>seeEventContacts</code>, alias <code>sec</code></a></h3>
+<div class="paragraph">
+<p>Shows an event&#8217;s contacts in the persons list. The information displayed in aligned with that in the UI
+when hovering over the event contact.</p>
 </div>
 <div class="paragraph">
-<p>After the user executes the command <code>addEvent n/Doctor Appointment dsc/Consultation d/2018-10-14 st/1030 et/1200 a/123, Clementi Rd, 1234665 i/1 t/Meeting t/Appointment</code>,
-a message indicating successful execution of the command will be displayed.
-The user will be automatically directed to the Events tab,
-where the newly added event (as highlighted in green below) will be shown in the tab.</p>
+<p>Format: <code>seeEventContacts d/DATE(YYYY-MM-DD) i/EVENT_INDEX</code></p>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/add-event_new-event.PNG" alt="Adding an event" width="790">
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Event dates should be in the format YYYY-MM-DD</p>
+</li>
+<li>
+<p>Event index is based on the displayed index of each event <strong>within each date</strong> in the displayed list (see example below).<br>
+e.g. In the screenshot below, the event named "Meeting" is the 1st event on the date 2018-04-01,
+hence the command <code>seeEventContacts d/2018-04-01 i/1</code> will refer to this event.<br>
+The event named "Lecture" is the 2nd event on the date 2018-10-18,
+hence the command <code>seeEventContacts d/2018-10-18 i/2</code> will refer to this event.</p>
+</li>
+<li>
+<p>When a person is deleted or no longer exists in the system, he/she will not appear in the displayed persons list.
+When hovering over the event contact in the UI, a message indicating this person no longer exists in EventsPlus+ is displayed.</p>
+</li>
+<li>
+<p>If a person has been edited but still has the same identity as the original person added as an event contact,
+the updated details (latest information of the edited person) is shown, both in the persons list
+and when hovering over the event contact.</p>
+</li>
+</ul>
 </div>
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>If no address is supplied, "TBD" will be set in place of the address field. For instance, upon execution of the command
-<code>addEvent n/Doctor Appointment dsc/Consultation d/2018-10-14 st/1030 et/1200</code>, the newly added event is as highlighted below.
-The address field is set to "TBD".</p>
+<p>Example:</p>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/add-event-no-address.PNG" alt="Adding an event without an address" width="790">
+<div class="ulist">
+<ul>
+<li>
+<p><code>seeEventContacts d/2018-04-01 i/1</code><br></p>
+</li>
+</ul>
 </div>
+</div>
+<div class="sect2">
+<h3 id="adding-an-event-tag-code-addeventtag-code-alias-code-aet-code"><a class="link" href="#adding-an-event-tag-code-addeventtag-code-alias-code-aet-code">Adding an event tag: <code>addEventTag</code>, alias <code>aet</code></a></h3>
+<div class="paragraph">
+<p>Adds an event tag specified by the user into the system.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>addEventTag t/EVENT_TAG [t/EVENT_TAG&#8230;&#8203;]</code></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Event tags are case-insensitive, and will always be converted into lowercase.
+i.e. <code>MEETING</code> and <code>meeting</code> are considered the same tag,
+and only <code>meeting</code> will be shown in EventsPlus+
+Executing <code>addEventTag t/MEETING t/meeting</code> will only result in the first tag being added.
+Executing <code>addEventTag t/MEETING</code> again will not be successful, as the tag already exists in the system.</p>
+</li>
+<li>
+<p>Event tags should only be alphanumeric (A-Z, a-z, 0-9) and hence should exclude any spaces, special characters or symbols such as '%', '*', '~'</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
@@ -350,31 +380,60 @@ hence the command <code>deleteEvent d/2018-10-18 i/2</code> will delete this eve
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>Example:</p>
 </div>
+<div class="sect2">
+<h3 id="edit-event-address-code-editeventaddress-code-alias-code-eea-code"><a class="link" href="#edit-event-address-code-editeventaddress-code-alias-code-eea-code">Edit event address: <code>editEventAddress</code>, alias <code>eea</code></a></h3>
+<div class="paragraph">
+<p>Edits the address of the specified event in the address book.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>editEventAddress d/DATE(YYYY-MM-DD) i/EVENT_INDEX a/EVENT_ADDRESS</code></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
 <div class="ulist">
 <ul>
 <li>
-<p><code>deleteEvent d/2018-04-01 i/1</code></p>
+<p>Event dates should be in the format YYYY-MM-DD</p>
+</li>
+<li>
+<p>Event index is based on the displayed index of each event <strong>within each date</strong> in the displayed list (see example below).<br>
+e.g. In the screenshot below, the event named "Meeting" is the 1st event on the date 2018-04-01,
+hence the command <code>deleteEvent d/2018-04-01 i/1</code> will delete this event.<br>
+The event named "Lecture" is the 2nd event on the date 2018-10-18,
+hence the command <code>deleteEvent d/2018-10-18 i/2</code> will delete this event.</p>
+</li>
+<li>
+<p>the EVENT_ADDRESS field is mandatory</p>
 </li>
 </ul>
 </div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="list-all-events-code-listevent-code-alias-code-lse-code"><a class="link" href="#list-all-events-code-listevent-code-alias-code-lse-code">List all events: <code>listEvent</code>, alias <code>lse</code></a></h3>
 <div class="paragraph">
-<p><strong>Before Deletion</strong></p>
+<p>Shows a list of all events in the address book.<br>
+Format: <code>listEvent</code></p>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/delete-event-before.PNG" alt="Deleting an event" width="790">
 </div>
+<div class="sect2">
+<h3 id="find-events-by-event-tags-code-findevent-code-alias-code-fe-code"><a class="link" href="#find-events-by-event-tags-code-findevent-code-alias-code-fe-code">Find events by event tags: <code>findEvent</code>, alias <code>fe</code></a></h3>
+<div class="paragraph">
+<p>Shows a list of all events in the address book which are tagged as the specified tags in the command.
+Event tags are case-insensitive, as described in the <a href="#addEventTag">addEventTag</a> section.<br>
+i.e. <code>MEETING</code> and <code>meeting</code> are regarded as the same tag.</p>
 </div>
 <div class="paragraph">
-<p><strong>After Deletion</strong></p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/delete-event-after.PNG" alt="Deleting an event" width="790">
-</div>
+<p>Format: <code>findEvent EVENT_TAG [EVENT_TAG&#8230;&#8203;]</code></p>
 </div>
 </div>
 </div>
@@ -397,26 +456,6 @@ hence the command <code>deleteEvent d/2018-10-18 i/2</code> will delete this eve
 <div class="sect3">
 <h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
 <div class="sect4">
-<h5 id="structure-of-an-event"><a class="link" href="#structure-of-an-event">Structure of an Event</a></h5>
-<div class="paragraph">
-<p>In the <code>Model</code> component, an <code>Event</code> consists of various <code>Event</code> attributes.
-Namely, the classes <code>EventName</code>, <code>EventDescription</code>, <code>EventDate</code>, <code>EventTime</code>, <code>EventAddress</code> are used to represent respective information in an <code>Event</code>,
-as shown in the Class diagram below. Note that <code>EventDay</code> is generated from <code>EventDate</code> values, and each event also contains a <code>Set</code> of <code>Person</code> and <code>Tag</code> objects,
-which are used to represent the event contacts (from the address book) and event tags (from <a href="#EventTags">event tags</a> currently existing in the address book).<br></p>
-</div>
-<div class="paragraph">
-<p>By doing so, we achieve more abstraction and cohesion, and this abides by the Separation of Concerns (SoC) principle at the class level.
-On top of facilitating checking of bugs within the individual attributes,
-doing so will also allow the developer to alter the definition of the different attribute classes, as well as to add more attributes into the
-<code>Event</code> class easily.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/Event.png" alt="Event class">
-</div>
-</div>
-</div>
-<div class="sect4">
 <h5 id="adding-deleting-of-an-event"><a class="link" href="#adding-deleting-of-an-event">Adding/Deleting of an Event</a></h5>
 <div class="paragraph">
 <p>Methods have been added to <code>ModelManager</code>, <code>AddressBook</code> and the newly-added class <code>UniqueEventList</code> to facilitate adding and deleting of events.
@@ -438,47 +477,20 @@ The interaction between components is similar for the deletion of an event.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/add-event_logic-model.png" alt="Interactions between Logic and Model" width="700" height="700">
+<img src="../images/add-event_logic-model.png" alt="Interactions between Logic and Model" width="750" height="700">
 </div>
 </div>
 <div class="paragraph">
 <p>Step 1. User enters command to add an event<br>
-Step 2. <code>AddressBookParser</code> calls <code>AddEventCommandParser</code>, which generates an <code>AddEventCommand</code> with an <code>Event</code> and <code>Set&lt;Index&gt;</code>. The latter specifies the contact indices to add into the event.<br>
-Step 3. <code>AddEventCommand</code> calls <code>Model#hasEvent</code>, <code>Model#hasClashingEvent</code>, <code>Model#hasEventTag</code> to check if the event information is valid<br>
-Step 4. <code>AddEventCommand</code> calls <code>Event#setEventContacts</code> to set the <code>Set&lt;Person&gt;</code> of event contacts (Each <code>Person</code> has to be in the existing address book records)<br>
+Step 2. <code>AddressBookParser</code> calls <code>AddEventCommandParser</code>, which generates an <code>AddEventCommand</code> with an <code>Event</code> and <code>Set&lt;Index&gt;</code>. The latter specifies the contacts (indices) to add into the event.<br>
+Step 3. <code>AddEventCommand</code> calls <code>Model#hasEvent</code>, <code>Model#hasClashingEvent</code>, <code>Model#hasEventTag</code> to check if event details are valid.<br>
+Step 4. <code>AddEventCommand</code> calls <code>Event#setEventContacts</code> to set the <code>Set&lt;Person&gt;</code> of event contacts (Each <code>Person</code> has to be in the existing address book records).<br>
 Step 5. <code>AddEventCommand</code> calls <code>Model#addEvent</code> after all checks have passed. The event is added into the system from the <code>Model</code> component.<br></p>
 </div>
 <div class="paragraph">
 <p>For deletion of event(s), the flow is similar.
-The sequence diagram for the deletion of event is shown below.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/delete-event-condensed_logic-model.png" alt="Deleting an event" width="750">
-</div>
-</div>
-<div class="paragraph">
-<p>Step 1. User enters command to delete an event based on the event date and index (as displayed in the UI)<br>
-Step 2. <code>AddressBookParser</code> calls <code>DeleteEventCommandParser</code>, which generates an <code>DeleteEventCommand</code> with an <code>EventDate</code> and <code>Index</code>.<br>
-Step 3. <code>DeleteEventCommand</code> <a href="#gettingAnEvent">gets the event</a>.
-Step 4. The event from step 3 is deleted from the system from the <code>Model</code> component.<br></p>
-</div>
-<div id="gettingAnEvent" class="paragraph">
-<p>Events are retrieved based on their date and index in the displayed events list, as shown in the diagram below.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/get-event.png" alt="Getting an event" width="450" height="400">
-</div>
-</div>
-<div class="paragraph">
-<p>For the case of <code>DeleteEventCommand</code>, we let <code>XYZCommand</code> be <code>DeleteEventCommand</code>.
-Step 1. <code>DeleteEventCommand</code> calls <code>Model#getFilteredEventListByDate</code> to retrieve the last shown event list.<br>
-Step 2. <code>DeleteEventCommand</code> calls <code>getTargetDateList</code> to retrieve the list from which the event belongs to. <br>
-Step 3. <code>DeleteEventCommand</code> calls <code>getEvent</code> to retrieve the event based on its index in the list from step 2.<br></p>
-</div>
-<div class="paragraph">
-<p>Upon adding/deletion of events in <code>Model</code>, <code>AddressBookChangedEvent</code>, <code>AddressBookEventChangedEvent</code> and <code>EventPanelDisplayChangedEvent</code>
+More details can be found in the <a href="DeveloperGuide.html#AddDeleteEvents">Developer Guide</a>.
+Upon adding/deletion of events in <code>Model</code>, <code>AddressBookChangedEvent</code>, <code>AddressBookEventChangedEvent</code> and <code>EventPanelDisplayChangedEvent</code>
 are triggered from the <code>Model</code> component.
 The raised events are handled by:</p>
 </div>
@@ -551,103 +563,99 @@ However, this overhead is still acceptable given the current scale of the <code>
 </ul>
 </div>
 </li>
-<li>
-<p><strong>Alternative 2:</strong> Store a list of type <code>ObservableList&lt;ObservableList&lt;Event&gt;&gt;</code> in <code>UI</code> and <code>Model</code>,
-where each <code>ObservableList&lt;Event&gt;</code> is the list of events for a given date.
-Update this alongside the <code>filteredEvent</code> list in <code>Model</code>, by adding a listener to <code>filteredEvents</code>,
-such that each time the internal list of events changes, the corresponding update is performed on the 2D-list.</p>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Pros:</strong> There is no need to regenerate the list for <code>UI</code>, since information in this list stays updated.
-This reduces overhead incurred in list regeneration.</p>
-</li>
-<li>
-<p><strong>Cons</strong>: If more actions are carried out on the internal event list, the listener will have to be updated,
-as it will have to listen to more types of changes. This could potentially create more bugs in the code.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 3:</strong> Store a list of type <code>ObservableList&lt;ObservableList&lt;Event&gt;&gt;</code> (similar structure as in Alternative 2) in <code>UI</code> and <code>Model</code>.
-Create another internal list <code>UniqueEventListByDate</code> for this list of lists. Update this alongside <code>UniqueEventList</code>.</p>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Pros:</strong></p>
-<div class="ulist">
-<ul>
-<li>
-<p>There is no need to regenerate the list for <code>UI</code>, since information in this list stays updated.</p>
-</li>
-<li>
-<p>No listener is required, since an event can be added to <code>UniqueEventList</code> and <code>UniqueEventListByDate</code> simultaneously.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Cons:</strong> Two lists have to be maintained, both storing the same <code>Event</code> objects.
-The task of maintaining two lists may lead to inconsistencies between the two lists and more complex code in future.</p>
-</li>
-</ul>
-</div>
-</li>
 </ul>
 </div>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="see-event-contacts-feature"><a class="link" href="#see-event-contacts-feature">See Event Contacts feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">Current Implementation</a></h4>
+<div class="paragraph">
+<p>To obtain an event&#8217;s contacts, comparisons are done using <code>Person#isSamePerson</code> to check if for each event contact, there exists a person in the system
+who is the same person as the contact. By the use of a <code>Predicate</code> with this logic, we then apply the filter on <code>filteredPersons</code> in <code>Model</code>.<br>
+General steps are as follows. Detailed diagrams can be found in the <a href="DeveloperGuide.html#seeEventContacts">Developer Guide</a>.<br></p>
+</div>
+<div class="paragraph">
+<p>Step 1. User enters command to see an event&#8217;s contacts.<br>
+Step 2. <code>AddressBookParser</code> calls <code>SeeEventContactsCommandParser</code>, which generates a SeeEventContactsCommand` with an <code>EventDate</code> and <code>Index</code><br>
+Step 3. <code>SeeEventContactsCommand</code> <a href="#gettingAnEvent">gets the event</a>.<br>
+Step 4. A <code>ExistingPersonInEventPredicate</code> is created based on the event&#8217;s contacts from the event retrieved in Step 3.<br>
+Step 5. <code>SeeEventContactsCommand</code> calls <code>Model#updateFilteredEventList</code> to filter the displayed list using the <code>Predicate</code> object generated in step 4.<br></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="edit-event-address-feature"><a class="link" href="#edit-event-address-feature">Edit Event Address feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">Current Implementation</a></h4>
+<div class="paragraph">
+<p>To edit an event&#8217;s existing address, the system first retrieves the event from the address book. This process is similar to that for
+deleting an event. A new <code>Event</code> object is created with the same details as the old <code>Event</code> object, but with the updated <code>EventAddress</code>.
+This new <code>Event</code> replaces the old one in the address book in the <code>Model#updateEvent</code> method, i.e. the old <code>Event</code> object is removed
+from the internal list, and the new one set in its position.<br>
+General steps are as follows. Detailed diagrams can be found in the <a href="DeveloperGuide.html#EditEventAddress">Developer Guide</a>.<br></p>
+</div>
+<div class="paragraph">
+<p>Step 1. User enters command to edit an event&#8217;s address based on the event date and index (as displayed in the UI)<br>
+Step 2. <code>AddressBookParser</code> calls <code>EditEventAddressCommandParser</code>, which generates an <code>EditEventAddressCommand</code> with an <code>EventDate</code>, <code>Index</code>
+and the updated <code>EventAddress</code>.<br>
+Step 3. <code>EditEventAddressCommand</code> <a href="#gettingAnEvent">gets the event</a>.
+Step 4. A new event with all details (except <code>EventAddress</code>) duplicated from the old event in step 3 is created.<br>
+The <code>EventAddress</code> attribute of this new event is set to the updated <code>EventAddress</code> passed in to <code>EditEventAddressCommand</code> in step 2.<br>
+Step 5. The old event is replaced with the new one in the system from the <code>Model</code> component, through the execution of <code>Model#updateEvent</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="considerations"><a class="link" href="#considerations">Considerations</a></h4>
+<div class="paragraph">
+<p>When editing an event, there are several possible values that can be updated, including the event&#8217;s name, description, etc.
+However, this functionality is mainly catered to complement the <code>suggestLocation</code> functionality, whereby the user
+can first add an event without specifying any location (and address will be displayed as TBD), and
+edit the suggested location in afterwards.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="add-event-tags-feature"><a class="link" href="#add-event-tags-feature">Add Event Tags feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">Current Implementation</a></h4>
+<div class="paragraph">
+<p>The list of event tags in the system is stored in a <code>UniqueTagList</code> in <code>Model</code>.
+This implementation requires all event <code>Tag</code> objects to be unique (using case-insensitive comparison)<br>
+All event tags are always shown, hence it is sufficient to
+to keep an <code>ObservableList&lt;Tag&gt;</code> in <code>ModelManager</code>, rather than a <code>FilteredList</code> which is used to store list of <code>Person</code> and <code>Event</code> objects.<br>
+General steps are as follows. Detailed diagrams can be found in the <a href="DeveloperGuide.html#EventTags">Developer Guide</a>.<br></p>
+</div>
+<div class="paragraph">
+<p>Step 1. User enters command to add an event tag.<br>
+Step 2. <code>AddressBookParser</code> calls <code>AddEventTagCommandParser</code>, which generates an <code>AddEventTagCommand</code> with a <code>Set</code> of <code>Tag</code> object.<br>
+Step 3. <code>AddEventTagCommand</code> calls <code>Model#hasEventTag</code> to check for duplicate tags already in the system.<br>
+Step 4. <code>AddEventTagCommand</code> calls <code>Model#addEventTag</code> to add the new event <code>Tag</code> into <code>Model</code>.
+=== Filtering of Events</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="findEvent"><a class="link" href="#findEvent">Find Event (by tag) feature</a></h4>
 <div class="sect4">
-<h5 id="aspect-restrictions-on-event-tags"><a class="link" href="#aspect-restrictions-on-event-tags">Aspect: Restrictions on Event Tags</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (current choice):</strong> Valid event tags to be restricted to a list which can be edited by the user.</p>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Pros:</strong> Allows event tags to be standardized, and the user can keep track of the all the types of events he/she has just
-by referring to the <code>Flowpane</code> containing all the event tags available in the system. This also facilitates finding of events
-by event tags.</p>
-</li>
-<li>
-<p><strong>Cons:</strong> More work has to be done from the user&#8217;s end, as he/she has to add an event tag in the system
-before adding an event with that tag.</p>
-</li>
-</ul>
+<h5 id="current-implementation-5"><a class="link" href="#current-implementation-5">Current Implementation</a></h5>
+<div class="paragraph">
+<p>To find events by their tags, we make use of a <code>Predicate</code>. The <code>EventTagMatchesKeywordsPredicate</code> is used in filtering
+all events which have at least one tag matching at least one of the keywords provided by the user.<br>
+General steps are as follows. Detailed diagrams can be found in the <a href="DeveloperGuide.html#filteringEvents">Developer Guide</a>.<br></p>
 </div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> No restriction to event tags.</p>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Pros:</strong> Less work by the user, as he/she can just add any event tag when adding an event into the system.</p>
-</li>
-<li>
-<p><strong>Cons:</strong> Less standardization of event tags, which may cause the user&#8217;s data to become more disorganized in future.</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>Step 1. User enters command to find events with certain tags.<br>
+Step 2. <code>AddressBookParser</code> calls <code>FindEventCommandParser</code>, which generates an <code>FindEventCommand</code> with an <code>EventTagMatchesKeywordsPredicate</code>.<br>
+Step 3. <code>FindEventCommand</code> calls <code>Model#updateFilteredEventList</code> to filter the displayed list using the <code>Predicate</code> generated in step 2.<br></p>
 </div>
-</li>
-<li>
-<p><strong>Alternative 3:</strong> (2-in-1 approach) Event tags that are non-existing in EventsPlus+ to be added upon adding an event with that new tag.</p>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Pros:</strong> Less work by the user, and tag gets automatically added into the system.</p>
-</li>
-<li>
-<p><strong>Cons:</strong> The <code>addEvent</code> command will be performing two different actions - adding an event
-and adding an event tag. This may violate the Single Responsibility Principle (SRP) for the <code>AddEventCommand</code> class.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
+<div class="paragraph">
+<p>Similar to the other event-related commands, the list-filtering is done in <code>Model</code>, and
+the change is propagated to the <code>UI</code> component by triggering an event.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 10:09:27 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 11:23:13 UTC</div></div></div></body></html>
