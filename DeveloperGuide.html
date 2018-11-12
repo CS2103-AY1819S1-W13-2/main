@@ -1052,7 +1052,7 @@ The interaction between components is similar for the deletion of an event.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/add-event_logic-model.png" alt="Interactions between Logic and Model" width="800">
+<img src="images/add-event_logic-model.png" alt="Interactions between Logic and Model" width="700" height="700">
 </div>
 </div>
 <div class="paragraph">
@@ -1068,7 +1068,7 @@ The sequence diagram for the deletion of event is shown below.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/delete-event-condensed_logic-model.png" alt="Deleting an event" width="800">
+<img src="images/delete-event-condensed_logic-model.png" alt="Deleting an event" width="750">
 </div>
 </div>
 <div class="paragraph">
@@ -1082,7 +1082,7 @@ Step 4. The event from step 3 is deleted from the system from the <code>Model</c
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/get-event.png" alt="Getting an event">
+<img src="images/get-event.png" alt="Getting an event" width="450" height="400">
 </div>
 </div>
 <div class="paragraph">
@@ -1149,36 +1149,29 @@ we make use of a listener on the <code>filteredEvents</code> list in <code>Model
 </li>
 <li>
 <p><code>MainWindow</code> resets its <code>TabPanel</code> and passes the re-computed list (events grouped by date) into it.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
 <div class="imageblock">
 <div class="content">
-<img src="images/ui-display-ad.png" alt="Refresh of Tab Panel on Event Change" width="800">
+<img src="images/ui-display-ad.png" alt="Refresh of Tab Panel on Event Change">
 </div>
 </div>
-<div class="ulist">
-<ul>
+</li>
+</ul>
+</div>
+</li>
 <li>
 <p><strong>Cons:</strong> There is a regeneration of the <code>TabPanel</code> object in <code>MainWindow</code> each time such an event occurs.
 However, this overhead is still acceptable given the current scale of the <code>AddressBook</code>.</p>
-<div class="ulist">
-<ul>
+</li>
+</ul>
+</div>
+</li>
 <li>
 <p><strong>Alternative 2:</strong> Store a list of type <code>ObservableList&lt;ObservableList&lt;Event&gt;&gt;</code> in <code>UI</code> and <code>Model</code>,
 where each <code>ObservableList&lt;Event&gt;</code> is the list of events for a given date.
 Update this alongside the <code>filteredEvent</code> list in <code>Model</code>, by adding a listener to <code>filteredEvents</code>,
 such that each time the internal list of events changes, the corresponding update is performed on the 2D-list.</p>
-</li>
-</ul>
-</div>
-</li>
+<div class="ulist">
+<ul>
 <li>
 <p><strong>Pros:</strong> There is no need to regenerate the list for <code>UI</code>, since information in this list stays updated.
 This reduces overhead incurred in list regeneration.</p>
@@ -1186,15 +1179,15 @@ This reduces overhead incurred in list regeneration.</p>
 <li>
 <p><strong>Cons</strong>: If more actions are carried out on the internal event list, the listener will have to be updated,
 as it will have to listen to more types of changes. This could potentially create more bugs in the code.</p>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 3:</strong> Store a list of type <code>ObservableList&lt;ObservableList&lt;Event&gt;&gt;</code> (similar structure as in Alternative 2) in <code>UI</code> and <code>Model</code>.
-Create another internal list <code>UniqueEventListByDate</code> for this list of lists. Update this alongside <code>UniqueEventList</code>.</p>
 </li>
 </ul>
 </div>
 </li>
+<li>
+<p><strong>Alternative 3:</strong> Store a list of type <code>ObservableList&lt;ObservableList&lt;Event&gt;&gt;</code> (similar structure as in Alternative 2) in <code>UI</code> and <code>Model</code>.
+Create another internal list <code>UniqueEventListByDate</code> for this list of lists. Update this alongside <code>UniqueEventList</code>.</p>
+<div class="ulist">
+<ul>
 <li>
 <p><strong>Pros:</strong></p>
 <div class="ulist">
@@ -1211,6 +1204,9 @@ Create another internal list <code>UniqueEventListByDate</code> for this list of
 <li>
 <p><strong>Cons:</strong> Two lists have to be maintained, both storing the same <code>Event</code> objects.
 The task of maintaining two lists may lead to inconsistencies between the two lists and more complex code in future.</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -1281,7 +1277,7 @@ The flow for getting an event using date and index is the same as in <a href="#g
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/see-event-contacts-condensed_logic-model.png" alt="Interactions between Logic and Model" width="800">
+<img src="images/see-event-contacts-condensed_logic-model.png" alt="Interactions between Logic and Model" width="700">
 </div>
 </div>
 <div class="paragraph">
@@ -1339,7 +1335,7 @@ The flow for getting an event using date and index is the same as in <a href="#g
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/edit-event-address-condensed_logic-model.png" alt="Interactions between Logic and Model" width="800">
+<img src="images/edit-event-address-condensed_logic-model.png" alt="Interactions between Logic and Model" width="750">
 </div>
 </div>
 <div class="paragraph">
@@ -1377,7 +1373,7 @@ to keep an <code>ObservableList&lt;Tag&gt;</code> in <code>ModelManager</code>, 
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/add-event-tag_logic-model.png" alt="Interactions between Logic and Model" width="800">
+<img src="images/add-event-tag_logic-model.png" alt="Interactions between Logic and Model" width="700">
 </div>
 </div>
 <div class="paragraph">
@@ -1400,7 +1396,7 @@ all events which have at least one tag matching at least one of the keywords pro
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/find-event_logic-model.png" alt="Interactions between Logic and Model" width="800">
+<img src="images/find-event_logic-model.png" alt="Interactions between Logic and Model" width="750">
 </div>
 </div>
 <div class="paragraph">
@@ -1428,7 +1424,7 @@ the change is propagated to the <code>UI</code> component by triggering an event
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/list-event_logic-model.png" alt="Interactions between Logic and Model" width="800">
+<img src="images/list-event_logic-model.png" alt="Interactions between Logic and Model" width="650">
 </div>
 </div>
 <div class="paragraph">
@@ -3440,4 +3436,4 @@ To resolve the issue, manually add the missing event tags into the XML file.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 03:05:40 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 04:22:11 UTC</div></div></div></body></html>
