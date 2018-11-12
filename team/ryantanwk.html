@@ -10,7 +10,11 @@
 <h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>AddressBook - Level 4 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.</p>
+<p>EventsPlus+ is a Command Line Interface (CLI) desktop address book application catered for busy university students to
+manage their contacts, events, project meetings and ad-hoc events efficiently.
+It aims to simplify some of the more time-consuming administrative tasks
+such as coordinating location and date of ad-hoc events.
+The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has more than 10 kLoC.</p>
 </div>
 </div>
 </div>
@@ -20,40 +24,56 @@
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Major enhancement</strong>: added <strong>the ability to undo/redo previous commands</strong></p>
+<p><strong>Code contributed</strong>: [<a href="https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&amp;search=ryantanwk">RepoSense</a>]</p>
+</li>
+<li>
+<p><strong>Major enhancement</strong>: added the <strong>Notification/Favourite feature</strong></p>
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.</p>
+<p>What it does: Allows the user to enable/disable a welcome notification upon application startup.
+Moreoever, users can favourite an event so that the welcome message will display details of the event.</p>
 </li>
 <li>
-<p>Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.</p>
+<p>Justification: Busy users should have a convenient means to remind themselves of an upcoming event.</p>
 </li>
 <li>
-<p>Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.</p>
-</li>
-<li>
-<p>Credits: <em>{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}</em></p>
+<p>Highlights: If a favourite event is deleted, and notification is enabled,
+the welcome notification will display a default welcome message instead of the events of a deleted event.</p>
 </li>
 </ul>
 </div>
 </li>
-<li>
-<p><strong>Minor enhancement</strong>: added a history command that allows the user to navigate to previous commands using up/down keys.</p>
-</li>
-<li>
-<p><strong>Code contributed</strong>: [<a href="https://github.com">Functional code</a>] [<a href="https://github.com">Test code</a>] <em>{give links to collated code files}</em></p>
-</li>
+</ul>
+</div>
+<div class="ulist">
+<ul>
 <li>
 <p><strong>Other contributions</strong>:</p>
 <div class="ulist">
 <ul>
 <li>
+<p>added <strong>the toggle command</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: CLI command which allows user to switch UI tabs.</p>
+</li>
+<li>
+<p>Justification: Allow proficient users to navigate the UI solely using CLI.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
 <p>Project management:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Managed releases <code>v1.3</code> - <code>v1.5rc</code> (3 releases) on GitHub</p>
+<p>Setup "About Us" documentation</p>
+</li>
+<li>
+<p>Managed releases <code>v1.3</code> on GitHub</p>
 </li>
 </ul>
 </div>
@@ -63,10 +83,13 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Updated the GUI color scheme (Pull requests <a href="https://github.com">#33</a>, <a href="https://github.com">#34</a>)</p>
-</li>
-<li>
-<p>Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests <a href="https://github.com">#36</a>, <a href="https://github.com">#38</a>)</p>
+<p>Added the notification / favourite / toggle functionalities and tests. (Pull requests <a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/89">#89</a>,
+<a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/90">#90</a>,
+<a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/103">#103</a>,
+<a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/115">#115</a>,
+<a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/128">#128</a>,
+<a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/135">#135</a>,
+<a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/194">#194</a></p>
 </li>
 </ul>
 </div>
@@ -76,7 +99,11 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Did cosmetic tweaks to existing contents of the User Guide: <a href="https://github.com">#14</a></p>
+<p>Updated documentation for the enhancements as above: (Pull requests <a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/103">#103</a>,
+<a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/115">#115</a>,
+<a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/128">#128</a>,
+<a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/135">#135</a>,
+<a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/194">#194</a>,</p>
 </li>
 </ul>
 </div>
@@ -86,29 +113,12 @@
 <div class="ulist">
 <ul>
 <li>
-<p>PRs reviewed (with non-trivial review comments): <a href="https://github.com">#12</a>, <a href="https://github.com">#32</a>, <a href="https://github.com">#19</a>, <a href="https://github.com">#42</a></p>
-</li>
-<li>
-<p>Contributed to forum discussions (examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>, <a href="https://github.com">4</a>)</p>
-</li>
-<li>
-<p>Reported bugs and suggestions for other teams in the class (examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>)</p>
-</li>
-<li>
-<p>Some parts of the history feature I added was adopted by several other class mates (<a href="https://github.com">1</a>, <a href="https://github.com">2</a>)</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Tools:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Integrated a third party library (Natty) to the project (<a href="https://github.com">#42</a>)</p>
-</li>
-<li>
-<p>Integrated a new Github plugin (CircleCI) to the team repo</p>
+<p>Reported bugs and suggestions for other teams in the class (<a href="https://github.com/CS2103-AY1819S1-W17-3/main/issues/101">1</a>,
+<a href="https://github.com/CS2103-AY1819S1-W16-1/main/issues/103">2</a>,
+<a href="https://github.com/CS2103-AY1819S1-W17-3/main/issues/105">3</a>,
+<a href="https://github.com/CS2103-AY1819S1-W17-3/main/issues/112">4</a>,
+<a href="https://github.com/CS2103-AY1819S1-W17-3/main/issues/118">5</a>,
+<a href="https://github.com/CS2103-AY1819S1-W17-3/main/issues/122">6</a></p>
 </li>
 </ul>
 </div>
@@ -117,9 +127,6 @@
 </div>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p><em>{you can add/remove categories in the list above}</em></p>
 </div>
 </div>
 </div>
@@ -136,83 +143,6 @@
 </tr>
 </tbody>
 </table>
-<div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code-alias-code-u-code"><a class="link" href="#undoing-previous-command-code-undo-code-alias-code-u-code">Undoing previous command : <code>undo</code>, alias <code>u</code></a></h3>
-<div class="paragraph">
-<p>Restores the address book to the state before the previous <em>undoable</em> command was executed.<br>
-Format: <code>undo</code></p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>Undoable commands: those commands that modify the address book&#8217;s content (<code>add</code>, <code>delete</code>, <code>edit</code> and <code>clear</code>).</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>delete 1</code><br>
-<code>list</code><br>
-<code>undo</code> or <code>u</code> (reverses the <code>delete 1</code> command)<br></p>
-</li>
-<li>
-<p><code>select 1</code><br>
-<code>list</code><br>
-<code>undo</code><br>
-The <code>undo</code> command fails as there are no undoable commands executed previously.</p>
-</li>
-<li>
-<p><code>delete 1</code><br>
-<code>clear</code><br>
-<code>undo</code> or <code>u</code> (reverses the <code>clear</code> command)<br>
-<code>undo</code> or <code>u</code> (reverses the <code>delete 1</code> command)<br></p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code-alias-code-r-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code-alias-code-r-code">Redoing the previously undone command : <code>redo</code>, alias <code>r</code></a></h3>
-<div class="paragraph">
-<p>Reverses the most recent <code>undo</code> command.<br>
-Format: <code>redo</code></p>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>delete 1</code><br>
-<code>undo</code> or <code>u</code> (reverses the <code>delete 1</code> command)<br>
-<code>redo</code> or <code>r</code> (reapplies the <code>delete 1</code> command)<br></p>
-</li>
-<li>
-<p><code>delete 1</code><br>
-<code>redo</code> or <code>r</code><br>
-The <code>redo</code> command fails as there are no <code>undo</code> commands executed previously.</p>
-</li>
-<li>
-<p><code>delete 1</code><br>
-<code>clear</code><br>
-<code>undo</code> or <code>u</code> (reverses the <code>clear</code> command)<br>
-<code>undo</code> or <code>u</code> (reverses the <code>delete 1</code> command)<br>
-<code>redo</code> or <code>r</code> (reapplies the <code>delete 1</code> command)<br>
-<code>redo</code> or <code>r</code> (reapplies the <code>clear</code> command)<br></p>
-</li>
-</ul>
-</div>
-</div>
 </div>
 </div>
 <div class="sect1">
@@ -229,56 +159,38 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">Undo/Redo feature</a></h3>
+<h3 id="enable-disable-notification-feature"><a class="link" href="#enable-disable-notification-feature">Enable/Disable Notification feature</a></h3>
 <div class="sect3">
 <h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
 <div class="paragraph">
-<p>The undo/redo mechanism is facilitated by <code>VersionedSystem</code>.
-It extends <code>System</code> with an undo/redo history, stored internally as an <code>SystemStateList</code> and <code>currentStatePointer</code>.
-Additionally, it implements the following operations:</p>
+<p>Notification preference is stored in the preferences.json file.
+The notification mechanism is facilitated by Javafx.
+Upon startup, notification preference is loaded from preferences.json and saved to the ModelManager.
+Upon exit, the model&#8217;s notification preference is saved to preferences.json to ensure statefulness.
+When enabled, it creates a child stage and scene from the main window and displays with a countdown timer to automatically close the stage.
+Additionally, it implements the following operations</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>VersionedSystem#commit()</code>&#8201;&#8212;&#8201;Saves the current address book state in its history.</p>
+<p><code>ui#NotificationWindow()</code>&#8201;&#8212;&#8201;creates the stage and scene for the notification using 2 String inputs: <code>title</code> and <code>message</code></p>
 </li>
 <li>
-<p><code>VersionedSystem#undo()</code>&#8201;&#8212;&#8201;Restores the previous address book state from its history.</p>
+<p><code>logic#parser#NotificationCommandParser()</code>&#8201;&#8212;&#8201;creates a NotificationCommand object based on user&#8217;s input</p>
 </li>
 <li>
-<p><code>VersionedSystem#redo()</code>&#8201;&#8212;&#8201;Restores a previously undone address book state from its history.</p>
+<p><code>logic#commands#NotificationCommand()</code>&#8201;&#8212;&#8201;updates the ModelManager&#8217;s notificationPref attribute.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>These operations are exposed in the <code>Model</code> interface as <code>Model#commitSystem()</code>, <code>Model#undoSystem()</code> and <code>Model#redoSystem()</code> respectively.</p>
+<p>Given below is an example usage scenario and how the enable/disable notification mechanism behaves at each step.</p>
 </div>
 <div class="paragraph">
-<p>Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.</p>
+<p>Step 1. The user launches the application for the first time. The model&#8217;s notification preference is initally enabled, the notification window appears.</p>
 </div>
 <div class="paragraph">
-<p>Step 1. The user launches the application for the first time. The <code>VersionedSystem</code> will be initialized with the initial address book state, and the <code>currentStatePointer</code> pointing to that single address book state.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoStartingStateListDiagram.png" alt="UndoRedoStartingStateListDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>Step 2. The user executes <code>delete 5</code> command to delete the 5th person in the address book. The <code>delete</code> command calls <code>Model#commitSystem()</code>, causing the modified state of the address book after the <code>delete 5</code> command executes to be saved in the <code>SystemStateList</code>, and the <code>currentStatePointer</code> is shifted to the newly inserted address book state.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoNewCommand1StateListDiagram.png" alt="UndoRedoNewCommand1StateListDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>Step 3. The user executes <code>add n/David &#8230;&#8203;</code> to add a new person. The <code>add</code> command also calls <code>Model#commitSystem()</code>, causing another modified address book state to be saved into the <code>SystemStateList</code>.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoNewCommand2StateListDiagram.png" alt="UndoRedoNewCommand2StateListDiagram" width="800">
-</div>
+<p>Step 2. The user executes <code>notification disable</code>. The <code>notification</code> command calls NotificationCommandParser which converts <code>disable</code> into the boolean <code>false</code> and creates a new Notification Command which updates the Model&#8217;s notification preference to false.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -287,107 +199,40 @@ Additionally, it implements the following operations:</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If a command fails its execution, it will not call <code>Model#commitSystem()</code>, so the address book state will not be saved into the <code>SystemStateList</code>.
+The notification command will update the notification preference regardless of whether the new preference is same as the previous preference.
 </td>
 </tr>
 </table>
-</div>
-<div class="paragraph">
-<p>Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the <code>undo</code> command. The <code>undo</code> command will call <code>Model#undoSystem()</code>, which will shift the <code>currentStatePointer</code> once to the left, pointing it to the previous address book state, and restores the address book to that state.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoExecuteUndoStateListDiagram.png" alt="UndoRedoExecuteUndoStateListDiagram" width="800">
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If the <code>currentStatePointer</code> is at index 0, pointing to the initial address book state, then there are no previous address book states to restore. The <code>undo</code> command uses <code>Model#canUndoSystem()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The following sequence diagram shows how the undo operation works:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoSequenceDiagram.png" alt="UndoRedoSequenceDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>The <code>redo</code> command does the opposite&#8201;&#8212;&#8201;it calls <code>Model#redoSystem()</code>, which shifts the <code>currentStatePointer</code> once to the right, pointing to the previously undone state, and restores the address book to that state.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If the <code>currentStatePointer</code> is at index <code>SystemStateList.size() - 1</code>, pointing to the latest address book state, then there are no undone address book states to restore. The <code>redo</code> command uses <code>Model#canRedoSystem()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Step 5. The user then decides to execute the command <code>list</code>. Commands that do not modify the address book, such as <code>list</code>, will usually not call <code>Model#commitSystem()</code>, <code>Model#undoSystem()</code> or <code>Model#redoSystem()</code>. Thus, the <code>SystemStateList</code> remains unchanged.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoNewCommand3StateListDiagram.png" alt="UndoRedoNewCommand3StateListDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>Step 6. The user executes <code>clear</code>, which calls <code>Model#commitSystem()</code>. Since the <code>currentStatePointer</code> is not pointing at the end of the <code>SystemStateList</code>, all address book states after the <code>currentStatePointer</code> will be purged. We designed it this way because it no longer makes sense to redo the <code>add n/David &#8230;&#8203;</code> command. This is the behavior that most modern desktop applications follow.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoNewCommand4StateListDiagram.png" alt="UndoRedoNewCommand4StateListDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>The following activity diagram summarizes what happens when a user executes a new command:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoActivityDiagram.png" alt="UndoRedoActivityDiagram" width="650">
-</div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
 <div class="sect4">
-<h5 id="aspect-how-undo-redo-executes"><a class="link" href="#aspect-how-undo-redo-executes">Aspect: How undo &amp; redo executes</a></h5>
+<h5 id="aspect-how-notification-preferences-is-updated"><a class="link" href="#aspect-how-notification-preferences-is-updated">Aspect: How notification preferences is updated</a></h5>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Saves the entire address book.</p>
+<p><strong>Alternative 1 (current choice):</strong> Re-assign Model&#8217;s notification preference regardless of previous preference</p>
 <div class="ulist">
 <ul>
 <li>
 <p>Pros: Easy to implement.</p>
 </li>
 <li>
-<p>Cons: May have performance issues in terms of memory usage.</p>
+<p>Cons: Wasteful in the case of same notification preference.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Individual command knows how to undo/redo by itself.</p>
+<p><strong>Alternative 2:</strong> Check current notification preference and only assign new value if it is different from the previous value.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Will use less memory (e.g. for <code>delete</code>, just save the person being deleted).</p>
+<p>Pros: Do not waste computing cycles on unecessary re-assingment of notification preference.</p>
 </li>
 <li>
-<p>Cons: We must ensure that the implementation of each individual command are correct.</p>
+<p>Cons: Code becomes more complicated because additional check required.</p>
 </li>
 </ul>
 </div>
@@ -396,48 +241,216 @@ If the <code>currentStatePointer</code> is at index <code>SystemStateList.size()
 </div>
 </div>
 <div class="sect4">
-<h5 id="aspect-data-structure-to-support-the-undo-redo-commands"><a class="link" href="#aspect-data-structure-to-support-the-undo-redo-commands">Aspect: Data structure to support the undo/redo commands</a></h5>
+<h5 id="aspect-writing-to-preferences-json"><a class="link" href="#aspect-writing-to-preferences-json">Aspect: Writing to preferences.json</a></h5>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Use a list to store the history of address book states.</p>
+<p><strong>Alternative 1 (current choice):</strong> Write all Model preferences to preferences.json</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.</p>
+<p>Pros: Easy to implement.</p>
 </li>
 <li>
-<p>Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both <code>HistoryManager</code> and <code>VersionedSystem</code>.</p>
+<p>Cons: Unecessary computing cycles wasted on writing when possibly no change</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Use <code>HistoryManager</code> for undo/redo</p>
+<p><strong>Alternative 2:</strong> Check for difference between Model preferences and preferences.json, only write to preferences.json if there is difference.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.</p>
+<p>Pros: Efficient.</p>
 </li>
 <li>
-<p>Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as <code>HistoryManager</code> now needs to do two different things.</p>
+<p>Cons: Code becomes more complicated because additional check required
+=== Select an existing event to be detailed in the notification if notification is enabled.
+==== Current Implementation</p>
 </li>
 </ul>
 </div>
 </li>
 </ul>
 </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="project-powerpointlabs"><a class="link" href="#project-powerpointlabs">PROJECT: PowerPointLabs</a></h2>
-<div class="sectionbody">
-<hr>
 <div class="paragraph">
-<p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
+<p>Details of favourite event (i.e. event name, date, day, time, details) stored as a String "Favourite" in preferences.json file.
+The favourite mechanism is implemented through the ModelManager.
+Upon startup, if notification is enabled, and there is a String "favourite" in preferences.json is non-null, the notification will display the String "favourite".
+"Favourite" in preferences.json is also loaded into ModelManager.
+Upon executing FavouriteCommand, the event is selected based on the input parameters and the filteredEventsListByDate.
+The attributes of the event is formatted into a String and saved to the ModelManager.
+Upon exit, the formatted String in ModelManager is saved to preferences.json to ensure statefulness.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>logic#parser#FavouriteCommandParser()</code>&#8201;&#8212;&#8201;creates a FavouriteCommand object based on user&#8217;s inputs.</p>
+</li>
+<li>
+<p><code>logic#commands#FavouriteCommand()</code>&#8201;&#8212;&#8201;updates the ModelManager&#8217;s favouriteEvent attribute.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Given below is an example usage scenario and how the favourite mechanism behaves at each step.</p>
+</div>
+<div class="paragraph">
+<p>Step 1. The user launches the application for the first time. The model&#8217;s favouriteEvent attribute is initially null.</p>
+</div>
+<div class="paragraph">
+<p>Step 2. The user executes <code>favourite d/2018-04-01 i/1</code>. The <code>favourite</code> command calls FavouriteCommandParser which checks validity of user inputs and creates a new FavouriteCommand which selects the event and create a formatted String from the event details.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The favourite command will update favouriteEvent regardless of whether the new favouriteEvent String is the same as the existing String.
+</td>
+</tr>
+</table>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 12:44:58 UTC</div></div></div></body></html>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
+
+</div>
+<div class="sect3">
+<h4 id="aspect-how-favourite-is-updated"><a class="link" href="#aspect-how-favourite-is-updated">Aspect: How favourite is updated</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Re-assign Model&#8217;s favouriteEvent regardless of previous preference</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement.</p>
+</li>
+<li>
+<p>Cons: Wasteful in the case of same favorite event.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Check current favouriteEvent and only assign new value if it is different from the previous value.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Do not waste computing cycles on unecessary re-assingment of favouriteEvent.</p>
+</li>
+<li>
+<p>Cons: Code becomes more complicated because additional check required.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect4">
+<h5 id="aspect-writing-to-preferences-json-2"><a class="link" href="#aspect-writing-to-preferences-json-2">Aspect: Writing to preferences.json</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Write all Model preferences to preferences.json</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement.</p>
+</li>
+<li>
+<p>Cons: Unecessary computing cycles wasted on writing when possibly no change</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Check for difference between Model preferences and preferences.json, only write to preferences.json if there is difference.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Efficient.</p>
+</li>
+<li>
+<p>Cons: Code becomes more complicated because additional check required
+=== Toggles the UI tab to the tab on its right.
+==== Current Implementation</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Toggle command raises a TabPanelSelectionChangedEvent event through the ModelManager.
+The tab panel is subscribed to this event and will loop the tabList and change the selected tab to its adjacent tab when the event is raised.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>logic#parser#ToggleCommandParser()</code>&#8201;&#8212;&#8201;creates a ToggleCommand object.</p>
+</li>
+<li>
+<p><code>logic#commands#ToggleCommand()</code>&#8201;&#8212;&#8201;raises a TabPanelSelectionChangedEvent through the ModelManager.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+ToggleCommand is not compatible with undo/redo since there is no writing of data to storage.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">Design Considerations</a></h4>
+
+</div>
+<div class="sect3">
+<h4 id="aspect-how-change-of-ui-tab-is-executed"><a class="link" href="#aspect-how-change-of-ui-tab-is-executed">Aspect: How change of UI tab is executed</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> TabPanel subscribe to an event which will be raised by ToggleCommand</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Convenient to implement.</p>
+</li>
+<li>
+<p>Cons: Creates a new object and a new handler method.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Pass TabPanel into the ToggleCommand and select the new tab from ToggleCommand</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Does not require new event to be raised.</p>
+</li>
+<li>
+<p>Cons: Increases coupling.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 14:08:44 UTC</div></div></div></body></html>
