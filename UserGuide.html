@@ -25,7 +25,7 @@
 <li><a href="#undoing-previous-command-code-undo-code-alias-code-u-code">3.10. Undoing previous command : <code>undo</code>, alias <code>u</code></a></li>
 <li><a href="#redoing-the-previously-undone-command-code-redo-code-alias-code-r-code">3.11. Redoing the previously undone command : <code>redo</code>, alias <code>r</code></a></li>
 <li><a href="#show-faculty-location-code-showlocation-code">3.12. Show Faculty Location : <code>showLocation</code></a></li>
-<li><a href="#suggested-location-code-generatelocation-code">3.13. Suggested Location : <code>generateLocation</code></a></li>
+<li><a href="#suggested-meeting-location-code-generatelocation-code">3.13. Suggested Meeting Location : <code>generateLocation</code></a></li>
 <li><a href="#adding-an-event-code-addevent-code-alias-code-ae-code">3.14. Adding an event: <code>addEvent</code>, alias <code>ae</code></a></li>
 <li><a href="#seeEventContacts">3.15. Viewing an event&#8217;s contacts: <code>seeEventContacts</code>, alias <code>sec</code></a></li>
 <li><a href="#addEventTag">3.16. Adding an event tag: <code>addEventTag</code>, alias <code>aet</code></a></li>
@@ -56,6 +56,8 @@
 <li><a href="#share-multiple-contacts-with-my-peers-code-share-code">4.11. Share multiple contacts with my peers : <code>share</code></a></li>
 <li><a href="#archive-groups-code-archive-code">4.12. Archive groups : <code>archive</code></a></li>
 <li><a href="#unarchive-old-groups-code-unarchive-code">4.13. Unarchive old groups : <code>unarchive</code></a></li>
+<li><a href="#generate-timing-for-a-group-s-event-meeting-code-generatetiming-code">4.14. Generate timing for a group&#8217;s event/meeting : <code>generateTiming</code></a></li>
+<li><a href="#generate-convenient-location-for-an-event-meeting-code-generateconvenientlocation-code">4.15. Generate convenient location for an event/meeting : <code>generateConvenientLocation</code></a></li>
 </ul>
 </li>
 <li><a href="#faq">5. FAQ</a></li>
@@ -522,12 +524,13 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </div>
 </div>
 <div class="sect2">
-<h3 id="suggested-location-code-generatelocation-code"><a class="link" href="#suggested-location-code-generatelocation-code">3.13. Suggested Location : <code>generateLocation</code></a></h3>
+<h3 id="suggested-meeting-location-code-generatelocation-code"><a class="link" href="#suggested-meeting-location-code-generatelocation-code">3.13. Suggested Meeting Location : <code>generateLocation</code></a></h3>
 <div class="paragraph">
-<p>Creates a suggested location to meet up for an event.</p>
+<p>Creates a randomly suggested location in NUS to meet up for an event
+(uniquely identified by date and event&#8217;s index number).</p>
 </div>
 <div class="paragraph">
-<p>Format: <code>generateLocation n/EVENT_NAME d/EVENT_DATE st/EVENT_START_TIME</code></p>
+<p>Format: <code>generateLocation d/EVENT_DATE i/EVENT_INDEX</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -535,7 +538,7 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 <div class="ulist">
 <ul>
 <li>
-<p><code>generateLocation n/First Meeting d/2018-04-06 st/1600</code></p>
+<p><code>generateLocation d/2018-04-06 i/1</code></p>
 </li>
 </ul>
 </div>
@@ -1446,6 +1449,92 @@ Sends the 2nd, 3rd and 4th person to 1st person in the (same) list.</p>
 </ul>
 </div>
 </div>
+<div class="sect2">
+<h3 id="generate-timing-for-a-group-s-event-meeting-code-generatetiming-code"><a class="link" href="#generate-timing-for-a-group-s-event-meeting-code-generatetiming-code">4.14. Generate timing for a group&#8217;s event/meeting : <code>generateTiming</code></a></h3>
+<div class="paragraph">
+<p>Generates a possible meeting timing for a group&#8217;s event/meeting based on all member&#8217;s schedule and availability.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>generateTiming group/GROUP_NAME</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>generateTiming group/CS2103Group</code></p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>This command only works with groups and will not work for a user alone (for obvious reasons).</p>
+</li>
+<li>
+<p>If the group does not exist, an error message is displayed accordingly to indicate that this command cannot be parsed.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="generate-convenient-location-for-an-event-meeting-code-generateconvenientlocation-code"><a class="link" href="#generate-convenient-location-for-an-event-meeting-code-generateconvenientlocation-code">4.15. Generate convenient location for an event/meeting : <code>generateConvenientLocation</code></a></h3>
+<div class="paragraph">
+<p>This command builds on the existing generateLocation command, however, instead of generating a random location it will
+generate a location based on the people attending the event (i.e. members in the group or people tagged to the event).</p>
+</div>
+<div class="paragraph">
+<p>Thus this can be used within the context of a group&#8217;s
+events or the user&#8217;s own personal events.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>generateConvenientLocation group/GROUP_NAME d/EVENT_DATE i/EVENT_INDEX</code> (for group events) or<br>
+        <code>generateConvenientLocation d/EVENT_DATE i/EVENT_INDEX</code> (for user&#8217;s personal events)</p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>generateConvenientLocation group/CS2103Group d/2018-09-30 i/1</code></p>
+</li>
+<li>
+<p><code>generateConvenientLocation d/2018-09-30 i/1</code></p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>This command works with both group events and user&#8217;s own personal events.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1516,8 +1605,8 @@ Sends the 2nd, 3rd and 4th person to 1st person in the (same) list.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Suggest Location</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>generateLocation n/EVENT_NAME d/EVENT_DATE st/EVENT_START_TIME</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>generateLocation n/First Meeting d/2018-01-14 st/1330</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>generateLocation d/EVENT_DATE i/EVENT_INDEX</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>generateLocation d/2018-01-14 i/1</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Add Event</strong></p></td>
@@ -1592,4 +1681,4 @@ Sends the 2nd, 3rd and 4th person to 1st person in the (same) list.</p>
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 04:22:11 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 09:26:33 UTC</div></div></div></body></html>

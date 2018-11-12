@@ -1696,8 +1696,8 @@ there are a few key differences in the process that one needs to take note of.</
 <p>The command used to generate this possible meeting location is <code>generateLocation</code>.</p>
 </div>
 <div class="paragraph">
-<p>In order to generate a random location for an event, the user needs to input (in addition to the command) the event name,
-event date and event time. This is to detect the unique event (because some events may have the same name) and to ensure
+<p>In order to generate a random location for an event, the user needs to input (in addition to the command) the
+event date and event index. This is to detect the unique event (because some events may have the same name) and to ensure
 that this event is currently in the address book.</p>
 </div>
 <div class="paragraph">
@@ -1707,30 +1707,36 @@ these kind of commands. The GenerateLocationCommand object created will then con
 <div class="ulist">
 <ul>
 <li>
-<p>Event name</p>
-</li>
-<li>
 <p>Event date</p>
 </li>
 <li>
-<p>Event start time</p>
+<p>Event index</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
 <p>The values for these fields are based on the input given by the user. These values are checked for validity as per other event-related
 commands before the object is created. Following this, the address book is checked to determine whether this event does
-exist and if it does the status message indicates that a meeting location has been generated, if not it indicates to the user
+exist. If it does exist, the event name is retrieved and stored in the GenerateCommandLocation object.
+The status message indicates that a meeting location (it will show the meeting name too) has been generated, if not it indicates to the user
 that such as event does not exist.</p>
 </div>
 <div class="paragraph">
-<p>A random meeting location is generated based on 7 locations (for now) that have their Google Maps Place IDs stored in the EmbedGoogleMaps class.
+<p>A random meeting location is generated based on 7 locations (more will be added in future iterations) that have their Google Maps Place IDs stored in the <code>EmbedGoogleMaps</code> class.
 A call to the method that generates this location (more specifically, returns the Place ID of the location) is made in the execute
 method of the GenerateLocationCommand.</p>
 </div>
 <div class="paragraph">
 <p>Following this, a event, <code>RandomMeetingLocationGeneratedEvent</code>, newly created for this generateLocation command, is posted and is then handled by <code>TabPanel</code> (which switches to the Location
 Display Tab) and subsequently by <code>LocationDisplayPanel</code>.</p>
+</div>
+<div class="paragraph">
+<p>For simplicity, only the logic and event handling section of the sequence diagram is shown below for generateLocation command:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/generateLocation_EventsCenter_EmbedGoogleMaps_seqDiagram.PNG" alt="generateLocation EventsCenter EmbedGoogleMaps seqDiagram" width="800">
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -2440,16 +2446,28 @@ about where the group can meet by providing a list of locations that can be cons
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">new university student</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">visually locate a contact&#8217;s faculty on a map</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">find faculty locations easily as I am unfamiliar with the campus</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">busy university student</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">find a possible meeting location for an event or a meeting</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">find a meeting location on campus quickly so as to save time and energy thinking about such minor details</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">considerate  university student</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">obtain a meeting time that is convenient for all contacts in a group [Coming in V2.0]</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">find a convenient time for meetups</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">find a convenient time for events or meetings</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">considerate university student</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">obtain a meeting location that is convenient for all contacts in a group
+<td class="tableblock halign-left valign-top"><p class="tableblock">obtain a meeting location that is convenient for all contacts in a group [Coming in V2.0]
 (based on faculty)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">find a convenient location for meetups</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">find a convenient location for events or meetings</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
@@ -2802,7 +2820,7 @@ Guarantees: Event will be edited with the given address.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User selects the event (using name, date and start time) that he/she wants to find an event location for.</p>
+<p>User selects the event (using date and index) that he/she wants to find an event location for.</p>
 </li>
 <li>
 <p>System randomly generates a meeting location from those stored and displays it to user in location display tab using Google Maps Embed API.</p>
@@ -3142,16 +3160,20 @@ Expected: No contact&#8217;s location is displayed. Status message indicates tha
 <p>Prerequisites: Event must already exist inside the current list of events stored.</p>
 </li>
 <li>
-<p>Test case: <code>generateLocation n/Meeting d/2018-04-01 st/1400</code><br>
+<p>Test case: <code>generateLocation d/2018-04-01 i/1</code><br>
 Expected: A random meeting location (Kent Ridge MRT, YIH, Coffee Roasters, Humble Origins, i3, The Deck or The Terrace) is generated and displayed.
 Status message indicates that meeting location is being generated and what to do if meeting location is acceptable.</p>
 </li>
 <li>
-<p>Test case: <code>generateLocation n/Meeting</code><br>
+<p>Test case: <code>generateLocation d/2018-04-01</code><br>
 Expected: No possible meeting location is displayed. Status message indicates that command is incorrect and shows proper usage.</p>
 </li>
 <li>
-<p>Other incorrect faculty location display commands: <code>generateLocation</code>, <code>generateLocation st/1400</code>, <code>generateLocation d/2018-04-01</code></p>
+<p>Test case: <code>generateLocation i/0</code><br>
+Expected: No possible meeting location is displayed. Status message indicates that index is not a valid one and shows what are acceptable.</p>
+</li>
+<li>
+<p>Other incorrect faculty location display commands: <code>generateLocation</code>, <code>generateLocation i/1</code></p>
 </li>
 </ol>
 </div>
@@ -3436,4 +3458,4 @@ To resolve the issue, manually add the missing event tags into the XML file.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 04:22:11 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 09:26:33 UTC</div></div></div></body></html>
