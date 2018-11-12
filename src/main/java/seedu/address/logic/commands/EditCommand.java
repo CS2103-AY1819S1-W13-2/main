@@ -26,6 +26,7 @@ import seedu.address.model.person.Faculty;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -85,9 +86,14 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.updatePerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        model.commitAddressBook();
+        try {
+            model.updatePerson(personToEdit, editedPerson);
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            model.commitAddressBook();
+        } catch (DuplicatePersonException dpe) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
 

@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.event.exceptions.DuplicateEventException;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -61,6 +62,17 @@ public class UniquePersonList implements Iterable<Person> {
 
         if (!target.isSamePerson(editedPerson) && contains(editedPerson)) {
             throw new DuplicatePersonException();
+        }
+
+        /** TODO:
+         * temp fix for bug where editedPerson is the same person as target, but also same person
+         * as another person in the address book.
+         */
+        if (target.isSamePerson(editedPerson)) {
+            if (internalList.stream()
+                    .anyMatch(person -> !person.equals(target) && person.isSamePerson(editedPerson))) {
+                throw new DuplicatePersonException();
+            }
         }
 
         internalList.set(index, editedPerson);
