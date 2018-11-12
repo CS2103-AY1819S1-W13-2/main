@@ -1188,8 +1188,9 @@ The raised events are handled by:</p>
 </div>
 </div>
 </div>
-<div class="sect4">
-<h5 id="ui-events-display"><a class="link" href="#ui-events-display">UI Events Display</a></h5>
+</div>
+<div class="sect3">
+<h4 id="ui-events-display"><a class="link" href="#ui-events-display">3.5.2. UI Events Display</a></h4>
 <div class="paragraph">
 <p>To display the event information according to their date, a list of lists of events grouped by <code>EventDate</code> is set in the <code>ListView</code> object in the <code>EventPanelList</code>.
 Each cell represents the <code>EventListCard</code> for a particular date, which contains all the events, each displayed in a <code>EventCard</code>. For this implementation,
@@ -1197,9 +1198,8 @@ we require <code>ModelManager</code> to be able to return such an <code>Observab
 <code>ModelManager#getFilteredEventListByDate</code>.</p>
 </div>
 </div>
-</div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.5.2. Design Considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.5.3. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-data-structure-to-support-the-ui-events-display"><a class="link" href="#aspect-data-structure-to-support-the-ui-events-display">Aspect: Data Structure to Support the UI Events Display</a></h5>
 <div class="ulist">
@@ -1460,7 +1460,7 @@ Step 4. <code>AddEventTagCommand</code> calls <code>Model#addEventTag</code> to 
 <div class="sect2">
 <h3 id="filteringEvents"><a class="link" href="#filteringEvents">3.9. Filtering of Events</a></h3>
 <div class="sect3">
-<h4 id="findEvent"><a class="link" href="#findEvent">3.9.1. Find Event (by tag) feature</a></h4>
+<h4 id="FindEvent"><a class="link" href="#FindEvent">3.9.1. Find Event (by tag) feature</a></h4>
 <div class="sect4">
 <h5 id="current-implementation-9"><a class="link" href="#current-implementation-9">Current Implementation</a></h5>
 <div class="paragraph">
@@ -1502,7 +1502,7 @@ The details of the event triggers are as follows.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>UI</code> components are updated using a similar flow (by event triggers) to the <a href="#findEvent">find event</a> feature.<br>
+<p>The <code>UI</code> components are updated using a similar flow (by event triggers) to the <a href="#FindEvent">find event</a> feature.<br>
 <strong>Note:</strong> The inclusion of the <code>EventDisplayPanelChangedEvent</code> is required in <code>Model#updateFilteredEventList</code>
 so that <code>TabPanel</code> can switch to the event tab automatically whenever any of these commands are executed,
 even if there is no change to data in the filtered list
@@ -1677,7 +1677,7 @@ The number of successful inserts will be displayed.<br></p>
 <code>Faculty</code> field is defined as a separate class (akin to other classes constituting the <code>Person</code> class such as <code>Email</code> and <code>Address</code>).</p>
 </div>
 <div class="paragraph">
-<p>During the adding of <code>Person</code>'s to the EventsPlus+ address book, the <code>Faculty</code> class will ensure that the argument passed in is that of
+<p>During the adding of <code>Person</code>'s to EventsPlus+'s address book, the <code>Faculty</code> class will ensure that the argument passed in is that of
 a valid NUS faculty. It does this via an inner enum class called <code>Faculties</code> which stores as constants the only accepted <code>Faculty</code>
 argument values. The <code>isInEnum</code> method is used to check that the argument passed already exists as one of the constants.</p>
 </div>
@@ -1719,8 +1719,8 @@ argument values. The <code>isInEnum</code> method is used to check that the argu
 </ul>
 </div>
 <div class="paragraph">
-<p>A "-" response is also allowed as it is possible that the address book may indeed have contacts who are not in NUS at the
-current point in time.</p>
+<p>A "-" response is also allowed as it is possible that EventsPlus+'s address book
+ may indeed have contacts who are not students of NUS at the current point in time.</p>
 </div>
 <div class="paragraph">
 <p>The command used to display the faculty visually is <code>showLocation</code>.</p>
@@ -1733,14 +1733,14 @@ application. Together with the Google Maps API key, the place ID allows for the 
 faculty to be displayed in the Location Display Tab.</p>
 </div>
 <div class="paragraph">
-<p>When the (correct) showLocation command is input together with the index of the individual whose faculty location is to be displayed,
+<p>When the (correct) <code>showLocation</code> command is input together with the index of the individual whose faculty location is to be displayed,
 the index is first checked to determine if it is correct (more than 0 and not larger than the size of the list of contacts
-in the address book). Following this, the appropriate person is obtained from the <code>FilteredPersonList</code> (note: this is so as to allow
+in EventsPlus+'s addressbook). Following this, the appropriate person is obtained from the <code>FilteredPersonList</code> (this is so as to allow
 the displaying of the contact&#8217;s faculty location even if the list is filtered).</p>
 </div>
 <div class="paragraph">
 <p>A event, <code>FacultyLocationDisplayChangedEvent</code>, also newly created for this showLocation command, is posted and is then handled by <code>TabPanel</code> (which switches to the Location
-Display Tab) and subsequently by <code>LocationDisplayPanel</code>. The status message will show "Selected person: [INDEX] faculty location being displayed."</p>
+Display Tab) and subsequently by <code>LocationDisplayPanel</code>. The status message will show "Selected person: [INDEX]. Faculty location successfully displayed."</p>
 </div>
 <div class="paragraph">
 <p>If the contact has no faculty, a default location - University Hall - is displayed on the map.</p>
@@ -1772,11 +1772,11 @@ there are a few key differences in the process that one needs to take note of.</
 <div class="paragraph">
 <p>In order to generate a random location for an event, the user needs to input (in addition to the command) the
 event date and event index. This is to detect the unique event (because some events may have the same name) and to ensure
-that this event is currently in the address book.</p>
+that this event is currently in EventsPlus+.</p>
 </div>
 <div class="paragraph">
-<p>Command parsing is handled in a similar manner as other commands but there exists a specific GenerateLocationCommandParser to specifically parse
-these kind of commands. The GenerateLocationCommand object created will then consist of three fields:</p>
+<p>Command parsing is handled in a similar manner as other commands but there exists a specific <code>GenerateLocationCommandParser</code> to specifically parse
+these kind of commands. The GenerateLocationCommand object created will then consist of two fields:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1790,22 +1790,22 @@ these kind of commands. The GenerateLocationCommand object created will then con
 </div>
 <div class="paragraph">
 <p>The values for these fields are based on the input given by the user. These values are checked for validity as per other event-related
-commands before the object is created. Following this, the address book is checked to determine whether this event does
-exist. If it does exist, the event name is retrieved and stored in the GenerateCommandLocation object.
+commands before the object is created. Following this, EventsPlus+ is checked to determine whether this event does
+exist. If it does exist, the event name is retrieved and stored in the <code>GenerateCommandLocation</code> object.
 The status message indicates that a meeting location (it will show the meeting name too) has been generated, if not it indicates to the user
 that such as event does not exist.</p>
 </div>
 <div class="paragraph">
 <p>A random meeting location is generated based on 7 locations (more will be added in future iterations) that have their Google Maps Place IDs stored in the <code>EmbedGoogleMaps</code> class.
 A call to the method that generates this location (more specifically, returns the Place ID of the location) is made in the execute
-method of the GenerateLocationCommand.</p>
+method of GenerateLocationCommand.</p>
 </div>
 <div class="paragraph">
 <p>Following this, a event, <code>RandomMeetingLocationGeneratedEvent</code>, newly created for this generateLocation command, is posted and is then handled by <code>TabPanel</code> (which switches to the Location
 Display Tab) and subsequently by <code>LocationDisplayPanel</code>.</p>
 </div>
 <div class="paragraph">
-<p>For simplicity, only the logic and event handling section of the sequence diagram is shown below for generateLocation command:</p>
+<p>For simplicity, only the logic and event handling sections of the sequence diagram are shown below for the <code>generateLocation</code> command:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -2287,7 +2287,7 @@ b. Require developers to download those libraries manually (this creates extra w
 <div class="ulist">
 <ul>
 <li>
-<p>Avoid contact duplication, so the user has a clean and well-maintained address book.</p>
+<p>Avoid contact duplication, so the user has a clean and well-maintained contacts list.</p>
 </li>
 <li>
 <p>Show location of a person&#8217;s faculty visually, so that it is easier for user to see the location
@@ -2304,7 +2304,7 @@ about where the group can meet by providing a list of locations that can be cons
 <p>Allow the user to import contacts from an external source</p>
 </li>
 <li>
-<p>Allow the user to manage events neatly in the address book, so that he/she can avoid event clashes.</p>
+<p>Allow the user to manage events neatly in EventsPlus+, so that he/she can avoid event clashes.</p>
 </li>
 </ul>
 </div>
@@ -3544,4 +3544,4 @@ To resolve the issue, manually add the missing event tags into the XML file.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 14:08:44 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 14:20:13 UTC</div></div></div></body></html>

@@ -274,6 +274,9 @@ when hovering over the event contact.</p>
 <div class="ulist">
 <ul>
 <li>
+<p>To view all persons again after this command, use the <a href="#listPersons">list</a> command.</p>
+</li>
+<li>
 <p>Event dates should be in the format YYYY-MM-DD</p>
 </li>
 <li>
@@ -304,7 +307,8 @@ and when hovering over the event contact.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>seeEventContacts d/2018-04-01 i/1</code><br></p>
+<p><code>seeEventContacts d/2018-04-01 i/1</code><br>
+To view all persons again after this command, use the <code>list</code> command.</p>
 </li>
 </ul>
 </div>
@@ -461,10 +465,18 @@ i.e. <code>MEETING</code> and <code>meeting</code> are regarded as the same tag.
 <p>In the <code>Model</code> component, an <code>Event</code> consists of various <code>Event</code> attributes.
 Namely, the classes <code>EventName</code>, <code>EventDescription</code>, <code>EventDate</code>, <code>EventTime</code>, <code>EventAddress</code> are used to represent respective information in an <code>Event</code>,
 as shown in the Class diagram below. Note that <code>EventDay</code> is generated from <code>EventDate</code> values, and each event also contains a <code>Set</code> of <code>Person</code> and <code>Tag</code> objects,
-which are used to represent the event contacts (from the address book) and event tags (from <a href="#EventTags">event tags</a> currently existing in the address book).<br>
-image::Event.png[Event class]
-===== Adding/Deleting of an Event
-Methods have been added to <code>ModelManager</code>, <code>AddressBook</code> and the newly-added class <code>UniqueEventList</code> to facilitate adding and deleting of events.
+which are used to represent the event contacts (from the address book) and event tags (from <a href="#EventTags">event tags</a> currently existing in the address book).<br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/Event.png" alt="Event class">
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="adding-deleting-of-an-event"><a class="link" href="#adding-deleting-of-an-event">Adding/Deleting of an Event</a></h5>
+<div class="paragraph">
+<p>Methods have been added to <code>ModelManager</code>, <code>AddressBook</code> and the newly-added class <code>UniqueEventList</code> to facilitate adding and deleting of events.
 In order to limit modification of the internal list of <code>Event</code> objects, changes to this list is only carried out at the most fundamental level,
 which is <code>UniqueEventList</code>. <code>AddressBook</code> stores a reference to this internal list, and <code>ModelManager</code> stores an unmodifiable copy of this list.</p>
 </div>
@@ -495,7 +507,7 @@ Step 5. <code>AddEventCommand</code> calls <code>Model#addEvent</code> after all
 </div>
 <div class="paragraph">
 <p>For deletion of event(s), the flow is similar.
-More details can be found in the <a href="DeveloperGuide.html#AddDeleteEvents">Developer Guide</a>.
+More details can be found in the <a href="../DeveloperGuide.html#AddDeleteEvents">Developer Guide</a>.
 Upon adding/deletion of events in <code>Model</code>, <code>AddressBookChangedEvent</code>, <code>AddressBookEventChangedEvent</code> and <code>EventPanelDisplayChangedEvent</code>
 are triggered from the <code>Model</code> component.
 The raised events are handled by:</p>
@@ -519,14 +531,14 @@ The raised events are handled by:</p>
 </div>
 </div>
 </div>
-<div class="sect4">
-<h5 id="ui-events-display"><a class="link" href="#ui-events-display">UI Events Display</a></h5>
+</div>
+<div class="sect3">
+<h4 id="ui-events-display"><a class="link" href="#ui-events-display">UI Events Display</a></h4>
 <div class="paragraph">
 <p>To display the event information according to their date, a list of lists of events grouped by <code>EventDate</code> is set in the <code>ListView</code> object in the <code>EventPanelList</code>.
 Each cell represents the <code>EventListCard</code> for a particular date, which contains all the events, each displayed in a <code>EventCard</code>. For this implementation,
 we require <code>ModelManager</code> to be able to return such an <code>ObservableList&lt;List&lt;Event&gt;&gt;</code> object to the UI class <code>MainWindow</code>, and this is achieved via the method
 <code>ModelManager#getFilteredEventListByDate</code>.</p>
-</div>
 </div>
 </div>
 <div class="sect3">
@@ -581,7 +593,7 @@ However, this overhead is still acceptable given the current scale of the <code>
 <div class="paragraph">
 <p>To obtain an event&#8217;s contacts, comparisons are done using <code>Person#isSamePerson</code> to check if for each event contact, there exists a person in the system
 who is the same person as the contact. By the use of a <code>Predicate</code> with this logic, we then apply the filter on <code>filteredPersons</code> in <code>Model</code>.<br>
-General steps are as follows. Detailed diagrams can be found in the <a href="DeveloperGuide.html#seeEventContacts">Developer Guide</a>.<br></p>
+General steps are as follows. Detailed diagrams can be found in the <a href="../DeveloperGuide.html#seeEventContacts">Developer Guide</a>.<br></p>
 </div>
 <div class="paragraph">
 <p>Step 1. User enters command to see an event&#8217;s contacts.<br>
@@ -601,7 +613,7 @@ Step 5. <code>SeeEventContactsCommand</code> calls <code>Model#updateFilteredEve
 deleting an event. A new <code>Event</code> object is created with the same details as the old <code>Event</code> object, but with the updated <code>EventAddress</code>.
 This new <code>Event</code> replaces the old one in the address book in the <code>Model#updateEvent</code> method, i.e. the old <code>Event</code> object is removed
 from the internal list, and the new one set in its position.<br>
-General steps are as follows. Detailed diagrams can be found in the <a href="DeveloperGuide.html#EditEventAddress">Developer Guide</a>.<br></p>
+General steps are as follows. Detailed diagrams can be found in the <a href="../DeveloperGuide.html#EditEventAddress">Developer Guide</a>.<br></p>
 </div>
 <div class="paragraph">
 <p>Step 1. User enters command to edit an event&#8217;s address based on the event date and index (as displayed in the UI)<br>
@@ -632,24 +644,26 @@ edit the suggested location in afterwards.</p>
 This implementation requires all event <code>Tag</code> objects to be unique (using case-insensitive comparison)<br>
 All event tags are always shown, hence it is sufficient to
 to keep an <code>ObservableList&lt;Tag&gt;</code> in <code>ModelManager</code>, rather than a <code>FilteredList</code> which is used to store list of <code>Person</code> and <code>Event</code> objects.<br>
-General steps are as follows. Detailed diagrams can be found in the <a href="DeveloperGuide.html#EventTags">Developer Guide</a>.<br></p>
+General steps are as follows. Detailed diagrams can be found in the <a href="../DeveloperGuide.html#EventTags">Developer Guide</a>.<br></p>
 </div>
 <div class="paragraph">
 <p>Step 1. User enters command to add an event tag.<br>
 Step 2. <code>AddressBookParser</code> calls <code>AddEventTagCommandParser</code>, which generates an <code>AddEventTagCommand</code> with a <code>Set</code> of <code>Tag</code> object.<br>
 Step 3. <code>AddEventTagCommand</code> calls <code>Model#hasEventTag</code> to check for duplicate tags already in the system.<br>
-Step 4. <code>AddEventTagCommand</code> calls <code>Model#addEventTag</code> to add the new event <code>Tag</code> into <code>Model</code>.
-=== Filtering of Events</p>
+Step 4. <code>AddEventTagCommand</code> calls <code>Model#addEventTag</code> to add the new event <code>Tag</code> into <code>Model</code>.</p>
 </div>
 </div>
+</div>
+<div class="sect2">
+<h3 id="filtering-of-events"><a class="link" href="#filtering-of-events">Filtering of Events</a></h3>
 <div class="sect3">
-<h4 id="findEvent"><a class="link" href="#findEvent">Find Event (by tag) feature</a></h4>
+<h4 id="FindEvent"><a class="link" href="#FindEvent">Find Event (by tag) feature</a></h4>
 <div class="sect4">
 <h5 id="current-implementation-5"><a class="link" href="#current-implementation-5">Current Implementation</a></h5>
 <div class="paragraph">
 <p>To find events by their tags, we make use of a <code>Predicate</code>. The <code>EventTagMatchesKeywordsPredicate</code> is used in filtering
 all events which have at least one tag matching at least one of the keywords provided by the user.<br>
-General steps are as follows. Detailed diagrams can be found in the <a href="DeveloperGuide.html#filteringEvents">Developer Guide</a>.<br></p>
+General steps are as follows. Detailed diagrams can be found in the <a href="../DeveloperGuide.html#filteringEvents">Developer Guide</a>.<br></p>
 </div>
 <div class="paragraph">
 <p>Step 1. User enters command to find events with certain tags.<br>
@@ -658,10 +672,12 @@ Step 3. <code>FindEventCommand</code> calls <code>Model#updateFilteredEventList<
 </div>
 <div class="paragraph">
 <p>Similar to the other event-related commands, the list-filtering is done in <code>Model</code>, and
-the change is propagated to the <code>UI</code> component by triggering an event.</p>
+the change is propagated to the <code>UI</code> component by triggering an event.
+The implementation of the <a href="../DeveloperGuide.html#listEvent">listEvent</a> feature is similar to the above,
+and more details can be found in <a href="../DeveloperGuide.html#listEvent">Developer Guide</a></p>
 </div>
 </div>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 14:08:44 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 14:20:13 UTC</div></div></div></body></html>

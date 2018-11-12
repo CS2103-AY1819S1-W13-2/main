@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>John Doe - Project Portfolio</title><link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Pratyay Jaidev - Project Portfolio</title><link rel="stylesheet" href="../stylesheets/gh-pages.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">EventsPlus+</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link active" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/CS2103-AY1819S1-W13-2/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>John Doe - Project Portfolio</h1></div><div id="content"><div class="sect1">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">EventsPlus+</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link active" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/CS2103-AY1819S1-W13-2/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Pratyay Jaidev - Project Portfolio</h1></div><div id="content"><div class="sect1">
 <h2 id="project-eventsplus"><a class="link" href="#project-eventsplus">PROJECT: EventsPlus+</a></h2>
 <div class="sectionbody">
 <hr>
@@ -10,7 +10,10 @@
 <h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>AddressBook - Level 4 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.</p>
+<p>EventsPlus+ is a desktop address book application catered for busy university students to manage their contacts, events, project meetings and ad-hoc events efficiently.
+EventsPlus+ aims to simplify some of the more time-consuming administrative tasks such as coordinating location and date of ad-hoc events
+using a Command Line Interface (CLI). The user interacts with it using a CLI, and it has a GUI created with JavaFX.
+It is written in Java, and has about 10 kLoC.</p>
 </div>
 </div>
 </div>
@@ -20,53 +23,72 @@
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Major enhancement</strong>: added <strong>the ability to undo/redo previous commands</strong></p>
+<p><strong>Code contributed</strong>: [<a href="https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&amp;search=pratyayj">RepoSense</a>]</p>
+</li>
+<li>
+<p><strong>Major enhancement</strong>: added <strong>location-related functionality</strong></p>
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.</p>
+<p>What it does: The two features added provide the following: 1. the ability to visually display the faculty location of a contact on a map and 2. the ability to generate a (random) meeting location
+for events or meetings and display this location on a map.</p>
 </li>
 <li>
-<p>Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.</p>
+<p>Justification: Events cannot take place without a location set in place. Adding location-related functionality with respect to a contact&#8217;s faculty and events
+improves the user experience significantly by providing the user one-stop location functionality without having to exit the application at all.</p>
 </li>
 <li>
-<p>Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.</p>
+<p>Highlights: A Faculty field is added to the Person class which is crucial given that this application is primarily targeted toward university students and thus such a field is necessary.
+Selecting which particular Google Maps API to be integrated into the application required careful consideration (the Embed API was eventually chosen for its flexibility with the JavaFX web browser).
+In the long run, the implementation of this foundational functionality allows for further development of other location-related features such as generating
+directions or generating convenient meeting locations (based on faculty locations) which is one of the features to be done in V2.0.</p>
 </li>
 <li>
-<p>Credits: <em>{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}</em></p>
+<p>Credits: Google Maps Embed API was used for the map display.</p>
 </li>
 </ul>
 </div>
-</li>
-<li>
-<p><strong>Minor enhancement</strong>: added a history command that allows the user to navigate to previous commands using up/down keys.</p>
-</li>
-<li>
-<p><strong>Code contributed</strong>: [<a href="https://github.com">Functional code</a>] [<a href="https://github.com">Test code</a>] <em>{give links to collated code files}</em></p>
 </li>
 <li>
 <p><strong>Other contributions</strong>:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Project management:</p>
+<p>Minor enhancements:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Managed releases <code>v1.3</code> - <code>v1.5rc</code> (3 releases) on GitHub</p>
+<p>Added a separate Location Display tab to display location-related information instead of using pre-existing Webpage tab:
+(Pull request <a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/134">#134</a>)</p>
+</li>
+<li>
+<p>Application opens maximized at launch:
+(Pull request <a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/176">#176</a>)</p>
+</li>
+<li>
+<p>Added simple default landing pages (when application is first launched) for Location Display tab and Webpage tab:
+(Pull request <a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/134">134</a>)</p>
+</li>
+<li>
+<p>Wrote and modified tests to increase coverage by 4.4%:
+(Pull request <a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/191">191</a>)</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>Enhancements to existing features:</p>
+<p>Project management:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Updated the GUI color scheme (Pull requests <a href="https://github.com">#33</a>, <a href="https://github.com">#34</a>)</p>
+<p>Managed releases <code>v1.3.1</code> and <code>v1.4</code> on GitHub</p>
 </li>
 <li>
-<p>Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests <a href="https://github.com">#36</a>, <a href="https://github.com">#38</a>)</p>
+<p>Managed issue tracker and helped close issues upon completion: (examples: <a href="https://github.com/CS2103-AY1819S1-W13-2/main/issues/50">50</a>,
+<a href="https://github.com/CS2103-AY1819S1-W13-2/main/issues/146">146</a>,
+<a href="https://github.com/CS2103-AY1819S1-W13-2/main/issues/152">152</a>,
+<a href="https://github.com/CS2103-AY1819S1-W13-2/main/issues/160">160</a>,
+<a href="https://github.com/CS2103-AY1819S1-W13-2/main/issues/170">170</a>, amongst many others)</p>
 </li>
 </ul>
 </div>
@@ -76,7 +98,12 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Did cosmetic tweaks to existing contents of the User Guide: <a href="https://github.com">#14</a></p>
+<p>Added non-functional requirements to Developer Guide:
+(Pull request: <a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/69">#69</a>)</p>
+</li>
+<li>
+<p>Edited and formatted use cases in Developer Guide:
+(Pull request: <a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/172">#172</a>, <a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/190">#190</a>)</p>
 </li>
 </ul>
 </div>
@@ -86,16 +113,12 @@
 <div class="ulist">
 <ul>
 <li>
-<p>PRs reviewed (with non-trivial review comments): <a href="https://github.com">#12</a>, <a href="https://github.com">#32</a>, <a href="https://github.com">#19</a>, <a href="https://github.com">#42</a></p>
+<p>PRs reviewed (with non-trivial review comments): <a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/177">#177</a>, <a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/183">#183</a></p>
 </li>
 <li>
-<p>Contributed to forum discussions (examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>, <a href="https://github.com">4</a>)</p>
-</li>
-<li>
-<p>Reported bugs and suggestions for other teams in the class (examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>)</p>
-</li>
-<li>
-<p>Some parts of the history feature I added was adopted by several other class mates (<a href="https://github.com">1</a>, <a href="https://github.com">2</a>)</p>
+<p>Reported bugs and suggestions for other teams in the class:
+(examples:  <a href="https://github.com/CS2103-AY1819S1-T13-1/main/issues/134">134</a>, <a href="https://github.com/CS2103-AY1819S1-T13-1/main/issues/142">142</a>,
+ <a href="https://github.com/CS2103-AY1819S1-T13-1/main/issues/144">144</a>, <a href="https://github.com/CS2103-AY1819S1-T13-1/main/issues/159">159</a>)</p>
 </li>
 </ul>
 </div>
@@ -105,10 +128,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Integrated a third party library (Natty) to the project (<a href="https://github.com">#42</a>)</p>
-</li>
-<li>
-<p>Integrated a new Github plugin (CircleCI) to the team repo</p>
+<p>Integrated Google Maps API into the project: (Pull request: <a href="https://github.com/CS2103-AY1819S1-W13-2/main/pull/134">#134</a>)</p>
 </li>
 </ul>
 </div>
@@ -117,9 +137,6 @@
 </div>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p><em>{you can add/remove categories in the list above}</em></p>
 </div>
 </div>
 </div>
@@ -137,10 +154,65 @@
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code-alias-code-u-code"><a class="link" href="#undoing-previous-command-code-undo-code-alias-code-u-code">Undoing previous command : <code>undo</code>, alias <code>u</code></a></h3>
+<h3 id="show-faculty-location-code-showlocation-code"><a class="link" href="#show-faculty-location-code-showlocation-code">Show Faculty Location : <code>showLocation</code></a></h3>
 <div class="paragraph">
-<p>Restores the address book to the state before the previous <em>undoable</em> command was executed.<br>
-Format: <code>undo</code></p>
+<p>Shows the location of the person&#8217;s (identified by index number) faculty in the the location display panel.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>showLocation INDEX</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>showLocation 5</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="suggested-meeting-location-code-generatelocation-code"><a class="link" href="#suggested-meeting-location-code-generatelocation-code">Suggested Meeting Location : <code>generateLocation</code></a></h3>
+<div class="paragraph">
+<p>Creates a randomly suggested location in NUS to meet up for an event
+(uniquely identified by date and event&#8217;s index number).</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>generateLocation d/EVENT_DATE i/EVENT_INDEX</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>generateLocation d/2018-04-01 i/1</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="features-coming-up-in-future-strong-v2-0-strong"><a class="link" href="#features-coming-up-in-future-strong-v2-0-strong">Features coming up in future <strong>V2.0</strong>:</a></h3>
+
+</div>
+<div class="sect2">
+<h3 id="generate-timing-for-a-group-s-event-meeting-code-generatetiming-code"><a class="link" href="#generate-timing-for-a-group-s-event-meeting-code-generatetiming-code">Generate timing for a group&#8217;s event/meeting : <code>generateTiming</code></a></h3>
+<div class="paragraph">
+<p>Generates a possible meeting timing for a group&#8217;s event/meeting based on all member&#8217;s schedule and availability.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>generateTiming group/GROUP_NAME</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>generateTiming group/CS2103Group</code></p>
+</li>
+</ul>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -149,43 +221,34 @@ Format: <code>undo</code></p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<div class="paragraph">
-<p>Undoable commands: those commands that modify the address book&#8217;s content (<code>add</code>, <code>delete</code>, <code>edit</code> and <code>clear</code>).</p>
+<div class="ulist">
+<ul>
+<li>
+<p>This command only works with groups and will not work for a user alone (for obvious reasons).</p>
+</li>
+<li>
+<p>If the group does not exist, an error message is displayed accordingly to indicate that this command cannot be parsed.</p>
+</li>
+</ul>
 </div>
 </td>
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>delete 1</code><br>
-<code>list</code><br>
-<code>undo</code> or <code>u</code> (reverses the <code>delete 1</code> command)<br></p>
-</li>
-<li>
-<p><code>select 1</code><br>
-<code>list</code><br>
-<code>undo</code><br>
-The <code>undo</code> command fails as there are no undoable commands executed previously.</p>
-</li>
-<li>
-<p><code>delete 1</code><br>
-<code>clear</code><br>
-<code>undo</code> or <code>u</code> (reverses the <code>clear</code> command)<br>
-<code>undo</code> or <code>u</code> (reverses the <code>delete 1</code> command)<br></p>
-</li>
-</ul>
-</div>
 </div>
 <div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code-alias-code-r-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code-alias-code-r-code">Redoing the previously undone command : <code>redo</code>, alias <code>r</code></a></h3>
+<h3 id="generate-convenient-location-for-an-event-meeting-code-generateconvenientlocation-code"><a class="link" href="#generate-convenient-location-for-an-event-meeting-code-generateconvenientlocation-code">Generate convenient location for an event/meeting : <code>generateConvenientLocation</code></a></h3>
 <div class="paragraph">
-<p>Reverses the most recent <code>undo</code> command.<br>
-Format: <code>redo</code></p>
+<p>This command builds on the existing generateLocation command, however, instead of generating a random location it will
+generate a location based on the people attending the event (i.e. members in the group or people tagged to the event).</p>
+</div>
+<div class="paragraph">
+<p>Thus this can be used within the context of a group&#8217;s
+events or the user&#8217;s own personal events.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>generateConvenientLocation group/GROUP_NAME d/EVENT_DATE i/EVENT_INDEX</code> (for group events) or<br>
+        <code>generateConvenientLocation d/EVENT_DATE i/EVENT_INDEX</code> (for user&#8217;s personal events)</p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -193,24 +256,30 @@ Format: <code>redo</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>delete 1</code><br>
-<code>undo</code> or <code>u</code> (reverses the <code>delete 1</code> command)<br>
-<code>redo</code> or <code>r</code> (reapplies the <code>delete 1</code> command)<br></p>
+<p><code>generateConvenientLocation group/CS2103Group d/2018-09-30 i/1</code></p>
 </li>
 <li>
-<p><code>delete 1</code><br>
-<code>redo</code> or <code>r</code><br>
-The <code>redo</code> command fails as there are no <code>undo</code> commands executed previously.</p>
-</li>
-<li>
-<p><code>delete 1</code><br>
-<code>clear</code><br>
-<code>undo</code> or <code>u</code> (reverses the <code>clear</code> command)<br>
-<code>undo</code> or <code>u</code> (reverses the <code>delete 1</code> command)<br>
-<code>redo</code> or <code>r</code> (reapplies the <code>delete 1</code> command)<br>
-<code>redo</code> or <code>r</code> (reapplies the <code>clear</code> command)<br></p>
+<p><code>generateConvenientLocation d/2018-09-30 i/1</code></p>
 </li>
 </ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>This command works with both group events and user&#8217;s own personal events.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -229,215 +298,149 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">Undo/Redo feature</a></h3>
+<h3 id="show-person-s-faculty-location-visually"><a class="link" href="#show-person-s-faculty-location-visually">Show Person&#8217;s faculty location visually</a></h3>
 <div class="sect3">
 <h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
 <div class="paragraph">
-<p>The undo/redo mechanism is facilitated by <code>VersionedSystem</code>.
-It extends <code>System</code> with an undo/redo history, stored internally as an <code>SystemStateList</code> and <code>currentStatePointer</code>.
-Additionally, it implements the following operations:</p>
+<p>The displaying of the a <code>Person</code>'s faculty is facilitated by the newly added <code>Faculty</code> field in the <code>Person</code> class. This
+<code>Faculty</code> field is defined as a separate class (akin to other classes constituting the <code>Person</code> class such as <code>Email</code> and <code>Address</code>).</p>
+</div>
+<div class="paragraph">
+<p>During the adding of <code>Person</code>'s to EventsPlus+'s address book, the <code>Faculty</code> class will ensure that the argument passed in is that of
+a valid NUS faculty. It does this via an inner enum class called <code>Faculties</code> which stores as constants the only accepted <code>Faculty</code>
+argument values. The <code>isInEnum</code> method is used to check that the argument passed already exists as one of the constants.</p>
+</div>
+<div class="paragraph">
+<p>The valid arguments allowed are namely:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>VersionedSystem#commit()</code>&#8201;&#8212;&#8201;Saves the current address book state in its history.</p>
+<p>SOC (School of Computing)</p>
 </li>
 <li>
-<p><code>VersionedSystem#undo()</code>&#8201;&#8212;&#8201;Restores the previous address book state from its history.</p>
+<p>FOS (Faculty of Science)</p>
 </li>
 <li>
-<p><code>VersionedSystem#redo()</code>&#8201;&#8212;&#8201;Restores a previously undone address book state from its history.</p>
+<p>YLLSOM (Yong Loo Lin School of Medicine)</p>
+</li>
+<li>
+<p>FOD (Faculty of Dentistry)</p>
+</li>
+<li>
+<p>BIZ (NUS Business School)</p>
+</li>
+<li>
+<p>SDE (School of Design and Environment)</p>
+</li>
+<li>
+<p>FOE (Faculty of Engineering)</p>
+</li>
+<li>
+<p>FOL (Faculty of Law)</p>
+</li>
+<li>
+<p>YSTCOM (Yong Siew Toh Conservatory of Music)</p>
+</li>
+<li>
+<p>FASS (Faculty of Arts and Social Sciences)</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>These operations are exposed in the <code>Model</code> interface as <code>Model#commitSystem()</code>, <code>Model#undoSystem()</code> and <code>Model#redoSystem()</code> respectively.</p>
+<p>A "-" response is also allowed as it is possible that EventsPlus+'s address book
+ may indeed have contacts who are not students of NUS at the current point in time.</p>
 </div>
 <div class="paragraph">
-<p>Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.</p>
+<p>The command used to display the faculty visually is <code>showLocation</code>.</p>
 </div>
 <div class="paragraph">
-<p>Step 1. The user launches the application for the first time. The <code>VersionedSystem</code> will be initialized with the initial address book state, and the <code>currentStatePointer</code> pointing to that single address book state.</p>
+<p>In addition to the <code>Faculty</code> field, the showLocation command is assisted by Google Maps Embed API that allows for locations
+to be displayed visually in a separate tab, Location Display Tab. Google Maps uses unique Place IDs to identify locations
+on the map. For each faculty, these place IDs are stored in a newly created class <code>EmbedGoogleMaps</code> in the logic component of the
+application. Together with the Google Maps API key, the place ID allows for the generation of the exact spot of the person&#8217;s
+faculty to be displayed in the Location Display Tab.</p>
+</div>
+<div class="paragraph">
+<p>When the (correct) <code>showLocation</code> command is input together with the index of the individual whose faculty location is to be displayed,
+the index is first checked to determine if it is correct (more than 0 and not larger than the size of the list of contacts
+in EventsPlus+'s addressbook). Following this, the appropriate person is obtained from the <code>FilteredPersonList</code> (this is so as to allow
+the displaying of the contact&#8217;s faculty location even if the list is filtered).</p>
+</div>
+<div class="paragraph">
+<p>A event, <code>FacultyLocationDisplayChangedEvent</code>, also newly created for this showLocation command, is posted and is then handled by <code>TabPanel</code> (which switches to the Location
+Display Tab) and subsequently by <code>LocationDisplayPanel</code>. The status message will show "Selected person: [INDEX]. Faculty location successfully displayed."</p>
+</div>
+<div class="paragraph">
+<p>If the contact has no faculty, a default location - University Hall - is displayed on the map.</p>
+</div>
+<div class="paragraph">
+<p>The above-mentioned information can be represented in the following sequence diagram:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/UndoRedoStartingStateListDiagram.png" alt="UndoRedoStartingStateListDiagram" width="800">
+<img src="../images/showLocation_UI_LogicManager_seqDiagram.PNG" alt="showLocation UI LogicManager seqDiagram" width="800">
 </div>
-</div>
-<div class="paragraph">
-<p>Step 2. The user executes <code>delete 5</code> command to delete the 5th person in the address book. The <code>delete</code> command calls <code>Model#commitSystem()</code>, causing the modified state of the address book after the <code>delete 5</code> command executes to be saved in the <code>SystemStateList</code>, and the <code>currentStatePointer</code> is shifted to the newly inserted address book state.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/UndoRedoNewCommand1StateListDiagram.png" alt="UndoRedoNewCommand1StateListDiagram" width="800">
+<img src="../images/showLocation_EventsCenter_seqDiagram.PNG" alt="showLocation EventsCenter seqDiagram" width="800">
 </div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="generate-a-random-meeting-location-for-event"><a class="link" href="#generate-a-random-meeting-location-for-event">Generate a random meeting location for event</a></h3>
+<div class="paragraph">
+<p>The generation of a random meeting location primarily builds upon the visual display of a <code>Person</code>'s faculty. However
+there are a few key differences in the process that one needs to take note of.</p>
 </div>
 <div class="paragraph">
-<p>Step 3. The user executes <code>add n/David &#8230;&#8203;</code> to add a new person. The <code>add</code> command also calls <code>Model#commitSystem()</code>, causing another modified address book state to be saved into the <code>SystemStateList</code>.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoNewCommand2StateListDiagram.png" alt="UndoRedoNewCommand2StateListDiagram" width="800">
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If a command fails its execution, it will not call <code>Model#commitSystem()</code>, so the address book state will not be saved into the <code>SystemStateList</code>.
-</td>
-</tr>
-</table>
+<p>The command used to generate this possible meeting location is <code>generateLocation</code>.</p>
 </div>
 <div class="paragraph">
-<p>Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the <code>undo</code> command. The <code>undo</code> command will call <code>Model#undoSystem()</code>, which will shift the <code>currentStatePointer</code> once to the left, pointing it to the previous address book state, and restores the address book to that state.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoExecuteUndoStateListDiagram.png" alt="UndoRedoExecuteUndoStateListDiagram" width="800">
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If the <code>currentStatePointer</code> is at index 0, pointing to the initial address book state, then there are no previous address book states to restore. The <code>undo</code> command uses <code>Model#canUndoSystem()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
-</td>
-</tr>
-</table>
+<p>In order to generate a random location for an event, the user needs to input (in addition to the command) the
+event date and event index. This is to detect the unique event (because some events may have the same name) and to ensure
+that this event is currently in EventsPlus+.</p>
 </div>
 <div class="paragraph">
-<p>The following sequence diagram shows how the undo operation works:</p>
+<p>Command parsing is handled in a similar manner as other commands but there exists a specific <code>GenerateLocationCommandParser</code> to specifically parse
+these kind of commands. The GenerateLocationCommand object created will then consist of two fields:</p>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoSequenceDiagram.png" alt="UndoRedoSequenceDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>The <code>redo</code> command does the opposite&#8201;&#8212;&#8201;it calls <code>Model#redoSystem()</code>, which shifts the <code>currentStatePointer</code> once to the right, pointing to the previously undone state, and restores the address book to that state.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If the <code>currentStatePointer</code> is at index <code>SystemStateList.size() - 1</code>, pointing to the latest address book state, then there are no undone address book states to restore. The <code>redo</code> command uses <code>Model#canRedoSystem()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Step 5. The user then decides to execute the command <code>list</code>. Commands that do not modify the address book, such as <code>list</code>, will usually not call <code>Model#commitSystem()</code>, <code>Model#undoSystem()</code> or <code>Model#redoSystem()</code>. Thus, the <code>SystemStateList</code> remains unchanged.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoNewCommand3StateListDiagram.png" alt="UndoRedoNewCommand3StateListDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>Step 6. The user executes <code>clear</code>, which calls <code>Model#commitSystem()</code>. Since the <code>currentStatePointer</code> is not pointing at the end of the <code>SystemStateList</code>, all address book states after the <code>currentStatePointer</code> will be purged. We designed it this way because it no longer makes sense to redo the <code>add n/David &#8230;&#8203;</code> command. This is the behavior that most modern desktop applications follow.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoNewCommand4StateListDiagram.png" alt="UndoRedoNewCommand4StateListDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>The following activity diagram summarizes what happens when a user executes a new command:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoActivityDiagram.png" alt="UndoRedoActivityDiagram" width="650">
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
-<div class="sect4">
-<h5 id="aspect-how-undo-redo-executes"><a class="link" href="#aspect-how-undo-redo-executes">Aspect: How undo &amp; redo executes</a></h5>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Saves the entire address book.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Easy to implement.</p>
+<p>Event date</p>
 </li>
 <li>
-<p>Cons: May have performance issues in terms of memory usage.</p>
+<p>Event index</p>
 </li>
 </ul>
 </div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Individual command knows how to undo/redo by itself.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Will use less memory (e.g. for <code>delete</code>, just save the person being deleted).</p>
-</li>
-<li>
-<p>Cons: We must ensure that the implementation of each individual command are correct.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect4">
-<h5 id="aspect-data-structure-to-support-the-undo-redo-commands"><a class="link" href="#aspect-data-structure-to-support-the-undo-redo-commands">Aspect: Data structure to support the undo/redo commands</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (current choice):</strong> Use a list to store the history of address book states.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.</p>
-</li>
-<li>
-<p>Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both <code>HistoryManager</code> and <code>VersionedSystem</code>.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Use <code>HistoryManager</code> for undo/redo</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.</p>
-</li>
-<li>
-<p>Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as <code>HistoryManager</code> now needs to do two different things.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="project-powerpointlabs"><a class="link" href="#project-powerpointlabs">PROJECT: PowerPointLabs</a></h2>
-<div class="sectionbody">
-<hr>
 <div class="paragraph">
-<p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
+<p>The values for these fields are based on the input given by the user. These values are checked for validity as per other event-related
+commands before the object is created. Following this, EventsPlus+ is checked to determine whether this event does
+exist. If it does exist, the event name is retrieved and stored in the <code>GenerateCommandLocation</code> object.
+The status message indicates that a meeting location (it will show the meeting name too) has been generated, if not it indicates to the user
+that such as event does not exist.</p>
+</div>
+<div class="paragraph">
+<p>A random meeting location is generated based on 7 locations (more will be added in future iterations) that have their Google Maps Place IDs stored in the <code>EmbedGoogleMaps</code> class.
+A call to the method that generates this location (more specifically, returns the Place ID of the location) is made in the execute
+method of GenerateLocationCommand.</p>
+</div>
+<div class="paragraph">
+<p>Following this, a event, <code>RandomMeetingLocationGeneratedEvent</code>, newly created for this generateLocation command, is posted and is then handled by <code>TabPanel</code> (which switches to the Location
+Display Tab) and subsequently by <code>LocationDisplayPanel</code>.</p>
+</div>
+<div class="paragraph">
+<p>For simplicity, only the logic and event handling sections of the sequence diagram are shown below for the <code>generateLocation</code> command:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/generateLocation_EventsCenter_EmbedGoogleMaps_seqDiagram.png" alt="generateLocation EventsCenter EmbedGoogleMaps seqDiagram" width="800">
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 14:08:44 UTC</div></div></div></body></html>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 14:20:13 UTC</div></div></div></body></html>
