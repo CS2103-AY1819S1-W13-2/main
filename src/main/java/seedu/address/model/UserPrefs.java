@@ -12,7 +12,7 @@ import seedu.address.commons.core.GuiSettings;
 public class UserPrefs {
 
     private GuiSettings guiSettings;
-    private Path addressBookFilePath = Paths.get("data" , "eventsPlus.xml");
+    private Path addressBookFilePath = Paths.get("data" , "eventsPlusPlus.xml");
 
     public UserPrefs() {
         setGuiSettings(500, 500, 0, 0, true, null);
